@@ -24,4 +24,11 @@
       />
     }
   </div>
+
+  <app-toggle-button
+    label="Start Time"
+    [(checked)]="showStartTime"
+    (filterChanged)="onFilterUpdate($event)"
+  >
+  </app-toggle-button>
 </div>

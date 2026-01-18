@@ -4,11 +4,19 @@ import { SingleSelectComponent } from './shared/components/select/single-select/
 import { TableComponent } from './shared/components/table/table.component';
 import { CalenderComponent } from './shared/components/calender/calender.component';
 import { StatusButtonData } from './shared/components/status-button/status-button.types';
-import { StatusButton } from "./shared/components/status-button/status-button.component";
+import { StatusButton } from './shared/components/status-button/status-button.component';
+import { ToggleButtonComponent } from "./shared/components/toggle-button/toggle-button.component";
 
 @Component({
   selector: 'app-root',
-  imports: [ButtonComponent, SingleSelectComponent, TableComponent, CalenderComponent, StatusButton],
+  imports: [
+    ButtonComponent,
+    SingleSelectComponent,
+    TableComponent,
+    CalenderComponent,
+    StatusButton,
+    ToggleButtonComponent
+],
   templateUrl: './app.html',
   styleUrl: './app.css',
 })
@@ -52,5 +60,17 @@ export class App {
     // Example: API call
     this.isLoading.set(true);
     setTimeout(() => this.isLoading.set(false), 1000);
+  }
+
+  //toggle button
+  showStartTime = signal(false);
+  tableData = [
+    { id: 1, name: 'Meeting', time: '10:00 AM' },
+    { id: 2, name: 'Lunch', time: '1:00 PM' },
+  ];
+
+  onFilterUpdate(isActive: boolean) {
+    console.log('Toggle state is now:', isActive);
+    // Logic to filter your data source goes here
   }
 }
