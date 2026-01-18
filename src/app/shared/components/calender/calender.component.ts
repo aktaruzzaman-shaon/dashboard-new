@@ -30,6 +30,7 @@ export class CalenderComponent {
     return date.toLocaleString('default', { month: 'long', year: 'numeric' });
   }
 
+  // get days in a month
   getDaysInMonth(date: Date): (number | null)[] {
     const year = date.getFullYear();
     const month = date.getMonth();
@@ -50,6 +51,7 @@ export class CalenderComponent {
     return days;
   }
 
+  //selected date
   selectDate(day: number | null, isNextMonth: boolean): void {
     if (!day) return;
 
@@ -62,6 +64,7 @@ export class CalenderComponent {
     this.selectedDate = selectedDate;
   }
 
+  //which date is selected
   isSelected(day: number | null, isNextMonth: boolean): boolean {
     if (!day || !this.selectedDate) return false;
 
@@ -92,6 +95,7 @@ export class CalenderComponent {
     this.selectedDate = null;
   }
 
+  //finally submit the date
   apply(): void {
     if (this.selectedDate) {
       this.dateSelected.emit(this.selectedDate);

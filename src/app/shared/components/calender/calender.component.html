@@ -1,118 +1,147 @@
-<!-- date-picker.component.html -->
 <div class="relative">
   <label class="block text-sm font-medium text-gray-700 mb-2">{{ label }}</label>
   <div class="relative">
-    <input 
-      type="text" 
+    <input
+      type="text"
       [value]="getDisplayValue()"
       (click)="toggleCalendar()"
       readonly
       [placeholder]="placeholder"
       class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 cursor-pointer"
     />
-    <svg class="absolute right-3 top-3 w-5 h-5 text-blue-500 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+    <svg
+      class="absolute right-3 top-3 w-5 h-5 text-blue-500 pointer-events-none"
+      fill="none"
+      stroke="currentColor"
+      viewBox="0 0 24 24"
+    >
+      <path
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="2"
+        d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+      ></path>
     </svg>
   </div>
 
   <!-- Calendar Modal -->
   @if (isOpen) {
-  <div class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50" (click)="closeCalendar()">
-    <div class="bg-white rounded-2xl shadow-2xl p-6 w-full max-w-4xl" (click)="$event.stopPropagation()">
-      
-      <!-- Calendar Header -->
-      <div class="flex items-center justify-between mb-6">
-        <button (click)="previousMonth()" class="p-2 hover:bg-gray-100 rounded-lg transition-colors">
-          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
-          </svg>
-        </button>
-        
-        <div class="flex gap-8">
-          <h3 class="text-lg font-semibold">{{ getMonthName(currentMonth) }}</h3>
-          <h3 class="text-lg font-semibold">{{ getMonthName(nextMonth) }}</h3>
-        </div>
-        
-        <button (click)="nextMonthNav()" class="p-2 hover:bg-gray-100 rounded-lg transition-colors">
-          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-          </svg>
-        </button>
-      </div>
+    <div
+      class="fixed inset-0 bg-opacity-50 flex items-center justify-center z-50"
+      (click)="closeCalendar()"
+    >
+      <div
+        class="bg-white rounded-2xl shadow-2xl p-6 w-full max-w-4xl"
+        (click)="$event.stopPropagation()"
+      >
+        <!-- Calendar Header -->
+        <div class="flex items-center justify-between mb-6">
+          <button
+            (click)="previousMonth()"
+            class="p-2 hover:bg-gray-100 rounded-lg transition-colors"
+          >
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M15 19l-7-7 7-7"
+              ></path>
+            </svg>
+          </button>
 
-      <!-- Two Months Grid -->
-      <div class="grid grid-cols-2 gap-8">
-        
-        <!-- First Month -->
-        <div>
-          <div class="grid grid-cols-7 gap-2 mb-2">
-            @for (day of weekDays; track day) {
-            <div class="text-center text-sm font-medium text-gray-500 py-2">
-              {{ day }}
+          <div class="flex gap-8">
+            <h3 class="text-lg font-semibold">{{ getMonthName(currentMonth) }}</h3>
+            <h3 class="text-lg font-semibold">{{ getMonthName(nextMonth) }}</h3>
+          </div>
+
+          <button
+            (click)="nextMonthNav()"
+            class="p-2 hover:bg-gray-100 rounded-lg transition-colors"
+          >
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M9 5l7 7-7 7"
+              ></path>
+            </svg>
+          </button>
+        </div>
+
+        <!-- Two Months Grid -->
+        <div class="grid grid-cols-2 gap-8">
+          <!-- First Month -->
+          <div>
+            <div class="grid grid-cols-7 gap-2 mb-2">
+              @for (day of weekDays; track day) {
+                <div class="text-center text-sm font-medium text-gray-500 py-2">
+                  {{ day }}
+                </div>
+              }
             </div>
-            }
-          </div>
-          <div class="grid grid-cols-7 gap-2">
-            @for (day of getDaysInMonth(currentMonth); track $index) {
-            <button
-              (click)="selectDate(day, false)"
-              [disabled]="!day"
-              [class.bg-blue-500]="isSelected(day, false)"
-              [class.text-white]="isSelected(day, false)"
-              [class.hover:bg-blue-50]="day && !isSelected(day, false)"
-              [class.rounded-full]="isSelected(day, false)"
-              class="p-2 text-center text-sm transition-colors disabled:cursor-default disabled:text-transparent"
-            >
-              {{ day }}
-            </button>
-            }
-          </div>
-        </div>
-
-        <!-- Second Month -->
-        <div>
-          <div class="grid grid-cols-7 gap-2 mb-2">
-            @for (day of weekDays; track day) {
-            <div class="text-center text-sm font-medium text-gray-500 py-2">
-              {{ day }}
+            <div class="grid grid-cols-7 gap-2">
+              @for (day of getDaysInMonth(currentMonth); track $index) {
+                <button
+                  (click)="selectDate(day, false)"
+                  [disabled]="!day"
+                  [class.bg-blue-500]="isSelected(day, false)"
+                  [class.text-white]="isSelected(day, false)"
+                  [class.hover:bg-blue-50]="day && !isSelected(day, false)"
+                  [class.rounded-full]="isSelected(day, false)"
+                  class="p-2 text-center text-sm transition-colors disabled:cursor-default disabled:text-transparent"
+                >
+                  {{ day }}
+                </button>
+              }
             </div>
-            }
           </div>
-          <div class="grid grid-cols-7 gap-2">
-            @for (day of getDaysInMonth(nextMonth); track $index) {
-            <button
-              (click)="selectDate(day, true)"
-              [disabled]="!day"
-              [class.bg-blue-500]="isSelected(day, true)"
-              [class.text-white]="isSelected(day, true)"
-              [class.hover:bg-blue-50]="day && !isSelected(day, true)"
-              [class.rounded-full]="isSelected(day, true)"
-              class="p-2 text-center text-sm transition-colors disabled:cursor-default disabled:text-transparent"
-            >
-              {{ day }}
-            </button>
-            }
+
+          <!-- Second Month -->
+          <div>
+            <div class="grid grid-cols-7 gap-2 mb-2">
+              @for (day of weekDays; track day) {
+                <div class="text-center text-sm font-medium text-gray-500 py-2">
+                  {{ day }}
+                </div>
+              }
+            </div>
+            <div class="grid grid-cols-7 gap-2">
+              @for (day of getDaysInMonth(nextMonth); track $index) {
+                <button
+                  (click)="selectDate(day, true)"
+                  [disabled]="!day"
+                  [class.bg-blue-500]="isSelected(day, true)"
+                  [class.text-white]="isSelected(day, true)"
+                  [class.hover:bg-blue-50]="day && !isSelected(day, true)"
+                  [class.rounded-full]="isSelected(day, true)"
+                  class="p-2 text-center text-sm transition-colors disabled:cursor-default disabled:text-transparent"
+                >
+                  {{ day }}
+                </button>
+              }
+            </div>
           </div>
         </div>
-      </div>
 
-      <!-- Action Buttons -->
-      <div class="flex justify-start gap-3 mt-6">
-        <button 
-          (click)="reset()"
-          class="px-6 py-2 text-blue-500 hover:bg-blue-50 rounded-lg transition-colors"
-        >
-          Reset
-        </button>
-        <button 
-          (click)="apply()"
-          [disabled]="!selectedDate"
-          class="px-6 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors disabled:bg-gray-300 disabled:cursor-not-allowed"
-        >
-          Apply
-        </button>
+        <!-- Action Buttons -->
+        <div class="flex justify-start gap-3 mt-6">
+          <button
+            (click)="reset()"
+            class="px-6 py-2 text-blue-500 hover:bg-blue-50 rounded-lg transition-colors"
+          >
+            Reset
+          </button>
+          <button
+            (click)="apply()"
+            [disabled]="!selectedDate"
+            class="px-6 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors disabled:bg-gray-300 disabled:cursor-not-allowed"
+          >
+            Apply
+          </button>
+        </div>
       </div>
     </div>
-  </div>
   }
 </div>

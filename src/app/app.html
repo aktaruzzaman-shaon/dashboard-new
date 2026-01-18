@@ -3,5 +3,10 @@
   <!-- <SingleSelectComponent [items]="options" (selectChange)="onSelect($event)"></SingleSelectComponent> -->
   <app-single-select [items]="options" (selectChange)="onSelect($event)"></app-single-select>
   <app-table></app-table>
-  <app-calender></app-calender>
+  <app-calender
+    label="Travel Date To"
+    placeholder="DD/MM/YYYY"
+    [selectedDate]="travelDateTo()"
+    (dateSelected)="onDateToSelected($event)"
+  ></app-calender>
 </div>

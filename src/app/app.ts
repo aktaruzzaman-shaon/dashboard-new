@@ -11,6 +11,7 @@ import { CalenderComponent } from './shared/components/calender/calender.compone
   styleUrl: './app.css',
 })
 export class App {
+  // /----- for select component --------/
   protected readonly title = signal('dashboard');
   options = [
     { label: 'Dubai ', value: 1 },
@@ -20,5 +21,16 @@ export class App {
 
   onSelect(item: any) {
     console.log('Selected item:', item);
+  }
+
+  //---------for date picker component-------/
+  // Travel date state
+  travelDateTo = signal<Date | null>(null);
+
+  // Called when date-picker emits selected date
+  onDateToSelected(date: Date): void {
+    console.log(date);
+    this.travelDateTo.set(date);
+    console.log('Travel Date To:', date);
   }
 }
