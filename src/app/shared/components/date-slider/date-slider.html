@@ -1,0 +1,72 @@
+<div class="w-full max-w-5xl mx-auto p-4 bg-white select-none">
+  <div class="flex items-center justify-start gap-4 mb-6 ml-2">
+    <button
+      (click)="changeMonth(-1)"
+      class="p-1 hover:bg-gray-100 rounded-full transition-colors text-gray-400"
+    >
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+      </svg>
+    </button>
+
+    <h2 class="text-xl font-bold text-gray-800 min-w-37.5">
+      {{ selectedDate() | date: 'MMMM yyyy' }}
+    </h2>
+
+    <button
+      (click)="changeMonth(1)"
+      class="p-1 hover:bg-gray-100 rounded-full transition-colors text-gray-400"
+    >
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+      </svg>
+    </button>
+  </div>
+
+  <div class="relative flex items-center group">
+    <!-- left scroll button -->
+    <button
+      (click)="scroll('left')"
+      class="absolute -left-2 z-10 p-3 bg-white border border-gray-100 rounded-full shadow-lg hover:bg-gray-50 transition-transform active:scale-95"
+    >
+      <svg class="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+      </svg>
+    </button>
+
+    <div #scrollContainer class="flex gap-3 overflow-x-auto no-scrollbar scroll-smooth pb-2 px-2">
+      @for (date of daysInMonth(); track date.getTime()) {
+        <button
+          (click)="selectDate(date)"
+          [class.border-blue-500]="activeDate() === date.toDateString()"
+          [class.bg-blue-50]="activeDate() === date.toDateString()"
+          class="shrink-0 px-6 py-3 border border-gray-200 rounded-xl bg-white hover:border-gray-300 transition-all shadow-sm"
+        >
+          <span class="text-sm font-medium text-gray-600">
+            {{ date | date: 'dd MMM yyyy' }}
+          </span>
+        </button>
+      }
+    </div>
+    <!-- right scroll button -->
+    <button
+      (click)="scroll('right')"
+      class="absolute -right-2 z-10 p-3 bg-white border border-gray-100 rounded-full shadow-lg hover:bg-gray-50 transition-transform active:scale-95"
+    >
+      <svg class="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+      </svg>
+    </button>
+  </div>
+</div>
+
+<style>
+  /* Hide scrollbar but keep functionality */
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+</style>

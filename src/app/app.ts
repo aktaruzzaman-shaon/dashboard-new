@@ -10,6 +10,7 @@ import { DateRangeOption } from './shared/components/input/input-selector/input-
 import { InputSelectorComponent } from './shared/components/input/input-selector/input-selector.component';
 import { ModalComponent } from './shared/components/modal/modal.component';
 import { InputCoreComponent } from './shared/components/input/input-core/input-core.component';
+import { DateSlider } from "./shared/components/date-slider/date-slider";
 
 @Component({
   selector: 'app-root',
@@ -23,7 +24,8 @@ import { InputCoreComponent } from './shared/components/input/input-core/input-c
     InputSelectorComponent,
     ModalComponent,
     InputCoreComponent,
-  ],
+    DateSlider
+],
   templateUrl: './app.html',
   styleUrl: './app.css',
 })
@@ -140,5 +142,34 @@ export class App {
       });
       this.loading.set(false);
     }, 1500);
+  }
+
+  //date slider
+  demoData = signal<any[]>([]);
+  loadingDate = signal(false);
+  currentMonthName = signal('');
+
+  // This runs whenever the user clicks the month arrows in the slider
+  fetchDataByMonth(date: Date) {
+    this.loading.set(true);
+    this.currentMonthName.set(date.toLocaleString('default', { month: 'long' }));
+
+    const year = date.getFullYear();
+    const month = date.getMonth() + 1;
+
+    // Simulate API Call
+    console.log(`Fetching API: /api/data?year=${year}&month=${month}`);
+
+    setTimeout(() => {
+      this.demoData.set([
+        { id: 1, title: `Data item for ${this.currentMonthName()}` },
+        { id: 2, title: `Another entry` },
+      ]);
+      this.loadingDate.set(false);
+    }, 800);
+  }
+
+  onDateClick(date: Date) {
+    console.log('User selected specific day:', date);
   }
 }

@@ -72,7 +72,9 @@ Any content could be project here . Just demo text area . ALl are optional.</tex
   </app-modal>
 
   <!-- input filed component usage -->
-  <app-input-core>
-    
-  </app-input-core>
+  <app-input-core> </app-input-core>
+
+  <!-- date slider -->
+  <app-date-slider (monthChanged)="fetchDataByMonth($event)" (dateSelected)="onDateClick($event)">
+  </app-date-slider>
 </div>
