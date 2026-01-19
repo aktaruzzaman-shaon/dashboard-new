@@ -39,4 +39,33 @@
   >
     >
   </app-input-selector>
+
+  <!-- modal component usage -->
+  <button
+    class="px-4 py-2 bg-sky-500 text-white rounded-lg hover:bg-sky-600 transition"
+    (click)="openModal()"
+  >
+    Open Remarks Modal
+  </button>
+  <app-modal
+    [open]="isModalOpen()"
+    title="Remarks"
+    size="lg"
+    submitText="Save"
+    cancelText="Cancel"
+    [loading]="isSubmitting()"
+    (close)="closeModal()"
+    (submit)="submitModal()"
+  >
+    <div class="space-y-4">
+      <label class="block text-sm font-medium text-gray-700"> Remarks </label>
+
+      <textarea
+        rows="4"
+        class="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:ring-2 focus:ring-sky-500 focus:outline-none"
+        placeholder="Enter your remarks..."
+        (input)="remarks.set($any($event.target).value)"
+      >Any content could be project here . Just demo text area . ALl are optional.</textarea>
+    </div>
+  </app-modal>
 </div>

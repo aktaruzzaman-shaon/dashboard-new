@@ -7,7 +7,8 @@ import { StatusButtonData } from './shared/components/status-button/status-butto
 import { StatusButton } from './shared/components/status-button/status-button.component';
 import { ToggleButtonComponent } from './shared/components/toggle-button/toggle-button.component';
 import { DateRangeOption } from './shared/components/input/input-selector/input-selector.types';
-import { InputSelectorComponent } from "./shared/components/input/input-selector/input-selector.component";
+import { InputSelectorComponent } from './shared/components/input/input-selector/input-selector.component';
+import { ModalComponent } from "./shared/components/modal/modal.component";
 
 @Component({
   selector: 'app-root',
@@ -18,7 +19,8 @@ import { InputSelectorComponent } from "./shared/components/input/input-selector
     CalenderComponent,
     StatusButton,
     ToggleButtonComponent,
-    InputSelectorComponent
+    InputSelectorComponent,
+    ModalComponent
 ],
   templateUrl: './app.html',
   styleUrl: './app.css',
@@ -93,5 +95,31 @@ export class App {
     console.log('Received new selection:', selectedItems);
     this.currentSelection = selectedItems;
     // API calls or filtering based on this data
+  }
+
+  //modal useage examplel
+  isModalOpen = signal(false);
+  isSubmitting = signal(false);
+
+  remarks = signal<string>('');
+
+  openModal(): void {
+    this.isModalOpen.set(true);
+  }
+
+  closeModal(): void {
+    this.isModalOpen.set(false);
+  }
+
+  submitModal(): void {
+    this.isSubmitting.set(true);
+
+    // Simulate API call
+    setTimeout(() => {
+      console.log('Submitted Remarks:', this.remarks());
+
+      this.isSubmitting.set(false);
+      this.isModalOpen.set(false);
+    }, 1500);
   }
 }

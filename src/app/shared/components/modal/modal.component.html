@@ -1,0 +1,52 @@
+@if (open()) {
+  <div
+    class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 p-4"
+    (click)="onClose()"
+  >
+    <div
+      class="w-full bg-white shadow-xl transition-all duration-200 rounded-2xl"
+      [ngClass]="modalWidth()"
+      (click)="$event.stopPropagation()"
+    >
+      <!-- Header -->
+      @if (title()) {
+        <div class="flex items-center justify-between px-6 py-4 border-b">
+          <h2 class="text-lg font-semibold text-gray-800">
+            {{ title() }}
+          </h2>
+          <button (click)="close.emit()" class="text-gray-400 hover:text-gray-600">✕</button>
+        </div>
+      }
+
+      <!-- Body -->
+      <div class="px-6 py-4 max-h-[70vh] overflow-y-auto">
+        <ng-content></ng-content>
+      </div>
+
+      <!-- Footer -->
+      @if (!hideFooter()) {
+        <div class="flex justify-end gap-3 px-6 py-4 border-t">
+          <button
+            (click)="close.emit()"
+            class="px-4 py-2 rounded-lg text-gray-600 hover:bg-gray-100"
+          >
+            {{ cancelText() }}
+          </button>
+
+          <button
+            (click)="onSubmit()"
+            [disabled]="disableSubmit() || loading()"
+            class="px-4 py-2 rounded-lg bg-sky-500 text-white hover:bg-sky-600 disabled:bg-gray-300 disabled:cursor-not-allowed flex items-center gap-2"
+          >
+            @if (loading()) {
+              <span
+                class="h-4 w-4 animate-spin rounded-full border-2 border-white border-t-transparent"
+              ></span>
+            }
+            {{ submitText() }}
+          </button>
+        </div>
+      }
+    </div>
+  </div>
+}
