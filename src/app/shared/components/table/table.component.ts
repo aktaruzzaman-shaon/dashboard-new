@@ -8,6 +8,8 @@ import { Booking } from './table.types';
   styleUrl: './table.component.css',
 })
 export class TableComponent {
+  selectedRowReference: string = '';
+
   headers = [
     'Travel Date',
     'Reference',

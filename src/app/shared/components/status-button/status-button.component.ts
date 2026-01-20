@@ -17,13 +17,11 @@ export class StatusButton {
   size = input<StatusSize>('md');
   autoSelect = input<boolean>(false);
 
-  // ===== Output =====
   clicked = output<StatusButtonData>();
 
-  // ===== Computed classes =====
   buttonClasses = computed(() => {
     const base =
-      'relative inline-flex items-center gap-2 rounded-full border transition font-medium';
+      'relative inline-flex items-center gap-2 rounded-md border transition font-medium bold';
 
     const sizeMap: Record<StatusSize, string> = {
       sm: 'px-3 py-1.5 text-xs',
