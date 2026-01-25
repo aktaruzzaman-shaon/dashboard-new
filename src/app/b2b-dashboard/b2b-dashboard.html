@@ -7,7 +7,31 @@
     ></app-input-selector>
 
     <!-- ========== Travel Date FROM and TO  =========== -->
-     
+    <app-calender
+      label="Travel Date To"
+      placeholder="DD/MM/YYYY"
+      [selectedDate]="travelDateTo()"
+      (dateSelected)="onDateToSelected($event)"
+    ></app-calender>
+    <app-calender
+      label="Travel Date To"
+      placeholder="DD/MM/YYYY"
+      [selectedDate]="travelDateTo()"
+      (dateSelected)="onDateToSelected($event)"
+    ></app-calender>
 
+    <!-- ========== City Select =========== -->
+    <app-single-select [items]="options" (selectChange)="onSelect($event)"></app-single-select>
+
+    <!-- ========== Supplier Status =========== -->
+    <app-select-menu
+      label="Project Category"
+      [options]="roleOptions()"
+      (onSelection)="doSomething($event)"
+    >
+    </app-select-menu>
+
+    <!-- ========== Booking Reference =========== -->
+    <app-input-core label="Booking Reference Number"></app-input-core>
   </div>
 </div>

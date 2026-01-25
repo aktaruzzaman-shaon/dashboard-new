@@ -7,12 +7,11 @@ import { SelectItem } from '../select.types';
   templateUrl: './single-select.component.html',
   styleUrl: './single-select.component.css',
 })
+
 export class SingleSelectComponent {
 
   items = input<SelectItem<number>[]>([]);
   placeholder = input<string>('Select option');
-
-
   selectChange = output<SelectItem<number>>();
 
   isOpen = signal(false);
@@ -39,4 +38,5 @@ export class SingleSelectComponent {
     this.selectedItem.set(item);
     this.selectChange.emit(item);
   }
+
 }
