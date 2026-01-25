@@ -60,20 +60,23 @@
   </div>
 
   <div class="app-container">
-    <div>
+    <div class="flex justify-around">
       <div class="flex gap-3">
         @for (status of statuses(); track status.value) {
           <app-status-button
             [data]="status"
             [active]="activeStatus() === status.value"
             [color]="
-              status.value === 'approved' ? 'green' : status.value === 'rejected' ? 'red' : 'sky'
+              status.value === 'approved' ? 'sky' : status.value === 'rejected' ? 'sky' : 'sky'
             "
             [loading]="isLoading() && activeStatus() === status.value"
             size="md"
             (clicked)="onStatusClick($event)"
           />
         }
+      </div>
+      <div>
+        <div (click)="open()">Open</div>
       </div>
     </div>
   </div>
