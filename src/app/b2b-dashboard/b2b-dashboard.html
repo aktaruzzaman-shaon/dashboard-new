@@ -21,7 +21,11 @@
     ></app-calender>
 
     <!-- ========== City Select =========== -->
-    <app-single-select label="City" [items]="options" (selectChange)="onSelect($event)"></app-single-select>
+    <app-single-select
+      label="City"
+      [items]="options"
+      (selectChange)="onSelect($event)"
+    ></app-single-select>
 
     <!-- ========== Supplier Status =========== -->
     <app-select-menu
@@ -43,5 +47,15 @@
 
     <!-- ========== Booking Reference =========== -->
     <app-input-core label="Booking Reference Number"></app-input-core>
+
+    <!-- ========== Advanced Search Portion =========== -->
+    <button (click)="open()">Advance Access</button>
+    <app-toggle-component-container [isOpen]="isContainerOpen()" (closed)="close()">
+      <app-single-select></app-single-select>
+      <app-single-select></app-single-select>
+      <app-single-select></app-single-select>
+      <app-single-select></app-single-select>
+      <app-single-select></app-single-select>
+    </app-toggle-component-container>
   </div>
 </div>

@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import { Component, input, output, signal } from '@angular/core';
 import { InputSelectorComponent } from '../shared/components/input/input-selector/input-selector.component';
 import { DateRangeOption } from '../shared/components/input/input-selector/input-selector.types';
 import { CalenderComponent } from '../shared/components/calender/calender.component';
@@ -6,6 +6,7 @@ import { SingleSelectComponent } from '../shared/components/select/single-select
 import { InputCoreComponent } from '../shared/components/input/input-core/input-core.component';
 import { SelectMenuComponent } from '../shared/components/select/select-menu/select-menu';
 import { SelectMenu } from '../shared/components/select/select-menu/selectMenu.type';
+import { ToggleComponentContainer } from '../shared/components/container/toggle-component-container/toggle-component-container';
 
 @Component({
   selector: 'app-b2b-dashboard',
@@ -15,6 +16,7 @@ import { SelectMenu } from '../shared/components/select/select-menu/selectMenu.t
     SingleSelectComponent,
     InputCoreComponent,
     SelectMenuComponent,
+    ToggleComponentContainer,
   ],
   templateUrl: './b2b-dashboard.html',
   styleUrl: './b2b-dashboard.css',
@@ -80,9 +82,7 @@ export class B2bDashboard {
       value: { access: ['AWS', 'Kubernetes'], level: 'Staff', salary_band: 'S' },
     },
   ]);
-
   selectedData = signal<any>(null);
-
   handleData(data: any) {
     console.log('Component Emitted:', data);
     this.selectedData.set(data);
@@ -118,4 +118,13 @@ export class B2bDashboard {
   //   console.log('Component Emitted:', data);
   //   this.selectedData.set(data);
   // }
+
+  // =========Advance Search Portion==========
+  isContainerOpen = signal(false);
+  open() {
+    this.isContainerOpen.set(true);
+  }
+  close() {
+    this.isContainerOpen.set(false);
+  }
 }
