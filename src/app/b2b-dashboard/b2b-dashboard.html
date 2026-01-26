@@ -78,7 +78,15 @@
         }
       </div>
       <div>
-        <div (click)="openTableRowModificationContainer()">Open</div>
+        <!-- <div (click)="openTableRowModificationContainer()">Open</div> -->
+        <app-settings-button
+          label="Column Selection"
+          buttonLabel="Default"
+          (onButtonClick)="resetToDefault()"
+          (onIconClick)="openTableRowModificationContainer()"
+        >
+          ></app-settings-button
+        >
       </div>
     </div>
     <!-- table row modification toggle buttons -->

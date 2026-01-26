@@ -11,6 +11,7 @@ import { StatusButton } from '../shared/components/status-button/status-button.c
 import { StatusButtonData } from '../shared/components/status-button/status-button.types';
 import { ToggleButtonComponent } from '../shared/components/toggle-button/toggle-button.component';
 import { TableComponent } from '../shared/components/table/table.component';
+import { SettingsButton } from '../shared/components/button/settings-button/settings-button';
 type ColumnKey = string;
 
 @Component({
@@ -25,6 +26,7 @@ type ColumnKey = string;
     StatusButton,
     ToggleButtonComponent,
     TableComponent,
+    SettingsButton,
   ],
   templateUrl: './b2b-dashboard.html',
   styleUrl: './b2b-dashboard.css',
@@ -198,14 +200,16 @@ export class B2bDashboard {
   }
 
   // 🔹 reset button logic
-  resetColumns() {
-    this.columnVisibility.set(
-      Object.fromEntries(this.tableColumns.map((col) => [col.key, true])),
-    );
-  }
+  // resetColumns() {
+  //   this.columnVisibility.set(Object.fromEntries(this.tableColumns.map((col) => [col.key, true])));
+  // }
 
   // for only table porttion
   openColumnSettings() {
     this.isTableModificationContainerOpen.set(true);
+  }
+
+  resetToDefault() {
+    this.columnVisibility.set(Object.fromEntries(this.tableColumns.map((col) => [col.key, true])));
   }
 }
