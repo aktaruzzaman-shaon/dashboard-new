@@ -12,7 +12,9 @@ import { StatusButtonData } from '../shared/components/status-button/status-butt
 import { ToggleButtonComponent } from '../shared/components/toggle-button/toggle-button.component';
 import { TableComponent } from '../shared/components/table/table.component';
 import { SettingsButton } from '../shared/components/button/settings-button/settings-button';
-import { OutlineButton } from "../shared/components/outline-button/outline-button";
+import { OutlineButton } from '../shared/components/outline-button/outline-button';
+import { MultiSelect } from '../shared/components/select/multi-select/multi-select.component';
+import { OptionItem } from '../shared/components/select/select.types';
 type ColumnKey = string;
 
 @Component({
@@ -28,8 +30,9 @@ type ColumnKey = string;
     ToggleButtonComponent,
     TableComponent,
     SettingsButton,
-    OutlineButton
-],
+    OutlineButton,
+    MultiSelect,
+  ],
   templateUrl: './b2b-dashboard.html',
   styleUrl: './b2b-dashboard.css',
 })
@@ -138,6 +141,25 @@ export class B2bDashboard {
   }
   close() {
     this.isContainerOpen.set(false);
+  }
+
+  //========== Advance Search Portion multiselect=========
+  optionList = [
+    { label: 'Option Name 1', value: 'opt1' },
+    { label: 'Option Name 2', value: 'opt2' },
+    { label: 'Option Name 3', value: 'opt3' },
+  ];
+
+  supplierList = [
+    { label: 'Supplier A', value: 'a' },
+    { label: 'Supplier B', value: 'b' },
+  ];
+
+  selectedFilters: Record<string, string[]> = {};
+
+  onMultiSelectDone(event: { id: string; values: string[] }) {
+    this.selectedFilters[event.id] = event.values;
+    console.log(this.selectedFilters);
   }
 
   //Table portion===========================

@@ -49,13 +49,44 @@
     <app-input-core label="Booking Reference Number"></app-input-core>
 
     <!-- ========== Advanced Search Portion =========== -->
-    <button (click)="open()">Advance Access</button>
+    <button (click)="open()" class="pb-3 text-lg text-">Advance Access</button>
+
     <app-toggle-component-container [isOpen]="isContainerOpen()" (closed)="close()">
-      <app-single-select></app-single-select>
-      <app-single-select></app-single-select>
-      <app-single-select></app-single-select>
-      <app-single-select></app-single-select>
-      <app-single-select></app-single-select>
+      <app-multi-select
+        id="option"
+        label="Option"
+        placeholder="Option Name"
+        [options]="optionList"
+        (done)="onMultiSelectDone($event)"
+      ></app-multi-select>
+      <app-multi-select
+        id="supplier"
+        label="Option"
+        placeholder="Option Name"
+        [options]="optionList"
+        (done)="onMultiSelectDone($event)"
+      ></app-multi-select>
+      <app-multi-select
+        id="user"
+        label="Option"
+        placeholder="Option Name"
+        [options]="optionList"
+        (done)="onMultiSelectDone($event)"
+      ></app-multi-select>
+      <app-multi-select
+        id="profitCenter"
+        label="Option"
+        placeholder="Option Name"
+        [options]="optionList"
+        (done)="onMultiSelectDone($event)"
+      ></app-multi-select>
+      <app-multi-select
+        id="provider"
+        label="Option"
+        placeholder="Option Name"
+        [options]="optionList"
+        (done)="onMultiSelectDone($event)"
+      ></app-multi-select>
     </app-toggle-component-container>
   </div>
 
