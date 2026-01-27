@@ -21,6 +21,7 @@ import { OptionItem } from '../shared/components/select/select.types';
 import { single } from 'rxjs';
 import { ModalComponent } from '../shared/components/modal/modal.component';
 import { ButtonWithPopup } from '../shared/components/button/button-with-popup/button-with-popup';
+import { DateSlider } from '../shared/components/date-slider/date-slider';
 type ColumnKey = string;
 
 @Component({
@@ -36,10 +37,9 @@ type ColumnKey = string;
     ToggleButtonComponent,
     TableComponent,
     SettingsButton,
-    OutlineButton,
     MultiSelect,
-    ModalComponent,
     ButtonWithPopup,
+    DateSlider,
   ],
   templateUrl: './b2b-dashboard.html',
   styleUrl: './b2b-dashboard.css',
@@ -270,7 +270,6 @@ export class B2bDashboard {
   }
 
   //table refenence deatail modal
-  
 
   // 🔹 reset button logic
   // resetColumns() {

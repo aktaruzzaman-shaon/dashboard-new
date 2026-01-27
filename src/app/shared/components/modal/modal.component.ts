@@ -8,21 +8,11 @@ import { CommonModule } from '@angular/common';
   templateUrl: './modal.component.html',
   styleUrl: './modal.component.css',
 })
+
 export class ModalComponent {
   open = input<boolean>(false);
   title = input<string>('');
   size = input<ModalSize>('md');
-
-  modalWidth = computed(() => {
-    const map: Record<ModalSize, string> = {
-      sm: 'max-w-sm',
-      md: 'max-w-2xl',
-      lg: 'max-w-4xl',
-      xl: 'max-w-6xl',
-      full: 'max-w-full h-full rounded-none',
-    };
-    return map[this.size()];
-  });
 
   // ui config
   hideFooter = input<boolean>(false);
@@ -35,6 +25,17 @@ export class ModalComponent {
 
   close = output<void>();
   submit = output<void>();
+
+  modalWidth = computed(() => {
+    const map: Record<ModalSize, string> = {
+      sm: 'max-w-sm',
+      md: 'max-w-2xl',
+      lg: 'max-w-4xl',
+      xl: 'max-w-6xl',
+      full: 'max-w-full h-full rounded-none',
+    };
+    return map[this.size()];
+  });
 
   onClose(): void {
     if (this.disableBackdropClose()) return;
