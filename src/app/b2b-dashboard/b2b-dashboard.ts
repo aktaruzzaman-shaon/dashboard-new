@@ -269,6 +269,9 @@ export class B2bDashboard {
     }));
   }
 
+  //table refenence deatail modal
+  
+
   // 🔹 reset button logic
   // resetColumns() {
   //   this.columnVisibility.set(Object.fromEntries(this.tableColumns.map((col) => [col.key, true])));

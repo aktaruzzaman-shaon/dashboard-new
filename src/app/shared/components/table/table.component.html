@@ -56,11 +56,21 @@
                   <div class="flex items-center gap-2 text-sm text-gray-900">
                     <span class="truncate">{{ booking.reference }}</span>
                     <button
-                      (click)="onReferenceDetails(booking)"
+                      (click)="openModal()"
                       class="px-2 py-0.5 text-[10px] bg-gray-50 text-gray-600 rounded border border-gray-200 hover:bg-gray-100 transition-colors"
                     >
                       Details
                     </button>
+                    <app-modal
+                      [open]="isModalOpen()"
+                      title="Remarks"
+                      size="lg"
+                      submitText="Save"
+                      cancelText="Cancel"
+                      [loading]="isSubmitting()"
+                      (close)="closeModal()"
+                      (submit)="submitModal()"
+                    ></app-modal>
                   </div>
                 }
 
@@ -96,7 +106,32 @@
                 }
 
                 @case ('supplier') {
-                  <div class="text-sm">{{ booking.supplier }}</div>
+                  <div class="flex items-start ">
+                    <span
+                      class="flex items-center justify-center w-4 h-4 rounded-full bg-green-100 text-green-600 text-xs shrink-0"
+                    >
+                      ✓
+                    </span>
+                    <span
+                      class="text-sm font-medium text-gray-800 truncate max-w-[140px] sm:max-w-none"
+                    >
+                      {{ booking.supplier }}
+                    </span>
+                    <svg
+                      class="w-4 h-4 text-gray-400 shrink-0"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M9 5l7 7-7 7"
+                      />
+                    </svg>
+                  </div>
+                  <!-- <div class="text-sm">{{ booking.supplier }}</div> -->
                 }
 
                 @case ('status') {

@@ -1,21 +1,19 @@
-import { Component, input, output } from '@angular/core';
+import { Component, input, output, signal } from '@angular/core';
 import { Booking } from './table.types';
+import { ModalComponent } from '../modal/modal.component';
 
 @Component({
   selector: 'app-table',
-  imports: [],
+  imports: [ModalComponent],
   templateUrl: './table.component.html',
   styleUrl: './table.component.css',
 })
 export class TableComponent {
-   columns = input<{ key: string; label: string }[]>([]);
+  columns = input<{ key: string; label: string }[]>([]);
   columnVisibility = input<Record<string, boolean>>({});
-
-  // Track selected rows
   selectedReferences = new Set<string>();
-
-  // Output event to notify parent about selection changes
   selectionChange = output<string[]>();
+  referenceDetailsModalOpen = signal<boolean>(false);
 
   bookings: Booking[] = [
     {
@@ -72,11 +70,37 @@ export class TableComponent {
   }
 
   onReferenceDetails(booking: Booking): void {
+    this.referenceDetailsModalOpen.set(true);
     console.log('Reference details clicked:', booking);
     // Will open modal later
   }
 
-  // Row selection methods
+  isModalOpen = signal(false);
+  isSubmitting = signal(false);
+
+  remarks = signal<string>('');
+
+  openModal(): void {
+    this.isModalOpen.set(true);
+  }
+
+  closeModal(): void {
+    this.isModalOpen.set(false);
+  }
+
+  submitModal(): void {
+    console.log("submitted")
+    this.isSubmitting.set(true);
+
+    // Simulate API call
+    setTimeout(() => {
+      console.log('Submitted Remarks:', this.remarks());
+
+      this.isSubmitting.set(false);
+      this.isModalOpen.set(false);
+    }, 1500);
+  }
+
   isRowSelected(reference: string): boolean {
     return this.selectedReferences.has(reference);
   }
