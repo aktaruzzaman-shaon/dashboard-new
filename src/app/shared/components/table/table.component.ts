@@ -1,11 +1,12 @@
 import { Component, input, output, signal } from '@angular/core';
 import { Booking } from './table.types';
 import { ModalComponent } from '../modal/modal.component';
-import { SignButtonWithPopup } from "../button/sign-button-with-popup/sign-button-with-popup";
+import { SignButtonWithPopup } from '../button/sign-button-with-popup/sign-button-with-popup';
+import { IconButtonPopup } from '../button/icon-button-popup/icon-button-popup';
 
 @Component({
   selector: 'app-table',
-  imports: [ModalComponent, SignButtonWithPopup],
+  imports: [ModalComponent, IconButtonPopup],
   templateUrl: './table.component.html',
   styleUrl: './table.component.css',
 })
@@ -29,6 +30,36 @@ export class TableComponent {
       confirmation: 'YCTG5498641',
       supplier: 'Karan Verma',
       status: 'Pending',
+      user: 'Rajesh Verma',
+      provider: 'Paramount Tourism',
+    },
+    {
+      travelDate: '13 Oct 2024',
+      reference: '264654654984642',
+      optionName: 'From Dubai Marina Sightseeing Yacht',
+      type: 'Private',
+      startTime: '10:00 AM',
+      duration: '4 Hours',
+      guests: '8Adult 4 Child 2 Infant',
+      sold: { cost: 149, sale: 200 },
+      confirmation: 'YCTG5498641',
+      supplier: 'Karan Verma',
+      status: 'Accepted',
+      user: 'Rajesh Verma',
+      provider: 'Paramount Tourism',
+    },
+    {
+      travelDate: '13 Oct 2024',
+      reference: '264654654984642',
+      optionName: 'From Dubai Marina Sightseeing Yacht',
+      type: 'Private',
+      startTime: '10:00 AM',
+      duration: '4 Hours',
+      guests: '8Adult 4 Child 2 Infant',
+      sold: { cost: 149, sale: 200 },
+      confirmation: 'YCTG5498641',
+      supplier: 'Karan Verma',
+      status: 'Accepted',
       user: 'Rajesh Verma',
       provider: 'Paramount Tourism',
     },
@@ -108,7 +139,7 @@ export class TableComponent {
   supplierRemarks = signal<string>('Supplier');
 
   openSupplierDetailsModal(): void {
-    console.log("checked")
+    console.log('checked');
     this.isSupplierModalOpen.set(true);
   }
 

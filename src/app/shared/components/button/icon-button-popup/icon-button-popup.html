@@ -1,0 +1,61 @@
+<div class="relative inline-block" #container>
+  <!-- Trigger Button with projected SVG -->
+  <button
+    #triggerButton
+    (click)="togglePopup()"
+    class="relative text-blue-400  rounded-full hover:bg-gray-100 transition-colors duration-200 "
+    [attr.aria-expanded]="isOpen()"
+    aria-haspopup="true"
+  >
+    <!-- SVG Icon Projection Slot -->
+    <ng-content select="[icon]"></ng-content>
+
+    <!-- Badge (optional) -->
+    @if (badgeDisplay(); as display) {
+      <span
+        class="absolute -top-1 -right-1 bg-sky-500 text-white text-xs font-bold rounded-full h-3 w-3 flex items-center justify-center"
+      >
+        {{ display }}
+      </span>
+    }
+  </button>
+
+  <!-- Backdrop Overlay -->
+  @if (isOpen()) {
+    <div class="fixed inset-0 bg-black/35 z-40" (click)="closePopup()" @fadeIn></div>
+  }
+
+  <!-- Popup Modal -->
+  @if (isOpen()) {
+    <div
+      #popupModal
+      [ngClass]="getPopupPositionClasses()"
+      class="absolute z-50 bg-white rounded-lg shadow-2xl border border-gray-200 min-w-[100px] max-w-[90vw]"
+      @slideIn
+      (click)="$event.stopPropagation()"
+    >
+      <!-- Close button (optional) -->
+      @if (showCloseButton()) {
+        <button
+          (click)="closePopup()"
+          class="absolute -top-2 -right-100 p-1 rounded-full hover:bg-gray-100 transition-colors"
+          aria-label="Close"
+        >
+          <svg class="w-4 h-4 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M6 18L18 6M6 6l12 12"
+            ></path>
+          </svg>
+        </button>
+      }
+
+      <!-- Popup Content Projection Slot -->
+      <div class="p-1">
+        <ng-content></ng-content>
+      </div>
+    </div>
+  }
+</div>
