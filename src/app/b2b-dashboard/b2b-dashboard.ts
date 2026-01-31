@@ -62,10 +62,19 @@ export class B2bDashboard {
     this.currentSelection = selectedItems;
   }
 
+  // from and to date calculation
+  getDateRange(selectedDateRange: DateRangeOption[]) {
+    const selectedRangeValueArray = []
+    for (const singleSelectedRange of selectedDateRange){
+      
+    }
+   
+  }
+
   //Travel Date FROM and TO  ====================================
   travelDateTo = signal<Date | null>(null);
   travelDateFrom = signal<Date | null>(null);
-  onDateToSelected(date: Date |null ): void {
+  onDateToSelected(date: Date | null): void {
     console.log(date);
     this.travelDateTo.set(date);
     console.log('Travel Date To:', date);
