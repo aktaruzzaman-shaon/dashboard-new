@@ -1,0 +1,115 @@
+.
+├── angular.json
+├── package.json
+├── package-lock.json
+├── public
+│   └── favicon.ico
+├── README.md
+├── src
+│   ├── app
+│   │   ├── app.config.ts
+│   │   ├── app.css
+│   │   ├── app.html
+│   │   ├── app.routes.ts
+│   │   ├── app.ts
+│   │   ├── b2b-dashboard
+│   │   │   ├── b2b-dashboard.css
+│   │   │   ├── b2b-dashboard.html
+│   │   │   └── b2b-dashboard.ts
+│   │   ├── shared
+│   │   │   └── components
+│   │   │       ├── button
+│   │   │       │   ├── button.component.css
+│   │   │       │   ├── button.component.html
+│   │   │       │   ├── button.component.ts
+│   │   │       │   ├── button.types.ts
+│   │   │       │   ├── button.utils.ts
+│   │   │       │   ├── button-with-popup
+│   │   │       │   │   ├── button-with-popup.css
+│   │   │       │   │   ├── button-with-popup.html
+│   │   │       │   │   └── button-with-popup.ts
+│   │   │       │   ├── icon-button-popup
+│   │   │       │   │   ├── icon-button-popup.css
+│   │   │       │   │   ├── icon-button-popup.html
+│   │   │       │   │   └── icon-button-popup.ts
+│   │   │       │   ├── settings-button
+│   │   │       │   │   ├── settings-button.css
+│   │   │       │   │   ├── settings-button.html
+│   │   │       │   │   └── settings-button.ts
+│   │   │       │   └── sign-button-with-popup
+│   │   │       │       ├── sign-button-with-popup.css
+│   │   │       │       ├── sign-button-with-popup.html
+│   │   │       │       └── sign-button-with-popup.ts
+│   │   │       ├── calender
+│   │   │       │   ├── calender.component.css
+│   │   │       │   ├── calender.component.html
+│   │   │       │   └── calender.component.ts
+│   │   │       ├── container
+│   │   │       │   └── toggle-component-container
+│   │   │       │       ├── toggle-component-container.css
+│   │   │       │       ├── toggle-component-container.html
+│   │   │       │       └── toggle-component-container.ts
+│   │   │       ├── date-slider
+│   │   │       │   ├── date-slider.css
+│   │   │       │   ├── date-slider.html
+│   │   │       │   └── date-slider.ts
+│   │   │       ├── input
+│   │   │       │   ├── input-core
+│   │   │       │   │   ├── input-core.component.css
+│   │   │       │   │   ├── input-core.component.html
+│   │   │       │   │   ├── input-core.component.ts
+│   │   │       │   │   └── input-core.types.ts
+│   │   │       │   └── input-selector
+│   │   │       │       ├── input-selector.component.css
+│   │   │       │       ├── input-selector.component.html
+│   │   │       │       ├── input-selector.component.ts
+│   │   │       │       └── input-selector.types.ts
+│   │   │       ├── modal
+│   │   │       │   ├── modal.component.css
+│   │   │       │   ├── modal.component.html
+│   │   │       │   ├── modal.component.ts
+│   │   │       │   └── modal.types.ts
+│   │   │       ├── outline-button
+│   │   │       │   ├── outline-button.css
+│   │   │       │   ├── outline-button.html
+│   │   │       │   └── outline-button.ts
+│   │   │       ├── select
+│   │   │       │   ├── multi-select
+│   │   │       │   │   ├── multi-select.component.css
+│   │   │       │   │   ├── multi-select.component.html
+│   │   │       │   │   └── multi-select.component.ts
+│   │   │       │   ├── select-menu
+│   │   │       │   │   ├── select-menu.css
+│   │   │       │   │   ├── select-menu.html
+│   │   │       │   │   ├── select-menu.ts
+│   │   │       │   │   └── selectMenu.type.ts
+│   │   │       │   ├── select.types.ts
+│   │   │       │   └── single-select
+│   │   │       │       ├── single-select.component.css
+│   │   │       │       ├── single-select.component.html
+│   │   │       │       └── single-select.component.ts
+│   │   │       ├── status-button
+│   │   │       │   ├── status-button.component.css
+│   │   │       │   ├── status-button.component.html
+│   │   │       │   ├── status-button.component.ts
+│   │   │       │   └── status-button.types.ts
+│   │   │       ├── table
+│   │   │       │   ├── demo.html
+│   │   │       │   ├── table.component.css
+│   │   │       │   ├── table.component.html
+│   │   │       │   ├── table.component.ts
+│   │   │       │   └── table.types.ts
+│   │   │       └── toggle-button
+│   │   │           ├── toggle-button.component.css
+│   │   │           ├── toggle-button.component.html
+│   │   │           └── toggle-button.component.ts
+│   │   └── usage.html
+│   ├── index.html
+│   ├── main.ts
+│   └── styles.css
+├── structure.txt
+├── tsconfig.app.json
+├── tsconfig.json
+└── tsconfig.spec.json
+
+28 directories, 85 files
