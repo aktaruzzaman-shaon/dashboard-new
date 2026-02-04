@@ -36,6 +36,7 @@ export class CalenderComponent {
   dateRange = input<DateRange | null>(null);
   travelFromDate = input<Date | null>(null);
   travelToDate = input<Date | null>(null);
+  showDateType = input<'fromDate' | 'toDate'>('fromDate');
 
   // Outputs
   fromDateSelected = output<Date | null>();
@@ -55,10 +56,9 @@ export class CalenderComponent {
   weekDays = ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'];
 
   constructor() {
-    
     // Sync temp dates with selected dates from parent
     effect(() => {
-      
+      console.log('Syncing temp dates with travel dates from parent', this.dateRange());
       this.tempFromDate.set(this.travelFromDate());
       this.tempToDate.set(this.travelToDate());
     });
@@ -133,7 +133,6 @@ export class CalenderComponent {
   // }
 
   selectDate(day: number | null, isNextMonth: boolean): void {
-    console.log('Date clicked:', day, isNextMonth);
     if (!day) return;
 
     const selectedDate = new Date(
@@ -141,7 +140,6 @@ export class CalenderComponent {
       isNextMonth ? this.nextMonth.getMonth() : this.currentMonth.getMonth(),
       day,
     );
-    console.log('Constructed date:', selectedDate);
 
     // Check if date is within allowed range
     if (!this.isDateAllowed(selectedDate)) {
@@ -387,11 +385,27 @@ export class CalenderComponent {
   // }
 
   getDisplayValue(): string {
-    if (this.tempFromDate()) {
+    console.log('Getting display value for date type:', this.dateRange());
+    if (this.tempFromDate() && this.showDateType() === 'fromDate') {
       return this.formatDate(this.tempFromDate());
-    } else if (this.tempToDate()) {
-      return this.formatDate(this.tempToDate());
+    } else if (
+      this.dateRange() &&
+      this.dateRange()?.from.toString() != 'Invalid Date' &&
+      this.showDateType() === 'fromDate'
+    ) {
+      return this.formatDate(this.dateRange()?.from || null);
     }
+
+    if (this.tempToDate() && this.showDateType() === 'toDate') {
+      return this.formatDate(this.tempToDate());
+    } else if (
+      this.dateRange() &&
+      this.dateRange()?.to.toString() != 'Invalid Date' &&
+      this.showDateType() === 'toDate'
+    ) {
+      return this.formatDate(this.dateRange()?.to || null);
+    }
+
     return '';
   }
 }

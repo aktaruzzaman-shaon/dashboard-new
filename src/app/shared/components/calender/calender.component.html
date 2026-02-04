@@ -86,7 +86,7 @@
                     (click)="selectDate(day, false)"
                     [disabled]="isDisabled(day, false)"
                     [class.text-blue-600]="isInSelectedRange(day, false)"
-                    [class.text-green-700]="
+                    [class.text-red-700]="
                       (isInAllowedRange(day, false) &&
                         !isSelected(day, false) &&
                         !isInSelectedRange(day, false)) ??

@@ -123,32 +123,30 @@ export class B2bDashboard {
   rangeFromInput: string = '';
   rangeToInput: string = '';
 
-  // setDateRange(): void {
-  //   const value = this.getDateRange(this.selectedDateRange()) ?? null;
-  //   this.allowedDateRange.set(value);
+  setDateRange(): void {
+    const value = this.getDateRange(this.selectedDateRange()) ?? null;
+    this.allowedDateRange.set(value);
 
-  //   if (this.rangeFromInput && this.rangeToInput) {
-  //     const fromDate = new Date(this.rangeFromInput + 'T00:00:00');
-  //     const toDate = new Date(this.rangeToInput + 'T00:00:00');
-  //     const value = this.getDateRange(this.selectedDateRange());
-  //     console.log('Setting date range from inputs:', fromDate, toDate);
-  //     // Validate that from is before to
-  //     if (fromDate <= toDate) {
-  //       this.allowedDateRange.set({ from: fromDate, to: toDate });
-  //       console.log(this.allowedDateRange());
+    if (this.rangeFromInput && this.rangeToInput) {
+      const fromDate = new Date(this.rangeFromInput + 'T00:00:00') || null;
+      const toDate = new Date(this.rangeToInput + 'T00:00:00') || null;
+      console.log('Setting date range from inputs:', fromDate, toDate);
+      // Validate that from is before to
+      if (fromDate <= toDate) {
+        this.allowedDateRange.set({ from: fromDate, to: toDate });
 
-  //       // Clear travel dates if they're outside the new range
-  //       if (this.travelFrom() && !this.isDateInRange(this.travelFrom()!, fromDate, toDate)) {
-  //         this.travelFrom.set(null);
-  //       }
-  //       if (this.travelTo() && !this.isDateInRange(this.travelTo()!, fromDate, toDate)) {
-  //         this.travelTo.set(null);
-  //       }
-  //     } else {
-  //       alert('Range start date must be before or equal to range end date');
-  //     }
-  //   }
-  // }
+        // Clear travel dates if they're outside the new range
+        if (this.travelFrom() && !this.isDateInRange(this.travelFrom()!, fromDate, toDate)) {
+          this.travelFrom.set(null);
+        }
+        if (this.travelTo() && !this.isDateInRange(this.travelTo()!, fromDate, toDate)) {
+          this.travelTo.set(null);
+        }
+      } else {
+        alert('Range start date must be before or equal to range end date');
+      }
+    }
+  }
 
   clearDateRange(): void {
     this.allowedDateRange.set(null);
