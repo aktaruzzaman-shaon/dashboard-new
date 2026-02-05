@@ -1,15 +1,19 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, Type } from '@angular/core';
 import { RouterLink, RouterModule } from '@angular/router';
+import { BookingIconComponent } from '../../../../icons/BookingIcon';
+import { OperationsIconComponent } from '../../../../icons/OperationsIcon';
+import { AccountsIconComponent } from '../../../../icons/AccountsIcon';
+import { MarkUpIconComponent } from '../../../../icons/MarkUpIcon';
+import { LogoutIconComponent } from '../../../../icons/LogoutIcon';
 
 interface MenuItem {
   label: string;
-  icon: string;
+  icon: Type<any> | string;
   route?: string;
   children?: MenuItem[];
   expanded?: boolean;
 }
-
 @Component({
   selector: 'app-sidebar',
   imports: [RouterLink, CommonModule, RouterModule],
@@ -21,7 +25,7 @@ export class Sidebar {
   menuItems: MenuItem[] = [
     {
       label: 'Bookings',
-      icon: '📅',
+      icon: BookingIconComponent,
       expanded: false,
       children: [
         { label: 'My Bookings', icon: '', route: '/bookings/my-bookings' },
@@ -30,7 +34,7 @@ export class Sidebar {
     },
     {
       label: 'My Operations',
-      icon: '⚙️',
+      icon: OperationsIconComponent,
       expanded: false,
       children: [
         { label: 'Activities Operations', icon: '', route: '/operations/activities' },
@@ -43,22 +47,26 @@ export class Sidebar {
     },
     {
       label: 'Accounts',
-      icon: '👤',
+      icon: AccountsIconComponent,
       route: '/accounts',
     },
     {
       label: 'Markup',
-      icon: '💰',
+      icon: MarkUpIconComponent,
       route: '/markup',
     },
     {
       label: 'Logout',
-      icon: '🚪',
+      icon: LogoutIconComponent,
       route: '/logout',
     },
   ];
 
   ngOnInit(): void {}
+
+  isComponent(icon: any): boolean {
+    return typeof icon === 'function';
+  }
 
   toggleSidebar(): void {
     this.isSidebarOpen = !this.isSidebarOpen;

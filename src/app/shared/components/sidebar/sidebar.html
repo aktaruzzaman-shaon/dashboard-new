@@ -1,9 +1,7 @@
 <!-- Mobile Overlay -->
-<div
-  *ngIf="isSidebarOpen"
-  class="fixed inset-0 bg-opacity-50 z-40 lg:hidden"
-  (click)="toggleSidebar()"
-></div>
+@if (isSidebarOpen) {
+  <div class="fixed inset-0  bg-opacity-50 z-40 lg:hidden" (click)="toggleSidebar()"></div>
+}
 
 <!-- Sidebar -->
 <aside
@@ -13,59 +11,72 @@
   <!-- Logo -->
   <div class="p-4 border-b border-gray-200">
     <div class="flex items-center space-x-2">
-      <div class="w-10 h-10 bg-gradient-to-br from-orange-400 to-pink-500 rounded"></div>
-      <span class="text-xl font-bold text-gray-800">RAYNA</span>
+      <div class="w-10 h-10 ">
+        Rayna
+      </div>
+      
     </div>
   </div>
 
   <!-- Menu Items -->
   <nav class="p-4 space-y-1">
-    <div *ngFor="let item of menuItems" class="mb-1">
-      <!-- Parent Menu Item -->
-      <div
-        (click)="toggleMenuItem(item)"
-        [routerLink]="!item.children ? item.route : null"
-        routerLinkActive="bg-blue-50 text-blue-600"
-        [routerLinkActiveOptions]="{ exact: false }"
-        class="flex items-center justify-between px-4 py-3 rounded-lg cursor-pointer hover:bg-gray-100 transition-colors group"
-      >
-        <div class="flex items-center space-x-3">
-          <span class="text-xl">{{ item.icon }}</span>
-          <span class="text-sm font-medium text-gray-700 group-hover:text-gray-900">{{
-            item.label
-          }}</span>
-        </div>
-        <svg
-          *ngIf="item.children"
-          [class.rotate-180]="item.expanded"
-          class="w-4 h-4 text-gray-400 transition-transform"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
+    @for (item of menuItems; track item.label) {
+      <div class="mb-1">
+        <!-- Parent Menu Item -->
+        <div
+          (click)="toggleMenuItem(item)"
+          [routerLink]="!item.children ? item.route : null"
+          routerLinkActive="bg-blue-50 text-blue-600"
+          [routerLinkActiveOptions]="{ exact: false }"
+          class="flex items-center justify-between px-4 py-3 rounded-lg cursor-pointer hover:bg-gray-100 transition-colors group"
         >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="M19 9l-7 7-7-7"
-          />
-        </svg>
-      </div>
+          <div class="flex items-center space-x-3">
+            <!-- Dynamic Icon: Component or String -->
+            @if (isComponent(item.icon)) {
+              <ng-container *ngComponentOutlet="$any(item.icon); inputs: { size: 20 }" />
+            } @else {
+              <span class="text-xl">{{ item.icon }}</span>
+            }
 
-      <!-- Child Menu Items -->
-      <div
-        *ngIf="item.children && item.expanded"
-        class="ml-4 mt-1 space-y-1 border-l-2 border-gray-200 pl-4"
-      >
-        <a
-          *ngFor="let child of item.children"
-          [routerLink]="child.route"
-          routerLinkActive="bg-blue-50 text-blue-600 font-medium"
-          class="block px-4 py-2 rounded-lg text-sm text-gray-600 hover:bg-gray-50 hover:text-gray-900 transition-colors"
-        >
-          {{ child.label }}
-        </a>
+            <span class="text-sm font-medium text-gray-700 group-hover:text-gray-900">
+              {{ item.label }}
+            </span>
+          </div>
+
+          <!-- Dropdown Arrow -->
+          @if (item.children) {
+            <svg
+              [class.rotate-180]="item.expanded"
+              class="w-4 h-4 text-gray-400 transition-transform"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M19 9l-7 7-7-7"
+              />
+            </svg>
+          }
+        </div>
+
+        <!-- Child Menu Items -->
+        @if (item.children && item.expanded) {
+          <div class="ml-4 mt-1 space-y-1 border-l-2 border-gray-200 pl-4">
+            @for (child of item.children; track child.label) {
+              <a
+                [routerLink]="child.route"
+                routerLinkActive="bg-blue-50 text-blue-600 font-medium"
+                class="block px-4 py-2 rounded-lg text-sm text-gray-600 hover:bg-gray-50 hover:text-gray-900 transition-colors"
+              >
+                {{ child.label }}
+              </a>
+            }
+          </div>
+        }
       </div>
-    </div>
+    }
   </nav>
 </aside>
