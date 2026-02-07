@@ -1,4 +1,13 @@
-import { Component, computed, effect, input, model, output, signal } from '@angular/core';
+import {
+  Component,
+  computed,
+  effect,
+  input,
+  model,
+  output,
+  signal,
+  viewChild,
+} from '@angular/core';
 import { InputSelectorComponent } from '../shared/components/input/input-selector/input-selector.component';
 import { DateRangeOption } from '../shared/components/input/input-selector/input-selector.types';
 import { CalenderComponent, DateRange } from '../shared/components/calender/calender.component';
@@ -51,12 +60,13 @@ export class B2bDashboard {
   //=============== Travel Date range selection input =================
 
   availableDateRanges: DateRangeOption[] = [
-    { id: 'today', label: 'Today', value: { start: 0, end: 1 } },
-    { id: 'tomorrow', label: 'Tomorrow', value: { start: 0, end: 1 } },
-    { id: 'd3-d7', label: 'Day 3 to Day 7', value: { start: 3, end: 7 } },
-    { id: 'd7-d15', label: 'Day 7 to Day 15', value: { start: 7, end: 15 } },
-    { id: 'd15-plus', label: 'Day 15 & Beyond', value: { start: 15, end: 365 } },
-    { id: 'last-90', label: 'Last 90 days', value: { start: -90, end: 0 } },
+    { id: 'today', label: 'Today', type: 'relative', value: { start: 0, end: 1 } },
+    { id: 'tomorrow', label: 'Tomorrow', type: 'relative', value: { start: 1, end: 2 } },
+    { id: 'd3-d7', label: 'Day 3 to Day 7', type: 'relative', value: { start: 3, end: 7 } },
+    { id: 'd7-d15', label: 'Day 7 to Day 15', type: 'relative', value: { start: 7, end: 15 } },
+    { id: 'd15-plus', label: 'Day 15 & Beyond', type: 'relative', value: { start: 15, end: 365 } },
+    { id: 'last-90', label: 'Last 90 days', type: 'relative', value: { start: -90, end: 0 } },
+    { id: 'custom', label: 'Custom', type: 'custom', value: { start: 0, end: 0 } },
   ];
 
   currentSelection = signal<DateRangeOption[]>([]);
@@ -64,15 +74,18 @@ export class B2bDashboard {
     this.currentSelection.set(selectedItems);
   }
 
-  onDateRangeSelected($event) {
-    console.log('Selected Date Range:', $event);
-    // You can perform additional actions here based on the selected date range
-  }
-
-  // ================   For calender only portion========================
+  // ================   For calender only portion======================
 
   allowedDateRange = signal<DateRange | null>(null);
   selectedDateRange = computed(() => this.currentSelection());
+  calendar = viewChild(CalenderComponent);
+
+  // checkign custom add or not
+  isCustomMode = computed(() => {
+    const ranges = this.selectedDateRange();
+    const rangesArray = Array.isArray(ranges) ? ranges : [ranges];
+    return rangesArray.some((range) => range.type === 'custom');
+  });
 
   constructor() {
     effect(() => {
@@ -82,18 +95,113 @@ export class B2bDashboard {
   }
 
   // here calculate date range from selected options
+  // getDateRange(selectedDateRange: DateRangeOption[] | DateRangeOption) {
+  //   const startDateArray = [];
+  //   const endDateArray = [];
+
+  //   if (!Array.isArray(selectedDateRange)) {
+  //     selectedDateRange = [selectedDateRange];
+  //   }
+
+  //   for (const singleSelectedRange of selectedDateRange) {
+  //     startDateArray.push(singleSelectedRange.value.start);
+  //     endDateArray.push(singleSelectedRange.value.end);
+  //   }
+
+  //   const finalStartDate = Math.min(...startDateArray);
+  //   const finalEndDate = Math.max(...endDateArray);
+
+  //   const today = new Date();
+  //   const addDays = (days: number) => {
+  //     const d = new Date(today);
+  //     d.setDate(today.getDate() + days);
+  //     return d;
+  //   };
+
+  //   this.allowedDateRange.set({
+  //     from: addDays(finalStartDate ?? 0),
+  //     to: addDays(finalEndDate),
+  //   });
+  // }
+
+  // getDateRange(selectedDateRange: DateRangeOption[] | DateRangeOption) {
+  //   const ranges = Array.isArray(selectedDateRange) ? selectedDateRange : [selectedDateRange];
+
+  //   const startDateArray: number[] = [];
+  //   const endDateArray: number[] = [];
+
+  //   // Check if "Custom" is part of the selection
+  //   const hasCustom = ranges.some((range) => range.type === 'custom');
+
+  //   if (hasCustom) {
+  //     // 1. Force the values to 0/0 as requested
+  //     startDateArray.push(0);
+  //     endDateArray.push(0);
+
+  //     // 2. Open the calendar so the user can actually pick their custom range
+  //     this.calendar()?.toggleCalendar();
+  //   } else {
+  //     // 3. Standard logic for non-custom ranges
+  //     for (const range of ranges) {
+  //       if (range.value) {
+  //         startDateArray.push(range.value.start);
+  //         endDateArray.push(range.value.end);
+  //       }
+  //     }
+  //   }
+
+  //   // If no ranges were found at all, we shouldn't proceed
+  //   if (startDateArray.length === 0) return;
+
+  //   const finalStartDate = Math.min(...startDateArray);
+  //   const finalEndDate = Math.max(...endDateArray);
+
+  //   const today = new Date();
+  //   const addDays = (days: number) => {
+  //     const d = new Date(today);
+  //     d.setHours(0, 0, 0, 0); // Normalized to start of day
+  //     d.setDate(today.getDate() + days);
+  //     return d;
+  //   };
+
+  //   // This will now set { from: Today, to: Today } if Custom was clicked
+  //   this.allowedDateRange.set({
+  //     from: addDays(finalStartDate),
+  //     to: addDays(finalEndDate),
+  //   });
+  // }
+
   getDateRange(selectedDateRange: DateRangeOption[] | DateRangeOption) {
-    const startDateArray = [];
-    const endDateArray = [];
+    const ranges = Array.isArray(selectedDateRange) ? selectedDateRange : [selectedDateRange];
 
-    if (!Array.isArray(selectedDateRange)) {
-      selectedDateRange = [selectedDateRange];
+    const startDateArray: number[] = [];
+    const endDateArray: number[] = [];
+
+    // Check if "Custom" is part of the selection
+    const hasCustom = ranges.some((range) => range.type === 'custom');
+
+    if (hasCustom) {
+      // For custom mode, set allowedDateRange to null so all dates are available
+      this.allowedDateRange.set(null);
+
+      // Open the calendar so the user can pick their custom range
+      setTimeout(() => {
+        this.calendar()?.toggleCalendar();
+      }, 0);
+
+      return; // Exit early for custom mode
+    } else {
+      // Standard logic for non-custom ranges
+      for (const range of ranges) {
+        if (range.value) {
+          startDateArray.push(range.value.start);
+          endDateArray.push(range.value.end);
+        }
+      }
     }
 
-    for (const singleSelectedRange of selectedDateRange) {
-      startDateArray.push(singleSelectedRange.value.start);
-      endDateArray.push(singleSelectedRange.value.end);
-    }
+    // If no ranges were found at all, we shouldn't proceed
+    if (startDateArray.length === 0) return;
 
     const finalStartDate = Math.min(...startDateArray);
     const finalEndDate = Math.max(...endDateArray);
@@ -101,12 +209,13 @@ export class B2bDashboard {
     const today = new Date();
     const addDays = (days: number) => {
       const d = new Date(today);
+      d.setHours(0, 0, 0, 0);
       d.setDate(today.getDate() + days);
       return d;
     };
 
     this.allowedDateRange.set({
-      from: addDays(finalStartDate ?? 0),
+      from: addDays(finalStartDate),
       to: addDays(finalEndDate),
     });
   }
@@ -119,19 +228,59 @@ export class B2bDashboard {
   rangeFromInput: string = '';
   rangeToInput: string = '';
 
+  // setDateRange(): void {
+  //   if (this.selectedDateRange().length > 0 && this.selectedDateRange()[0].type === 'custom') {
+  //     const calendarInstance = this.calendar();
+  //     if (calendarInstance) {
+  //       console.log('Toggling calendar for custom range selection');
+  //       calendarInstance.toggleCalendar();
+  //     }
+  //   }
+
+  //   const value = this.getDateRange(this.selectedDateRange()) ?? null;
+  //   this.allowedDateRange.set(value);
+
+  //   if (this.rangeFromInput && this.rangeToInput) {
+  //     const fromDate = new Date(this.rangeFromInput + 'T00:00:00') || null;
+  //     const toDate = new Date(this.rangeToInput + 'T00:00:00') || null;
+  //     console.log('Setting date range from inputs:', fromDate, toDate);
+  //     // Validate that from is before to
+  //     if (fromDate <= toDate) {
+  //       this.allowedDateRange.set({ from: fromDate, to: toDate });
+
+  //       // Clear travel dates if they're outside the new range
+  //       if (this.travelFrom() && !this.isDateInRange(this.travelFrom()!, fromDate, toDate)) {
+  //         this.travelFrom.set(null);
+  //       }
+  //       if (this.travelTo() && !this.isDateInRange(this.travelTo()!, fromDate, toDate)) {
+  //         this.travelTo.set(null);
+  //       }
+  //     } else {
+  //       alert('Range start date must be before or equal to range end date');
+  //     }
+  //   }
+  // }
   setDateRange(): void {
-    const value = this.getDateRange(this.selectedDateRange()) ?? null;
-    this.allowedDateRange.set(value);
+    if (this.selectedDateRange().length > 0 && this.selectedDateRange()[0].type === 'custom') {
+      // Remove this block since getDateRange already handles it
+      // const calendarInstance = this.calendar();
+      // if (calendarInstance) {
+      //   console.log('Toggling calendar for custom range selection');
+      //   calendarInstance.toggleCalendar();
+      // }
+    }
+
+    this.getDateRange(this.selectedDateRange()); // Remove the ?? null
+    // allowedDateRange is already set inside getDateRange
 
     if (this.rangeFromInput && this.rangeToInput) {
       const fromDate = new Date(this.rangeFromInput + 'T00:00:00') || null;
       const toDate = new Date(this.rangeToInput + 'T00:00:00') || null;
       console.log('Setting date range from inputs:', fromDate, toDate);
-      // Validate that from is before to
+
       if (fromDate <= toDate) {
         this.allowedDateRange.set({ from: fromDate, to: toDate });
 
-        // Clear travel dates if they're outside the new range
         if (this.travelFrom() && !this.isDateInRange(this.travelFrom()!, fromDate, toDate)) {
           this.travelFrom.set(null);
         }

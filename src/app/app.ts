@@ -109,12 +109,12 @@ export class App {
 
   // Date range selection input
   availableDateRanges: DateRangeOption[] = [
-    { id: 'today', label: 'Today', value: { type: 'relative', val: 0 } },
-    { id: 'tomorrow', label: 'Tomorrow', value: { type: 'relative', val: 1 } },
-    { id: 'd3-d7', label: 'Day 3 to Day 7', value: { type: 'range', start: 3, end: 7 } },
-    { id: 'd7-d15', label: 'Day 7 to Day 15', value: { type: 'range', start: 7, end: 15 } },
-    { id: 'd15-plus', label: 'Day 15 & Beyond', value: { type: 'range', start: 15, end: null } },
-    { id: 'last-90', label: 'Last 90 days', value: { type: 'lookback', days: 90 } },
+    { id: 'today', label: 'Today', type: 'relative', value: { start: 0, end: 1 } },
+    { id: 'tomorrow', label: 'Tomorrow', type: 'relative', value: { start: 1, end: 2 } },
+    { id: 'd3-d7', label: 'Day 3 to Day 7', type: 'relative', value: { start: 3, end: 7 } },
+    { id: 'd7-d15', label: 'Day 7 to Day 15', type: 'relative', value: { start: 7, end: 15 } },
+    { id: 'd15-plus', label: 'Day 15 & Beyond', type: 'relative', value: { start: 15, end: 365 } },
+    { id: 'last-90', label: 'Last 90 days', type: 'relative', value: { start: -90, end: 0 } },
   ];
 
   currentSelection: DateRangeOption[] = [];

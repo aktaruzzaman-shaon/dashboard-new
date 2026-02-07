@@ -37,6 +37,7 @@ export class CalenderComponent {
   travelFromDate = input<Date | null>(null);
   travelToDate = input<Date | null>(null);
   showDateType = input<'fromDate' | 'toDate'>('fromDate');
+  isCustomMode = input<boolean>(false);
 
   // Outputs
   fromDateSelected = output<Date | null>();
@@ -217,9 +218,10 @@ export class CalenderComponent {
 
   // Check if date is within the allowed range
   isDateAllowed(date: Date): boolean {
-    if (!this.dateRange()) return true;
+    if (!this.dateRange() || this.isCustomMode()) return true;
 
     const range = this.dateRange()!;
+
     const dateOnly = new Date(date.getFullYear(), date.getMonth(), date.getDate());
     const rangeFrom = new Date(
       range.from.getFullYear(),
@@ -276,6 +278,7 @@ export class CalenderComponent {
   // Check if date is within the allowed range (for highlighting)
   isInAllowedRange(day: number | null, isNextMonth: boolean): boolean {
     if (!day || !this.dateRange()) return false;
+    if (this.isCustomMode()) return true;
 
     const date = new Date(
       isNextMonth ? this.nextMonth.getFullYear() : this.currentMonth.getFullYear(),

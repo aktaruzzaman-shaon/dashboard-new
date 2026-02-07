@@ -1,5 +1,6 @@
 export interface DateRangeOption {
   id: string;
   label: string;
-  value: any;
+  type: 'relative' | 'custom';
+  value?: any;
 }

@@ -7,13 +7,13 @@
       [options]="availableDateRanges"
       (selectionChange)="onDateRangeSelected($event)"
     ></app-input-selector>
-  
 
     <!-- ========== Travel Date FROM and TO  =========== -->
 
     <!-- Travel From Date -->
     <app-calender
       [label]="'Travel Date From'"
+      [isCustomMode]="isCustomMode()"
       [placeholder]="'Select travel dates'"
       [dateRange]="allowedDateRange()"
       [travelFromDate]="travelFrom()"
@@ -27,6 +27,7 @@
     <app-calender
       [label]="'Travel Date To'"
       [placeholder]="'Select travel dates'"
+      [isCustomMode]="isCustomMode()"
       [showDateType]="'toDate'"
       [dateRange]="allowedDateRange()"
       [travelFromDate]="travelFrom()"
@@ -313,7 +314,7 @@
               <button
                 class="flex items-center justify-between p-1 hover:bg-gray-50 transition-colors group"
               >
-                <div class="flex items-center gap-3"> 
+                <div class="flex items-center gap-3">
                   <i class="text-xl text-gray-700">💬</i>
                   <span class="font-medium text-gray-800">Modify Date/Time</span>
                 </div>
