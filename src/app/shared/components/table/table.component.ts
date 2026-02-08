@@ -2,10 +2,11 @@ import { Component, input, output, signal, computed, model } from '@angular/core
 import { Booking } from './table.types';
 import { ModalComponent } from '../modal/modal.component';
 import { IconButtonPopup } from '../button/icon-button-popup/icon-button-popup';
+import { MultiSelect, MultiSelectOption } from '../select/multi-select/multi-select.component';
 
 @Component({
   selector: 'app-table',
-  imports: [ModalComponent, IconButtonPopup],
+  imports: [ModalComponent, IconButtonPopup, MultiSelect],
   templateUrl: './table.component.html',
   styleUrl: './table.component.css',
 })
@@ -19,11 +20,13 @@ export class TableComponent {
   activeStatus = input<string | null>(null);
   statusWiseRowCountChange = output<Record<string, number>>();
   tableTravelStatus = output<string>();
- 
+
+  showOptionHeaderSelect = signal(false);
+  selectedOptions = signal<string[]>([]);
+
   tableStatus(status: string): void {
     this.tableTravelStatus.emit(status);
   }
-
 
   // 🔹 Original bookings data (immutable source)
   private readonly originalBookings: Booking[] = [
@@ -102,6 +105,20 @@ export class TableComponent {
       user: 'Rajesh Verma',
       provider: 'Paramount Tourism',
     },
+  ];
+
+  // demo data for showing the multiselect
+  countryOptions: MultiSelectOption[] = [
+    { label: 'United States', value: 'us' },
+    { label: 'United Kingdom', value: 'uk' },
+    { label: 'Canada', value: 'ca' },
+    { label: 'Australia', value: 'au' },
+    { label: 'Germany', value: 'de' },
+    { label: 'France', value: 'fr' },
+    { label: 'Japan', value: 'jp' },
+    { label: 'Brazil', value: 'br' },
+    { label: 'India', value: 'in' },
+    { label: 'China', value: 'cn' },
   ];
 
   // 🔹 Sorting state signals
@@ -362,6 +379,25 @@ export class TableComponent {
   deselectAll(): void {
     this.selectedReferences.clear();
     this.emitSelectionChange();
+  }
+  // for opening the option name
+  selectedHeaderPos = { top: 0, left: 0 };
+  openOptionHeaderSelect(event: MouseEvent) {
+    event.stopPropagation(); // prevent sort clicks
+    const rect = (event.currentTarget as HTMLElement).getBoundingClientRect();
+
+    // Save header coordinates
+    this.selectedHeaderPos = { top: rect.bottom, left: rect.left };
+
+    this.showOptionHeaderSelect.set(true);
+  }
+
+  closeOptionHeaderSelect() {
+    this.showOptionHeaderSelect.set(false);
+  }
+
+  onCountrySelection(event: any) {
+    console.log('Selected country:', event);
   }
 
   toggleSelectAll(): void {
