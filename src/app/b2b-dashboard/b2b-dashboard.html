@@ -1,5 +1,7 @@
 <div class="w-full">
-  <div class="app-container grid grid-cols-7 items-end gap-4 w-full p-4">
+  <div
+    class="app-container grid grid-cols-[repeat(auto-fit,minmax(200px,1fr))] items-end gap-4 w-full p-4"
+  >
     <!-- ======Travel Date range selection input ========-->
 
     <app-input-selector
@@ -67,8 +69,8 @@
     <!-- ========== Booking Reference =========== -->
 
     <app-input-core label="Booking Reference Number"></app-input-core>
-    </div>
-    <div>
+  </div>
+  <div>
     <!-- ========== Advanced Search Portion =========== -->
 
     @if (advanceButtonOpen()) {

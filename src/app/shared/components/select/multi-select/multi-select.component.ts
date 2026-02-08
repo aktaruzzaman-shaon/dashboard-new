@@ -28,10 +28,10 @@ export class MultiSelect {
   placeholder = input('Select');
   isOpen = signal(false);
   search = signal('');
-   done = output<{ id: string; values: string[] }>();
+  done = output<{ id: string; values: string[] }>();
 
   private selectedValues = signal<Set<string>>(new Set());
- 
+
   /** Filtered options based on search term */
   filteredOptions = computed(() =>
     this.options().filter((o) => o.label.toLowerCase().includes(this.search().toLowerCase())),
@@ -70,12 +70,12 @@ export class MultiSelect {
   private closeDropdown() {
     this.isOpen.set(false);
     this.search.set('');
-    this.zIndex.set(50); 
+    this.zIndex.set(50);
   }
 
   private openDropdown() {
     this.isOpen.set(true);
-    this.zIndex.set(9999); 
+    this.zIndex.set(9999);
   }
 
   /** Toggle a single option on/off */
