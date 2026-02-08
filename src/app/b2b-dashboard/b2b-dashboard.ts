@@ -35,6 +35,17 @@ type ColumnKey = string;
 
 type StatusCountMap = Record<string, number>;
 
+export interface CityItem {
+  label: string;
+  value: number;
+}
+
+export interface CountryItem {
+  country: string;
+  code: string;
+  cities: CityItem[];
+}
+
 @Component({
   selector: 'app-b2b-dashboard',
   imports: [
@@ -358,9 +369,22 @@ export class B2bDashboard {
 
   protected readonly title = signal('dashboard');
   options = [
-    { label: 'Dubai ', value: 1 },
-    { label: 'Abu Dhabi', value: 2 },
-    { label: 'Shariah', value: 3 },
+    {
+      country: 'United Arab Emirates',
+      code: 'ae',
+      cities: [
+        { label: 'Dubai', value: 1 },
+        { label: 'Abu Dhabi', value: 2 },
+      ],
+    },
+    {
+      country: 'Bangladesh',
+      code: 'bd',
+      cities: [
+        { label: 'Dhaka', value: 3 },
+        { label: 'Chittagong', value: 4 },
+      ],
+    },
   ];
 
   onSelect(item: any) {

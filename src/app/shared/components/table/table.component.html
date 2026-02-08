@@ -5,7 +5,7 @@
     <!-- TABLE HEADER -->
     <div
       class="grid gap-1 px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider"
-      [style.gridTemplateColumns]="'repeat(' + visibleColumnCount() + ', 120px)'"
+      [style.gridTemplateColumns]="'repeat(' + visibleColumnCount() + ', minmax(10px, 1fr))'"
     >
       @for (col of columns(); track col.key) {
         @if (isVisible(col.key)) {
@@ -91,7 +91,7 @@
           [class.border-sky-500]="isRowSelected(booking.reference)"
           [class.bg-sky-50]="isRowSelected(booking.reference)"
           [class.hover:border-sky-300]="!isRowSelected(booking.reference)"
-          [style.gridTemplateColumns]="'repeat(' + visibleColumnCount() + ', 120px)'"
+          [style.gridTemplateColumns]="'repeat(' + visibleColumnCount() + ', minmax(10px, 1fr))'"
           (click)="toggleRowSelection(booking, $event)"
         >
           @for (col of columns(); track col.key) {
