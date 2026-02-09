@@ -398,6 +398,7 @@ export class TableComponent {
 
   onCountrySelection(event: any) {
     console.log('Selected country:', event);
+    this.showOptionHeaderSelect.set(false);
   }
 
   toggleSelectAll(): void {
