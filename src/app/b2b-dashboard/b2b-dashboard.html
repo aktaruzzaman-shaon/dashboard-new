@@ -185,7 +185,7 @@
         [isOpen]="isTableModificationContainerOpen()"
         [closeButton]="false"
       >
-        <div class="grid grid-cols-[repeat(auto-fit,minmax(200px,1fr))] gap-4">
+        <div class="grid grid-cols-[repeat(auto-fit,minmax(240px,1fr))] gap-2 w-full">
           @for (singleColumn of tableColumns.slice(0, -1); track singleColumn.key) {
             <app-toggle-button
               [label]="singleColumn.label"
