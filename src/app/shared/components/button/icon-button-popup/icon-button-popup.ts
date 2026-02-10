@@ -21,7 +21,7 @@ export class IconButtonPopup {
   badgeCount = input<number | undefined>();
   showCloseButton = input(true);
   closeOnOutsideClick = input(true);
-
+  isDisabled = input(false);
   isOpen = signal(false);
 
   togglePopup(): void {
