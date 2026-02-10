@@ -1,6 +1,7 @@
 <div class="w-full">
-  <div class="app-container">
-    <div class="grid grid-cols-[repeat(auto-fit,minmax(200px,1fr))] gap-4 w-full p-4">
+  @if (!showBookingDetail()) {
+    <div class="app-container">
+      <div class="grid grid-cols-[repeat(auto-fit,minmax(200px,1fr))] gap-4 w-full p-4">
       <!-- ======Travel Date range selection input ========-->
 
       <app-input-selector
@@ -207,6 +208,7 @@
         [activeStatus]="activeStatus()"
         (statusWiseRowCountChange)="statusWiseRowCount.set($event)"
         (tableTravelStatus)="onTableTravelStatus($event)"
+        (openDetail)="openBookingDetail($event)"
       />
     </div>
 
@@ -354,4 +356,10 @@
       </div>
     </div>
   </div>
+  } @else {
+    <app-booking-details
+      [reference]="selectedReference()!"
+      (goBack)="closeBookingDetail()"
+    />
+  }
 </div>

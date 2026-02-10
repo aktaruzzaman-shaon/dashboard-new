@@ -1,12 +1,25 @@
-<div class="fixed inset-0 z-50 bg-white">
-  <nav class="p-4 border-b flex items-center gap-4 bg-white">
-    <button (click)="goBack.emit()" class="p-2 hover:bg-gray-100 rounded-full">
-      <svg>...</svg>
-    </button>
-    <span class="font-semibold text-lg">Booking Details</span>
-  </nav>
+<div class="w-full h-full bg-gray-50 overflow-y-auto flex flex-col">
+  <div class="flex justify-between items-center sticky top-0 bg-white z-10 p-8 border-b shrink-0">
+    <div class="flex items-center gap-2">
+      <button (click)="goBack.emit()" class="hover:bg-gray-200 p-1 rounded transition-colors">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M15 19l-7-7 7-7"
+          />
+        </svg>
+      </button>
+      <h1 class="text-2xl font-bold text-gray-900">Booking Details</h1>
+    </div>
+    <div class="text-xs text-gray-900">
+      <span (click)="goBack.emit()" class="hover:cursor-pointer">Yacht Operations</span> &gt;
+      <span class="text-gray-900">Booking Details</span>
+    </div>
+  </div>
 
-  <div class="p-8 max-w-4xl mx-auto">
+  <div class="flex-1 overflow-y-auto p-8">
     @if (isLoading()) {
       <div class="animate-pulse">Loading detailed information...</div>
     } @else if (bookingDetails()) {
@@ -17,6 +30,8 @@
           <p>{{ bookingDetails().status }}</p>
         </div>
       </div>
+    } @else {
+      <p class="text-gray-500">No booking details available.</p>
     }
   </div>
 </div>

@@ -31,6 +31,7 @@ import { single } from 'rxjs';
 import { ModalComponent } from '../shared/components/modal/modal.component';
 import { ButtonWithPopup } from '../shared/components/button/button-with-popup/button-with-popup';
 import { DateSlider } from '../shared/components/date-slider/date-slider';
+import { BookingDetails } from '../shared/components/composit/booking-details/booking-details';
 type ColumnKey = string;
 
 type StatusCountMap = Record<string, number>;
@@ -63,6 +64,7 @@ export interface CountryItem {
     ButtonWithPopup,
     DateSlider,
     ModalComponent,
+    BookingDetails,
   ],
   templateUrl: './b2b-dashboard.html',
   styleUrl: './b2b-dashboard.css',
@@ -587,6 +589,20 @@ export class B2bDashboard {
   isTableModificationContainerOpen = signal(false);
   openTableRowModificationContainerToggle(isOpen: boolean) {
     this.isTableModificationContainerOpen.set(isOpen);
+  }
+
+  // Booking Details Management
+  showBookingDetail = signal(false);
+  selectedReference = signal<string | null>(null);
+
+  openBookingDetail(reference: string) {
+    this.selectedReference.set(reference);
+    this.showBookingDetail.set(true);
+  }
+
+  closeBookingDetail() {
+    this.showBookingDetail.set(false);
+    this.selectedReference.set(null);
   }
 
   //Table Column Customization toggle buttons==================
