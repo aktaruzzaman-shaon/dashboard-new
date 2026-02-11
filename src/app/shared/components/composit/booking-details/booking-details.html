@@ -179,33 +179,35 @@
                 <p class="text-xs sm:text-sm font-medium text-gray-900">Al Barsha South, Dubai</p>
               </div>
             </div>
-
-            <!-- Details and Actions -->
-            <div
-              class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4"
-            >
-              <div class="flex items-center gap-4">
-                <button class="text-blue-500 hover:text-blue-600 transition-colors">
-                  <app-icon-button-popup></app-icon-button-popup>
-                </button>
-                <button class="text-blue-500 hover:text-blue-600 transition-colors">
-                  <app-details-icon></app-details-icon>
-                </button>
-                <button class="text-blue-500 hover:text-blue-600 transition-colors">
-                  <app-log-icon></app-log-icon>
-                </button>
-              </div>
-
-              <div class="flex flex-wrap gap-3 w-full sm:w-auto">
-                <app-outline-button></app-outline-button>
-                <button
-                  class="flex-1 sm:flex-none px-6 py-2.5 bg-blue-500 text-white rounded-lg font-medium hover:bg-blue-600 transition-colors text-sm"
-                >
-                  <i class="fa-regular fa-file-lines mr-2"></i>Booking
-                </button>
-              </div>
-            </div>
           </div>
+        </div>
+      </div>
+
+      <!-- Details and Actions -->
+      <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mt-5">
+        <div class="flex items-center gap-4">
+          <app-icon-button-popup [badgeCount]="5">
+            <app-notification-icon svg-icon></app-notification-icon>
+            Hello from icon
+          </app-icon-button-popup>
+          <button class="text-blue-500 hover:text-blue-600 transition-colors">
+            <app-details-icon></app-details-icon>
+          </button>
+          <button class="text-blue-500 hover:text-blue-600 transition-colors">
+            <app-log-icon></app-log-icon>
+          </button>
+        </div>
+
+        <div class="flex flex-wrap gap-3 w-full sm:w-auto">
+          <app-outline-button label="Accept">
+            <app-accept-icon></app-accept-icon>
+          </app-outline-button>
+          <app-outline-button label="Booking">
+            <app-booking-icon></app-booking-icon>
+          </app-outline-button>
+          <app-outline-button label="Booking">
+            <app-booking-icon></app-booking-icon>
+          </app-outline-button>
         </div>
       </div>
     </div>

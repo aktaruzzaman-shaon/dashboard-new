@@ -3,10 +3,11 @@ import { Booking } from './table.types';
 import { ModalComponent } from '../modal/modal.component';
 import { IconButtonPopup } from '../button/icon-button-popup/icon-button-popup';
 import { MultiSelect, MultiSelectOption } from '../select/multi-select/multi-select.component';
+import { NotificationIconComponent } from "../../../../icons/NotificationIcon";
 
 @Component({
   selector: 'app-table',
-  imports: [ModalComponent, IconButtonPopup, MultiSelect],
+  imports: [ModalComponent, IconButtonPopup, MultiSelect, NotificationIconComponent],
   templateUrl: './table.component.html',
   styleUrl: './table.component.css',
 })

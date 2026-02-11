@@ -3,10 +3,14 @@ import { IconButtonPopup } from "../../button/icon-button-popup/icon-button-popu
 import { DetailsIconComponent } from '../../../../../icons/DetailsIcon';
 import { LogIconComponent } from "../../../../../icons/LogIcon";
 import { OutlineButton } from "../../outline-button/outline-button";
+import { ButtonComponent } from "../../button/button.component";
+import { AcceptIconComponent } from "../../../../../icons/AcceptIcon";
+import { BookingIconComponent } from "../../../../../icons/BookingIcon";
+import { NotificationIconComponent } from "../../../../../icons/NotificationIcon";
 
 @Component({
   selector: 'app-booking-details',
-  imports: [IconButtonPopup, DetailsIconComponent, LogIconComponent, OutlineButton],
+  imports: [IconButtonPopup, DetailsIconComponent, LogIconComponent, OutlineButton, AcceptIconComponent, BookingIconComponent, NotificationIconComponent],
   templateUrl: './booking-details.html',
   styleUrl: './booking-details.css',
 })
