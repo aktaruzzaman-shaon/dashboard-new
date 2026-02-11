@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 
 @Component({
-  selector: 'app-booking-icon',
+  selector: 'app-log-icon',
   standalone: true,
   template: `
     <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
@@ -23,6 +23,6 @@ import { Component, Input } from '@angular/core';
     `,
   ],
 })
-export class BookingIconComponent {
+export class LogIconComponent {
   @Input() size: number = 24;
 }

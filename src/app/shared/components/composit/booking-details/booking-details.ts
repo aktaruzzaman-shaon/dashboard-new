@@ -1,8 +1,12 @@
 import { Component, input, OnInit, output, signal } from '@angular/core';
+import { IconButtonPopup } from "../../button/icon-button-popup/icon-button-popup";
+import { DetailsIconComponent } from '../../../../../icons/DetailsIcon';
+import { LogIconComponent } from "../../../../../icons/LogIcon";
+import { OutlineButton } from "../../outline-button/outline-button";
 
 @Component({
   selector: 'app-booking-details',
-  imports: [],
+  imports: [IconButtonPopup, DetailsIconComponent, LogIconComponent, OutlineButton],
   templateUrl: './booking-details.html',
   styleUrl: './booking-details.css',
 })
