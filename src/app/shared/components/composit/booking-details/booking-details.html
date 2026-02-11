@@ -1,4 +1,4 @@
-<div class="w-full h-full bg-gray-50 overflow-y-auto flex flex-col">
+<!-- <div class="w-full h-full bg-gray-50 overflow-y-auto flex flex-col">
   <div class="flex justify-between items-center sticky top-0 bg-white z-10 p-8 border-b shrink-0">
     <div class="flex items-center gap-2">
       <button (click)="goBack.emit()" class="hover:bg-gray-200 p-1 rounded transition-colors">
@@ -33,5 +33,185 @@
     } @else {
       <p class="text-gray-500">No booking details available.</p>
     }
+  </div>
+</div> -->
+
+<div class="bg-gray-50">
+  <div class="w-full p-4 sm:p-6 lg:p-8">
+    <!-- Header -->
+    <div
+      class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 sm:mb-8 gap-4"
+    >
+      <h1 class="text-2xl sm:text-3xl font-semibold text-gray-900">Booking Details</h1>
+      <nav class="flex items-center text-sm text-gray-500 gap-2">
+        <span (click)="goBack.emit()" class="hover:text-gray-700 cursor-pointer"
+          >Yacht Operations</span
+        >
+        <i class="fa-solid fa-chevron-right text-xs"></i>
+        <span class="text-gray-900 font-medium">Booking Details</span>
+      </nav>
+    </div>
+
+    <!-- Guest Information -->
+    <div class="bg-white rounded-lg shadow-sm p-4 sm:p-6 mb-6">
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+        <div>
+          <label class="text-xs sm:text-sm text-gray-500 font-medium block mb-1.5"
+            >Guest Name</label
+          >
+          <p class="text-sm sm:text-base text-gray-900 font-medium">Ashish Nehra</p>
+        </div>
+        <div>
+          <label class="text-xs sm:text-sm text-gray-500 font-medium block mb-1.5"
+            >Booking Reference</label
+          >
+          <p class="text-sm sm:text-base text-gray-900 font-medium">AGT416182310</p>
+        </div>
+        <div>
+          <label class="text-xs sm:text-sm text-gray-500 font-medium block mb-1.5">Email</label>
+          <p class="text-sm sm:text-base text-gray-900 font-medium">ashishnehra@raynatours.com</p>
+        </div>
+        <div>
+          <label class="text-xs sm:text-sm text-gray-500 font-medium block mb-1.5"
+            >Phone Number</label
+          >
+          <p class="text-sm sm:text-base text-gray-900 font-medium">+971 12 1235 2356</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Yacht Booking -->
+    <div class="bg-white rounded-lg shadow-sm p-4 sm:p-6">
+      <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 gap-4">
+        <h2 class="text-xl sm:text-2xl font-semibold text-gray-900">Yacht Booking</h2>
+        <div class="text-right">
+          <p class="text-xs sm:text-sm text-gray-500 mb-1">Total Price</p>
+          <p class="text-xl sm:text-2xl font-bold text-gray-900">AED 200</p>
+        </div>
+      </div>
+
+      <!-- Booking Card -->
+      <div class="border border-gray-200 rounded-xl overflow-hidden">
+        <div class="flex flex-col lg:flex-row">
+          <!-- Yacht Image -->
+          <div class="lg:w-56 lg:flex-shrink-0 relative">
+            <img
+              src="https://images.unsplash.com/photo-1567899378494-47b22a2ae96a?w=400&h=300&fit=crop"
+              alt="Yacht"
+              class="w-full h-48 lg:h-full object-cover"
+            />
+            <div
+              class="absolute bottom-3 left-3 bg-blue-500 text-white px-3 py-1.5 rounded-md text-xs font-semibold"
+            >
+              Yachts
+            </div>
+          </div>
+
+          <!-- Booking Information -->
+          <div class="flex-1 p-4 sm:p-6">
+            <!-- Title and Status -->
+            <div
+              class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-4 gap-2"
+            >
+              <h3 class="text-lg sm:text-xl font-semibold text-gray-900">
+                From Dubai Marina Sightseeing Yacht
+              </h3>
+              <span
+                class="bg-orange-100 text-orange-600 px-3 py-1 rounded-md text-xs font-semibold"
+              >
+                Pending
+              </span>
+            </div>
+
+            <!-- Booking Details -->
+            <div
+              class="flex flex-wrap items-center gap-3 sm:gap-4 mb-4 text-xs sm:text-sm text-gray-600"
+            >
+              <div class="flex items-center gap-1.5">
+                <i class="fa-regular fa-calendar text-gray-400"></i>
+                <span>25 Sep 2024</span>
+              </div>
+              <div class="flex items-center gap-1.5">
+                <i class="fa-solid fa-ship text-gray-400"></i>
+                <span>Private Yacht</span>
+              </div>
+              <div class="flex items-center gap-1.5">
+                <i class="fa-regular fa-clock text-gray-400"></i>
+                <span>03:00 PM - 07:00 PM</span>
+              </div>
+              <div class="flex items-center gap-1.5">
+                <i class="fa-regular fa-hourglass text-gray-400"></i>
+                <span>5 Hours</span>
+              </div>
+              <div class="flex items-center gap-1.5">
+                <i class="fa-solid fa-users text-gray-400"></i>
+                <span>8 Adults 4 Child 2 Infant</span>
+              </div>
+            </div>
+
+            <!-- Additional Information Grid -->
+            <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 sm:gap-4 mb-6">
+              <div>
+                <label class="text-xs text-gray-500 block mb-1">Cancellation Deadline</label>
+                <p class="text-xs sm:text-sm font-medium text-red-600">05 Aug 2024 04:29</p>
+              </div>
+              <div>
+                <label class="text-xs text-gray-500 block mb-1">Confirmation Number</label>
+                <p class="text-xs sm:text-sm font-medium text-gray-900">TRA2541654</p>
+              </div>
+              <div>
+                <label class="text-xs text-gray-500 block mb-1">User</label>
+                <p class="text-xs sm:text-sm font-medium text-gray-900">Rajesh Verma</p>
+              </div>
+              <div>
+                <label class="text-xs text-gray-500 block mb-1">Provider</label>
+                <p class="text-xs sm:text-sm font-medium text-gray-900">Paramount Tourism</p>
+              </div>
+              <div>
+                <label class="text-xs text-gray-500 block mb-1">Supplier</label>
+                <div class="flex items-center gap-1.5">
+                  <i class="fa-regular fa-circle-check text-green-500 text-sm"></i>
+                  <p class="text-xs sm:text-sm font-medium text-gray-900">Ashish Nehra</p>
+                </div>
+              </div>
+              <div>
+                <label class="text-xs text-gray-500 block mb-1">Yacht Location</label>
+                <p class="text-xs sm:text-sm font-medium text-gray-900">Al Barsha South, Dubai</p>
+              </div>
+            </div>
+
+            <!-- Details and Actions -->
+            <div
+              class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4"
+            >
+              <div class="flex items-center gap-4">
+                <button class="text-blue-500 hover:text-blue-600 transition-colors">
+                  <i class="fa-solid fa-user text-lg"></i>
+                </button>
+                <button class="text-blue-500 hover:text-blue-600 transition-colors">
+                  <i class="fa-regular fa-credit-card text-lg"></i>
+                </button>
+                <button class="text-blue-500 hover:text-blue-600 transition-colors">
+                  <i class="fa-solid fa-magnifying-glass text-lg"></i>
+                </button>
+              </div>
+
+              <div class="flex flex-wrap gap-3 w-full sm:w-auto">
+                <button
+                  class="flex-1 sm:flex-none px-6 py-2.5 border border-blue-500 text-blue-500 rounded-lg font-medium hover:bg-blue-50 transition-colors text-sm"
+                >
+                  <i class="fa-solid fa-check mr-2"></i>Accept
+                </button>
+                <button
+                  class="flex-1 sm:flex-none px-6 py-2.5 bg-blue-500 text-white rounded-lg font-medium hover:bg-blue-600 transition-colors text-sm"
+                >
+                  <i class="fa-regular fa-file-lines mr-2"></i>Booking
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
