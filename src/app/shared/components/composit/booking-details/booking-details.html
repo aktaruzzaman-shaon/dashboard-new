@@ -186,25 +186,55 @@
       <!-- Details and Actions -->
       <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mt-5">
         <div class="flex items-center gap-4">
+          <!-- notification icon -->
           <app-icon-button-popup [badgeCount]="5">
             <app-notification-icon svg-icon></app-notification-icon>
-            Hello from icon
+            <!-- content -->
+            <div class="flex flex-col divide-y divide-gray-100">
+              <button
+                class="flex items-center justify-between p-4 hover:bg-gray-50 transition-colors group"
+              >
+                <div class="flex items-center gap-3">
+                  <i class="text-xl text-gray-700">💬</i>
+                  <span class="font-medium text-gray-800">WhatsApp Reminder</span>
+                </div>
+                <span class="text-gray-400 group-hover:translate-x-1 transition-transform">❯</span>
+              </button>
+              <button
+                class="flex items-center justify-between p-4 hover:bg-gray-50 transition-colors group text-left"
+              >
+                <div class="flex items-center gap-3">
+                  <i class="text-xl text-gray-700">🖨️</i>
+                  <span class="font-medium text-gray-800">Facebook</span>
+                </div>
+                <span class="text-gray-400 group-hover:translate-x-1 transition-transform">❯</span>
+              </button>
+            </div>
           </app-icon-button-popup>
+          <!-- details icon -->
           <button class="text-blue-500 hover:text-blue-600 transition-colors">
             <app-details-icon></app-details-icon>
           </button>
+          <!-- log icon -->
           <button class="text-blue-500 hover:text-blue-600 transition-colors">
             <app-log-icon></app-log-icon>
           </button>
         </div>
 
+        <!-- accept & booking button -->
         <div class="flex flex-wrap gap-3 w-full sm:w-auto">
-          <app-outline-button label="Accept">
+          <app-outline-button label="Accept" (btnClick)="activeModal.set('accept')">
             <app-accept-icon></app-accept-icon>
           </app-outline-button>
-          <app-outline-button label="Booking">
-            <app-booking-icon></app-booking-icon>
-          </app-outline-button>
+          @if (activeModal()) {
+            <app-modal [open]="!!activeModal()" title="Acknowledge & Accept">
+              @switch (activeModal()) {
+                @case ('accept') {
+                  <app-acknowledge-and-accept></app-acknowledge-and-accept>
+                }
+              }
+            </app-modal>
+          }
           <app-outline-button label="Booking">
             <app-booking-icon></app-booking-icon>
           </app-outline-button>

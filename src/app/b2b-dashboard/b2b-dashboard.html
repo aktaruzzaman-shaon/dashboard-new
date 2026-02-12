@@ -2,364 +2,379 @@
   @if (!showBookingDetail()) {
     <div class="app-container">
       <div class="grid grid-cols-[repeat(auto-fit,minmax(200px,1fr))] gap-4 w-full p-4">
-      <!-- ======Travel Date range selection input ========-->
+        <!-- ======Travel Date range selection input ========-->
 
-      <app-input-selector
-        label="Travel Date Range"
-        [options]="availableDateRanges"
-        (selectionChange)="onDateRangeSelected($event)"
-      ></app-input-selector>
+        <app-input-selector
+          label="Travel Date Range"
+          [options]="availableDateRanges"
+          (selectionChange)="onDateRangeSelected($event)"
+        ></app-input-selector>
 
-      <!-- ========== Travel Date FROM and TO  =========== -->
+        <!-- ========== Travel Date FROM and TO  =========== -->
 
-      <!-- Travel From Date -->
-      <app-calender
-        [label]="'Travel Date From'"
-        [isCustomMode]="isCustomMode()"
-        [placeholder]="'Select travel dates'"
-        [dateRange]="allowedDateRange()"
-        [travelFromDate]="travelFrom()"
-        [showDateType]="'fromDate'"
-        [travelToDate]="travelTo()"
-        (fromDateSelected)="onFromDateSelected($event)"
-        (toDateSelected)="onToDateSelected($event)"
-      />
+        <!-- Travel From Date -->
+        <app-calender
+          [label]="'Travel Date From'"
+          [isCustomMode]="isCustomMode()"
+          [placeholder]="'Select travel dates'"
+          [dateRange]="allowedDateRange()"
+          [travelFromDate]="travelFrom()"
+          [showDateType]="'fromDate'"
+          [travelToDate]="travelTo()"
+          (fromDateSelected)="onFromDateSelected($event)"
+          (toDateSelected)="onToDateSelected($event)"
+        />
 
-      <!-- Travel To Date -->
-      <app-calender
-        [label]="'Travel Date To'"
-        [placeholder]="'Select travel dates'"
-        [isCustomMode]="isCustomMode()"
-        [showDateType]="'toDate'"
-        [dateRange]="allowedDateRange()"
-        [travelFromDate]="travelFrom()"
-        [travelToDate]="travelTo()"
-        (fromDateSelected)="onFromDateSelected($event)"
-        (toDateSelected)="onToDateSelected($event)"
-      />
+        <!-- Travel To Date -->
+        <app-calender
+          [label]="'Travel Date To'"
+          [placeholder]="'Select travel dates'"
+          [isCustomMode]="isCustomMode()"
+          [showDateType]="'toDate'"
+          [dateRange]="allowedDateRange()"
+          [travelFromDate]="travelFrom()"
+          [travelToDate]="travelTo()"
+          (fromDateSelected)="onFromDateSelected($event)"
+          (toDateSelected)="onToDateSelected($event)"
+        />
 
-      <!-- ========== City Select =========== -->
+        <!-- ========== City Select =========== -->
 
-      <app-single-select
-        label="City"
-        [items]="options"
-        (selectChange)="onSelect($event)"
-      ></app-single-select>
+        <app-single-select
+          label="City"
+          [items]="options"
+          (selectChange)="onSelect($event)"
+        ></app-single-select>
 
-      <!-- ========== Supplier Status =========== -->
+        <!-- ========== Supplier Status =========== -->
 
-      <app-select-menu
-        label="Supplier Status"
-        [options]="roleOptions()"
-        placeholder="Choose an Action"
-        (onSelection)="handleData($event)"
-      >
-      </app-select-menu>
+        <app-select-menu
+          label="Supplier Status"
+          [options]="roleOptions()"
+          placeholder="Choose an Action"
+          (onSelection)="handleData($event)"
+        >
+        </app-select-menu>
 
-      <!-- ========== Yacht Type =========== -->
+        <!-- ========== Yacht Type =========== -->
 
-      <app-select-menu
-        label="Yacht Type"
-        [options]="roleOptions()"
-        placeholder="Choose an Action"
-        (onSelection)="handleData($event)"
-      >
-      </app-select-menu>
+        <app-select-menu
+          label="Yacht Type"
+          [options]="roleOptions()"
+          placeholder="Choose an Action"
+          (onSelection)="handleData($event)"
+        >
+        </app-select-menu>
 
-      <!-- ========== Booking Reference =========== -->
+        <!-- ========== Booking Reference =========== -->
 
-      <app-input-core label="Booking Reference Number"></app-input-core>
+        <app-input-core label="Booking Reference Number"></app-input-core>
 
-      <!-- ========== Advance Search Button =========== -->
+        <!-- ========== Advance Search Button =========== -->
 
-      @if (advanceButtonOpen()) {
-        <button (click)="open()" class="pt-4 text-md text-blue-600 text-start">
-          Advance Search
-        </button>
-      }
-    </div>
-
-    <!-- ========== Advanced Search Portion =========== -->
-
-    <div class="p-4">
-      <app-toggle-component-container
-        [isOpen]="isContainerOpen()"
-        (closed)="close()"
-        name="Advance Search"
-      >
-        <div>
-          <app-multi-select
-            id="fruits"
-            label="Category"
-            [options]="fruitOptions"
-            placeholder="Choose your favorite Category..."
-            (done)="onFruitSelection($event)"
-          />
-        </div>
-
-        <div>
-          <app-multi-select
-            id="colors"
-            label="Option Name"
-            [options]="colorOptions"
-            placeholder="Choose your Option Name ..."
-            (done)="onColorSelection($event)"
-          />
-        </div>
-
-        <div>
-          <app-multi-select
-            id="countries"
-            label="Supplier"
-            [options]="countryOptions"
-            placeholder="Choose Supplier to visit..."
-            (done)="onCountrySelection($event)"
-          />
-        </div>
-
-        <div>
-          <app-multi-select
-            id="Profit Center"
-            label="Provider"
-            [options]="countryOptions"
-            placeholder="Choose Provider to visit..."
-            (done)="onCountrySelection($event)"
-          />
-        </div>
-
-        <div>
-          <app-multi-select
-            id="provider"
-            label="Provider"
-            [options]="countryOptions"
-            placeholder="Choose Provider to visit..."
-            (done)="onCountrySelection($event)"
-          />
-        </div>
-      </app-toggle-component-container>
-    </div>
-  </div>
-
-  <!-- ================  Date Selections  ====================== -->
-
-  <div class="app-container">
-    <app-date-slider (dateSelected)="onSliderDateSelected($event)"></app-date-slider>
-  </div>
-
-  <!-- =============== Table Portions  ======================== -->
-
-  <div class="app-container">
-    <div class="flex justify-between">
-      <!-- table status button -->
-      <div class="flex gap-3 justify-start">
-        @for (status of statuses(); track status.value) {
-          <app-status-button
-            [data]="status"
-            [active]="activeStatus() === status.value"
-            [color]="
-              status.value === 'Accepted' ? 'sky' : status.value === 'Rejected' ? 'sky' : 'sky'
-            "
-            [loading]="isLoading() && activeStatus() === status.value"
-            size="md"
-            (clicked)="onStatusClick($event)"
-            [statusWiseRowCount]="statusWiseRowCount()[status.value]"
-          />
+        @if (advanceButtonOpen()) {
+          <button (click)="open()" class="pt-4 text-md text-blue-600 text-start">
+            Advance Search
+          </button>
         }
       </div>
 
-      <!-- table column  customization button -->
-      <div>
-        <app-settings-button
-          label="Column Selection"
-          buttonLabel="Default"
-          (onButtonClick)="resetToDefault()"
-          (onIconClick)="openTableRowModificationContainerToggle($event)"
+      <!-- ========== Advanced Search Portion =========== -->
+
+      <div class="p-4">
+        <app-toggle-component-container
+          [isOpen]="isContainerOpen()"
+          (closed)="close()"
+          name="Advance Search"
         >
-          ></app-settings-button
-        >
+          <div>
+            <app-multi-select
+              id="fruits"
+              label="Category"
+              [options]="fruitOptions"
+              placeholder="Choose your favorite Category..."
+              (done)="onFruitSelection($event)"
+            />
+          </div>
+
+          <div>
+            <app-multi-select
+              id="colors"
+              label="Option Name"
+              [options]="colorOptions"
+              placeholder="Choose your Option Name ..."
+              (done)="onColorSelection($event)"
+            />
+          </div>
+
+          <div>
+            <app-multi-select
+              id="countries"
+              label="Supplier"
+              [options]="countryOptions"
+              placeholder="Choose Supplier to visit..."
+              (done)="onCountrySelection($event)"
+            />
+          </div>
+
+          <div>
+            <app-multi-select
+              id="Profit Center"
+              label="Provider"
+              [options]="countryOptions"
+              placeholder="Choose Provider to visit..."
+              (done)="onCountrySelection($event)"
+            />
+          </div>
+
+          <div>
+            <app-multi-select
+              id="provider"
+              label="Provider"
+              [options]="countryOptions"
+              placeholder="Choose Provider to visit..."
+              (done)="onCountrySelection($event)"
+            />
+          </div>
+        </app-toggle-component-container>
       </div>
     </div>
 
-    <!-- table row modification toggle buttons -->
-    <div class="mt-5">
-      <app-toggle-component-container
-        [isOpen]="isTableModificationContainerOpen()"
-        [closeButton]="false"
-      >
-        <div class="grid grid-cols-[repeat(auto-fit,minmax(240px,1fr))] gap-2 w-full">
-          @for (singleColumn of tableColumns.slice(0, -1); track singleColumn.key) {
-            <app-toggle-button
-              [label]="singleColumn.label"
-              [(checked)]="columnVisibility()[singleColumn.key]"
-              (filterChanged)="onFilterUpdate(singleColumn.key, $event)"
-            ></app-toggle-button>
+    <!-- ================  Date Selections  ====================== -->
+
+    <div class="app-container">
+      <app-date-slider (dateSelected)="onSliderDateSelected($event)"></app-date-slider>
+    </div>
+
+    <!-- =============== Table Portions  ======================== -->
+
+    <div class="app-container">
+      <div class="flex justify-between">
+        <!-- table status button -->
+        <div class="flex gap-3 justify-start">
+          @for (status of statuses(); track status.value) {
+            <app-status-button
+              [data]="status"
+              [active]="activeStatus() === status.value"
+              [color]="
+                status.value === 'Accepted' ? 'sky' : status.value === 'Rejected' ? 'sky' : 'sky'
+              "
+              [loading]="isLoading() && activeStatus() === status.value"
+              size="md"
+              (clicked)="onStatusClick($event)"
+              [statusWiseRowCount]="statusWiseRowCount()[status.value]"
+            />
           }
         </div>
-      </app-toggle-component-container>
-    </div>
 
-    <div>
-      <app-table
-        #table
-        [columns]="tableColumns"
-        [columnVisibility]="columnVisibility()"
-        (selectionChange)="onSelectionChange($event)"
-        [sliderSelectedDate]="sliderSelectedDate()"
-        [activeStatus]="activeStatus()"
-        (statusWiseRowCountChange)="statusWiseRowCount.set($event)"
-        (tableTravelStatus)="onTableTravelStatus($event)"
-        (openDetail)="openBookingDetail($event)"
-      />
-    </div>
-
-    <!-- table supplier modal-->
-    <app-modal
-      [open]="isModalOpen()"
-      title="Remarks"
-      size="lg"
-      submitText="Save"
-      cancelText="Cancel"
-      [loading]="isSubmitting()"
-      (close)="closeModal()"
-      (submit)="submitModal()"
-    >
-      <div class="space-y-4">
-        <label class="block text-sm font-medium text-gray-700"> Remarks </label>
-
-        <textarea
-          rows="4"
-          class="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:ring-2 focus:ring-sky-500 focus:outline-none"
-          placeholder="Enter your remarks..."
-          (input)="remarks.set($any($event.target).value)"
-        >
-            Any content could be project here . Just demo text area . ALl are optional.
-          </textarea
-        >
-      </div>
-    </app-modal>
-
-    <!-- ================= Table Final Updating Portion=============== -->
-
-    <div class="mt-5">
-      <div class="flex justify-between">
+        <!-- table column  customization button -->
         <div>
-          <div class="mb-4 flex flex-col gap-3 items-center">
-            <span class="text-sm text-gray-600"> Selected: {{ table.getSelectedCount() }} </span>
-            <button
-              (click)="table.toggleSelectAll()"
-              class="text-md text-blue-500 rounded transition-colors"
-            >
-              {{ table.isAllSelected() ? 'Deselect All' : 'Select All' }}
-            </button>
+          <app-settings-button
+            label="Column Selection"
+            buttonLabel="Default"
+            (onButtonClick)="resetToDefault()"
+            (onIconClick)="openTableRowModificationContainerToggle($event)"
+          >
+            ></app-settings-button
+          >
+        </div>
+      </div>
 
-            <!-- <button
+      <!-- table row modification toggle buttons -->
+      <div class="mt-5">
+        <app-toggle-component-container
+          [isOpen]="isTableModificationContainerOpen()"
+          [closeButton]="false"
+        >
+          <div class="grid grid-cols-[repeat(auto-fit,minmax(240px,1fr))] gap-2 w-full">
+            @for (singleColumn of tableColumns.slice(0, -1); track singleColumn.key) {
+              <app-toggle-button
+                [label]="singleColumn.label"
+                [(checked)]="columnVisibility()[singleColumn.key]"
+                (filterChanged)="onFilterUpdate(singleColumn.key, $event)"
+              ></app-toggle-button>
+            }
+          </div>
+        </app-toggle-component-container>
+      </div>
+
+      <div>
+        <app-table
+          #table
+          [columns]="tableColumns"
+          [columnVisibility]="columnVisibility()"
+          (selectionChange)="onSelectionChange($event)"
+          [sliderSelectedDate]="sliderSelectedDate()"
+          [activeStatus]="activeStatus()"
+          (statusWiseRowCountChange)="statusWiseRowCount.set($event)"
+          (tableTravelStatus)="onTableTravelStatus($event)"
+          (openDetail)="openBookingDetail($event)"
+        />
+      </div>
+
+      <!-- table supplier modal-->
+      <app-modal
+        [open]="isModalOpen()"
+        title="Remarks"
+        size="lg"
+        submitText="Save"
+        cancelText="Cancel"
+        [loading]="isSubmitting()"
+        (close)="closeModal()"
+        (submit)="submitModal()"
+      >
+        <div class="space-y-4">
+          <label class="block text-sm font-medium text-gray-700"> Remarks </label>
+
+          <textarea
+            rows="4"
+            class="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:ring-2 focus:ring-sky-500 focus:outline-none"
+            placeholder="Enter your remarks..."
+            (input)="remarks.set($any($event.target).value)"
+          >
+            Any content could be project here . Just demo text area . ALl are optional.
+          </textarea>
+        </div>
+      </app-modal>
+
+      <!-- ================= Table Final Updating Portion=============== -->
+
+      <div class="mt-5">
+        <div class="flex justify-between">
+          <div>
+            <div class="mb-4 flex flex-col gap-3 items-center">
+              <span class="text-sm text-gray-600"> Selected: {{ table.getSelectedCount() }} </span>
+              <button
+                (click)="table.toggleSelectAll()"
+                class="text-md text-blue-500 rounded transition-colors"
+              >
+                {{ table.isAllSelected() ? 'Deselect All' : 'Select All' }}
+              </button>
+
+              <!-- <button
           (click)="table.deselectAll()"
           class="px-4 py-2 bg-gray-500 text-white rounded hover:bg-gray-600 transition-colors"
           [disabled]="table.getSelectedCount() === 0"
         >
           Clear Selection
         </button> -->
+            </div>
           </div>
-        </div>
 
-        <div class="flex gap-2">
-          <app-button-with-popup label="Show Reminders" [disabled]="!uiState().showReminders">
-            <div class="flex flex-col mx-5">
-              <button
-                class="flex items-center justify-between p-4 hover:bg-gray-50 transition-colors group"
-              >
-                <div class="flex items-center gap-3">
-                  <i class="text-xl text-gray-700">💬</i>
-                  <span class="font-medium text-gray-800">WhatsApp Reminder</span>
-                </div>
-                <span class="text-gray-400 group-hover:translate-x-1 transition-transform">❯</span>
-              </button>
-              <button
-                class="flex items-center justify-between p-4 hover:bg-gray-50 transition-colors group text-left"
-              >
-                <div class="flex items-center gap-3">
-                  <i class="text-xl text-gray-700">🖨️</i>
-                  <span class="font-medium text-gray-800">Print Job</span>
-                </div>
-                <span class="text-gray-400 group-hover:translate-x-1 transition-transform">❯</span>
-              </button>
-            </div>
-          </app-button-with-popup>
-          <app-button-with-popup label="Update Supplier" [disabled]="!uiState().showUpdateSupplier">
-            <div class="flex flex-col divide-y divide-gray-100">
-              <button
-                class="flex items-center justify-between p-4 hover:bg-gray-50 transition-colors group"
-              >
-                <div class="flex items-center gap-3">
-                  <i class="text-xl text-gray-700">💬</i>
-                  <span class="font-medium text-gray-800">WhatsApp Reminder</span>
-                </div>
-                <span class="text-gray-400 group-hover:translate-x-1 transition-transform">❯</span>
-              </button>
-              <button
-                class="flex items-center justify-between p-4 hover:bg-gray-50 transition-colors group text-left"
-              >
-                <div class="flex items-center gap-3">
-                  <i class="text-xl text-gray-700">🖨️</i>
-                  <span class="font-medium text-gray-800">Facebook</span>
-                </div>
-                <span class="text-gray-400 group-hover:translate-x-1 transition-transform">❯</span>
-              </button>
-            </div>
-          </app-button-with-popup>
-          <app-button-with-popup label="Accept" [disabled]="!uiState().showAccept">
-            <div class="flex flex-col divide-y divide-gray-100">
-              <button
-                class="flex items-center justify-between p-4 hover:bg-gray-50 transition-colors group"
-              >
-                <div class="flex items-center gap-3">
-                  <i class="text-xl text-gray-700">💬</i>
-                  <span class="font-medium text-gray-800">WhatsApp Reminder</span>
-                </div>
-                <span class="text-gray-400 group-hover:translate-x-1 transition-transform">❯</span>
-              </button>
-              <button
-                class="flex items-center justify-between p-4 hover:bg-gray-50 transition-colors group text-left"
-              >
-                <div class="flex items-center gap-3">
-                  <i class="text-xl text-gray-700">🖨️</i>
-                  <span class="font-medium text-gray-800">Facebook</span>
-                </div>
-                <span class="text-gray-400 group-hover:translate-x-1 transition-transform">❯</span>
-              </button>
-            </div>
-          </app-button-with-popup>
-          <app-button-with-popup label="Bookings" [disabled]="!uiState().showBookings">
-            <div class="flex flex-col divide-y divide-gray-100">
-              <button
-                class="flex items-center justify-between p-1 hover:bg-gray-50 transition-colors group"
-              >
-                <div class="flex items-center gap-3">
-                  <i class="text-xl text-gray-700">💬</i>
-                  <span class="font-medium text-gray-800">Modify Date/Time</span>
-                </div>
-                <span class="text-gray-400 group-hover:translate-x-1 transition-transform">❯</span>
-              </button>
+          <div class="flex gap-2">
+            <app-button-with-popup label="Show Reminders" [disabled]="!uiState().showReminders">
+              <div class="flex flex-col mx-5">
+                <button
+                  class="flex items-center justify-between p-4 hover:bg-gray-50 transition-colors group"
+                >
+                  <div class="flex items-center gap-3">
+                    <i class="text-xl text-gray-700">💬</i>
+                    <span class="font-medium text-gray-800">WhatsApp Reminder</span>
+                  </div>
+                  <span class="text-gray-400 group-hover:translate-x-1 transition-transform"
+                    >❯</span
+                  >
+                </button>
+                <button
+                  class="flex items-center justify-between p-4 hover:bg-gray-50 transition-colors group text-left"
+                >
+                  <div class="flex items-center gap-3">
+                    <i class="text-xl text-gray-700">🖨️</i>
+                    <span class="font-medium text-gray-800">Print Job</span>
+                  </div>
+                  <span class="text-gray-400 group-hover:translate-x-1 transition-transform"
+                    >❯</span
+                  >
+                </button>
+              </div>
+            </app-button-with-popup>
+            <app-button-with-popup
+              label="Update Supplier"
+              [disabled]="!uiState().showUpdateSupplier"
+            >
+              <div class="flex flex-col divide-y divide-gray-100">
+                <button
+                  class="flex items-center justify-between p-4 hover:bg-gray-50 transition-colors group"
+                >
+                  <div class="flex items-center gap-3">
+                    <i class="text-xl text-gray-700">💬</i>
+                    <span class="font-medium text-gray-800">WhatsApp Reminder</span>
+                  </div>
+                  <span class="text-gray-400 group-hover:translate-x-1 transition-transform"
+                    >❯</span
+                  >
+                </button>
+                <button
+                  class="flex items-center justify-between p-4 hover:bg-gray-50 transition-colors group text-left"
+                >
+                  <div class="flex items-center gap-3">
+                    <i class="text-xl text-gray-700">🖨️</i>
+                    <span class="font-medium text-gray-800">Facebook</span>
+                  </div>
+                  <span class="text-gray-400 group-hover:translate-x-1 transition-transform"
+                    >❯</span
+                  >
+                </button>
+              </div>
+            </app-button-with-popup>
+            <app-button-with-popup label="Accept" [disabled]="!uiState().showAccept">
+              <div class="flex flex-col divide-y divide-gray-100">
+                <button
+                  class="flex items-center justify-between p-4 hover:bg-gray-50 transition-colors group"
+                >
+                  <div class="flex items-center gap-3">
+                    <i class="text-xl text-gray-700">💬</i>
+                    <span class="font-medium text-gray-800">WhatsApp Reminder</span>
+                  </div>
+                  <span class="text-gray-400 group-hover:translate-x-1 transition-transform"
+                    >❯</span
+                  >
+                </button>
+                <button
+                  class="flex items-center justify-between p-4 hover:bg-gray-50 transition-colors group text-left"
+                >
+                  <div class="flex items-center gap-3">
+                    <i class="text-xl text-gray-700">🖨️</i>
+                    <span class="font-medium text-gray-800">Facebook</span>
+                  </div>
+                  <span class="text-gray-400 group-hover:translate-x-1 transition-transform"
+                    >❯</span
+                  >
+                </button>
+              </div>
+            </app-button-with-popup>
+            <app-button-with-popup label="Bookings" [disabled]="!uiState().showBookings">
+              <div class="flex flex-col divide-y divide-gray-100">
+                <button
+                  class="flex items-center justify-between p-1 hover:bg-gray-50 transition-colors group"
+                >
+                  <div class="flex items-center gap-3">
+                    <i class="text-xl text-gray-700">💬</i>
+                    <span class="font-medium text-gray-800">Modify Date/Time</span>
+                  </div>
+                  <span class="text-gray-400 group-hover:translate-x-1 transition-transform"
+                    >❯</span
+                  >
+                </button>
 
-              <button
-                class="flex items-center justify-between p-1 hover:bg-gray-50 transition-colors group text-left"
-              >
-                <div class="flex items-center gap-3">
-                  <i class="text-xl text-gray-700">🖨️</i>
-                  <span class="font-medium text-gray-800">Cancel</span>
-                </div>
-                <span class="text-gray-400 group-hover:translate-x-1 transition-transform">❯</span>
-              </button>
-            </div>
-          </app-button-with-popup>
+                <button
+                  class="flex items-center justify-between p-1 hover:bg-gray-50 transition-colors group text-left"
+                >
+                  <div class="flex items-center gap-3">
+                    <i class="text-xl text-gray-700">🖨️</i>
+                    <span class="font-medium text-gray-800">Cancel</span>
+                  </div>
+                  <span class="text-gray-400 group-hover:translate-x-1 transition-transform"
+                    >❯</span
+                  >
+                </button>
+              </div>
+            </app-button-with-popup>
+          </div>
         </div>
       </div>
     </div>
-  </div>
   } @else {
-    <app-booking-details
-      [reference]="selectedReference()!"
-      (goBack)="closeBookingDetail()"
-    />
+    <app-booking-details [reference]="selectedReference()!" (goBack)="closeBookingDetail()" />
   }
 </div>
