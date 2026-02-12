@@ -1,5 +1,5 @@
 import { Component, input, signal } from '@angular/core';
-import { ɵEmptyOutletComponent } from "@angular/router";
+import { ɵEmptyOutletComponent } from '@angular/router';
 
 @Component({
   selector: 'app-button-with-popup',

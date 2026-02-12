@@ -6,15 +6,15 @@
     [class.disabled]="disabled()"
     class="border px-4 py-2.5 border-sky-300 rounded-xl bg-white text-sky-400 font-medium text-sm md:text-base transition-all duration-200 ease-in-out hover:bg-sky-50 hover:border-sky-400 hover:shadow-sm active:scale-95 md:w-auto min-w-40 hover:bg-sky-50 hover:border-sky-400 hover:shadow-sm disabled:border-gray-200 disabled:text-gray-300 disabled:bg-gray-50 disabled:cursor-not-allowed disabled:shadow-none disabled:active:scale-100"
   >
-    {{ label() }}
+    <div class="flex gap-4">
+      <ng-content select="[button-icon]"></ng-content>
+      <div>{{ label() }}</div>
+    </div>
     <!-- <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 transition-transform" [class.rotate-180]="isOpen()" fill="none" viewBox="0 0 24 24" stroke="currentColor">
       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
     </svg> -->
-    <ng-component selector="[button-icon]"></ng-component>
   </button>
 
-
-  HGE
   @if (isOpen()) {
     <div class="fixed inset-0 bg-gray-900/30 z-40 transition-opacity" (click)="close()"></div>
 

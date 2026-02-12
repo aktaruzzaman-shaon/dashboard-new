@@ -9,8 +9,10 @@ import { BookingIconComponent } from '../../../../../icons/BookingIcon';
 import { NotificationIconComponent } from '../../../../../icons/NotificationIcon';
 import { ModalComponent } from '../../modal/modal.component';
 import { AcknowledgeAndAccept } from '../../macro/acknowledge-and-accept/acknowledge-and-accept';
+import { ButtonWithPopup } from "../../button/button-with-popup/button-with-popup";
+import { UpdateTravelDate } from "../update-travel-date/update-travel-date";
 
-type ModalType = 'accept' | 'decline' | 'edit' | null;
+type ModalType = 'accept' | 'decline' | 'edit' | 'edit-booking' | null;
 
 @Component({
   selector: 'app-booking-details',
@@ -24,7 +26,9 @@ type ModalType = 'accept' | 'decline' | 'edit' | null;
     NotificationIconComponent,
     ModalComponent,
     AcknowledgeAndAccept,
-  ],
+    ButtonWithPopup,
+    UpdateTravelDate
+],
   templateUrl: './booking-details.html',
   styleUrl: './booking-details.css',
 })
@@ -37,6 +41,8 @@ export class BookingDetails {
 
   // showing accept modal to save
   activeModal = signal<ModalType>(null);
+
+  
 
   // ngOnInit() {
   //   this.loadData();

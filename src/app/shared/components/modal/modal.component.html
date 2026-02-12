@@ -1,7 +1,6 @@
 @if (open()) {
   <div
-    class="fixed inset-0 z-50 flex items-center justify-center
-         bg-black/35 p-4"
+    class="fixed inset-0 z-100 flex items-center justify-center bg-black/35 p-4"
     (click)="onClose()"
   >
     <div
@@ -26,15 +25,15 @@
 
       <!-- Footer -->
       @if (hideFooter()) {
-        <div class="flex justify-end gap-3 px-6 py-4">
-          <button
+        <div class="flex justify-center gap-3 px-6 py-4">
+          <!-- <button
             (click)="close.emit()"
             class="px-4 py-2 rounded-lg text-gray-600 hover:bg-gray-100"
           >
             {{ cancelText() }}
-          </button>
+          </button> -->
 
-          <button
+          <!-- <button
             (click)="onSubmit()"
             [disabled]="disableSubmit() || loading()"
             class="px-4 py-2 rounded-lg bg-sky-500 text-white hover:bg-sky-600 disabled:bg-gray-300 disabled:cursor-not-allowed flex items-center gap-2"
@@ -45,7 +44,13 @@
               ></span>
             }
             {{ submitText() }}
-          </button>
+          </button> -->
+          <app-button
+            label="{{ submitText() }}"
+            size="md"
+            (buttonClick)="onSubmit()"
+            [disabled]="disableSubmit() || loading()"
+          ></app-button>
         </div>
       }
     </div>

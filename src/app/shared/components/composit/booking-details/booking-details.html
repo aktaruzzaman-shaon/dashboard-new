@@ -227,17 +227,41 @@
             <app-accept-icon></app-accept-icon>
           </app-outline-button>
           @if (activeModal()) {
-            <app-modal [open]="!!activeModal()" title="Acknowledge & Accept">
+            <app-modal [open]="!!activeModal()" [hideFooter]="true">
               @switch (activeModal()) {
                 @case ('accept') {
                   <app-acknowledge-and-accept></app-acknowledge-and-accept>
                 }
+                @case ('edit-booking') {
+                  <app-update-travel-date></app-update-travel-date>
+                }
               }
             </app-modal>
           }
-          <app-outline-button label="Booking">
-            <app-booking-icon></app-booking-icon>
-          </app-outline-button>
+          <app-button-with-popup label="Booking">
+            <app-booking-icon button-icon></app-booking-icon>
+            <div class="flex flex-col divide-y divide-gray-100">
+              <button
+                class="flex items-center justify-between p-4 hover:bg-gray-50 transition-colors group"
+                (click)="activeModal.set('edit-booking')"
+              >
+                <div class="flex items-center gap-3">
+                  <i class="text-xl text-gray-700">📝</i>
+                  <span class="font-medium text-gray-800">Edit Booking</span>
+                </div>
+                <span class="text-gray-400 group-hover:translate-x-1 transition-transform">❯</span>
+              </button>
+              <button
+                class="flex items-center justify-between p-4 hover:bg-gray-50 transition-colors group text-left"
+              >
+                <div class="flex items-center gap-3">
+                  <i class="text-xl text-gray-700">🗑️</i>
+                  <span class="font-medium text-gray-800">Cancel Booking</span>
+                </div>
+                <span class="text-gray-400 group-hover:translate-x-1 transition-transform">❯</span>
+              </button>
+            </div>
+          </app-button-with-popup>
         </div>
       </div>
     </div>
