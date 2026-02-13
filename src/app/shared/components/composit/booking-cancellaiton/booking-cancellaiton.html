@@ -1,0 +1,127 @@
+<div class="max-w-2xl mx-auto bg-white rounded-3xl p-8 font-sans text-gray-700">
+  <div class="flex justify-between items-center mb-8">
+    <h2 class="text-2xl font-extrabold text-gray-800">Booking Cancellation</h2>
+    <button
+      (click)="closeBookingCancelModal.emit()"
+      class="text-gray-400 hover:text-gray-600 transition-colors text-2xl"
+    >
+      &times;
+    </button>
+  </div>
+
+  <div class="space-y-3 mb-8 text-[15px]">
+    @for (item of bookingDetailsList; track item.label) {
+      <div class="flex justify-between items-start">
+        <span class="text-gray-500 font-medium whitespace-nowrap">{{ item.label }}</span>
+        <span class="text-gray-900 font-semibold text-right ml-4">{{ item.value }}</span>
+      </div>
+    }
+  </div>
+
+  <form [formGroup]="cancelForm" (ngSubmit)="onCancel()" class="space-y-6">
+    <div class="space-y-2">
+      <label class="block text-sm font-bold text-gray-700">CDesk Number</label>
+      <input
+        formControlName="cDeskNumber"
+        type="text"
+        placeholder="Enter cdesk number"
+        class="w-full p-3.5 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none transition-all disabled:bg-gray-50 disabled:text-gray-400 placeholder:text-gray-300"
+      />
+    </div>
+
+    <div class="flex items-center gap-4 py-2">
+      <span class="text-sm font-bold text-gray-700">Supplier failed to comply</span>
+      <label class="relative inline-flex items-center cursor-pointer">
+        <input type="checkbox" formControlName="supplierFailed" class="sr-only peer" />
+        <div
+          class="w-12 h-6 bg-gray-200 rounded-full peer peer-checked:after:translate-x-full peer-checked:bg-blue-500 after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all"
+        ></div>
+      </label>
+    </div>
+
+    <div>
+      <h3 class="text-sm font-bold text-gray-700 mb-4">Cancellation Charges</h3>
+      <div class="grid grid-cols-2 gap-6">
+        <div class="space-y-1">
+          <label class="text-xs font-bold text-gray-400 uppercase">Client</label>
+          <div class="relative group">
+            <input
+              type="number"
+              formControlName="clientCharge"
+              placeholder="Enter"
+              class="w-full p-3.5 border border-gray-200 rounded-xl focus:border-blue-500 outline-none pr-14"
+            />
+            <span
+              class="absolute right-4 top-4 text-xs font-bold text-gray-400 flex items-center gap-1"
+            >
+              AED
+              <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M19 9l-7 7-7-7"
+                ></path>
+              </svg>
+            </span>
+          </div>
+        </div>
+        <div class="space-y-1">
+          <label class="text-xs font-bold text-gray-400 uppercase">Supplier</label>
+          <div class="relative group">
+            <input
+              type="number"
+              formControlName="supplierCharge"
+              placeholder="Enter"
+              class="w-full p-3.5 border border-gray-200 rounded-xl focus:border-blue-500 outline-none pr-14"
+            />
+            <span
+              class="absolute right-4 top-4 text-xs font-bold text-gray-400 flex items-center gap-1"
+            >
+              %
+              <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M19 9l-7 7-7-7"
+                ></path>
+              </svg>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="space-y-2">
+      <label class="block text-sm font-bold text-gray-700">Cancellation Reason</label>
+      <textarea
+        formControlName="reason"
+        placeholder="Enter text here"
+        rows="4"
+        class="w-full p-4 border border-gray-200 rounded-xl focus:ring-2 focus:ring-red-500 outline-none resize-none placeholder:text-gray-300"
+      ></textarea>
+    </div>
+
+    <button
+      type="submit"
+      class="w-2/5 bg-[#E32636] hover:bg-red-700 text-white font-bold py-4 rounded-xl transition-all flex justify-center items-center gap-2 shadow-lg hover:shadow-red-200 active:scale-95 mx-auto"
+    >
+      <svg
+        class="w-5 h-5"
+        fill="none"
+        stroke="currentColor"
+        viewBox="0 0 24 24"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+        ></path>
+      </svg>
+      Cancel Booking
+    </button>
+  </form>
+</div>

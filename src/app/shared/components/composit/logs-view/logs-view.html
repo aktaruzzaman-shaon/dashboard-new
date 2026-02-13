@@ -1,0 +1,58 @@
+<div class="w-full max-w-6xl mx-auto bg-white p-6 font-sans text-gray-800">
+  <div class="flex justify-between items-start mb-8">
+    <div>
+      <h2 class="text-3xl font-bold text-[#2D2D2D] mb-4">Log Details</h2>
+      <div class="flex gap-6 text-[15px]">
+        <p>
+          <span class="font-bold">Reference Number:</span>
+          <span class="text-gray-500">{{ referenceNumber() }}</span>
+        </p>
+        <p>
+          <span class="font-bold">Option Name:</span>
+          <span class="text-gray-500">{{ optionName() }}</span>
+        </p>
+      </div>
+    </div>
+    <button class="text-gray-400 hover:text-gray-600 transition-colors" (click)="onClose()">
+      <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M6 18L18 6M6 6l12 12"
+        ></path>
+      </svg>
+    </button>
+  </div>
+
+  <div class="border-t border-gray-100">
+    <div class="grid grid-cols-[1.5fr_1fr_1.5fr_3fr] gap-4 py-4 px-2 border-b border-gray-100">
+      @for (header of tableHeaders; track header) {
+        <span class="text-sm font-bold text-gray-600 uppercase tracking-tight">{{ header }}</span>
+      }
+    </div>
+
+    <div class="divide-y divide-gray-100">
+      @for (log of logs(); track $index) {
+        <div
+          class="grid grid-cols-[1.5fr_1fr_1.5fr_3fr] gap-4 py-5 px-2 items-center hover:bg-gray-50 transition-colors group"
+        >
+          <div class="text-[14px] font-medium text-gray-700">
+            {{ log.dateTime }}
+          </div>
+          <div class="text-[14px] font-medium text-gray-700">
+            {{ log.employeeName }}
+          </div>
+          <div class="text-[14px] text-gray-500 break-all">
+            {{ log.email }}
+          </div>
+          <div class="text-[14px] text-gray-600 leading-relaxed pr-4">
+            {{ log.action }}
+          </div>
+        </div>
+      } @empty {
+        <div class="py-10 text-center text-gray-400">No logs available for this reference.</div>
+      }
+    </div>
+  </div>
+</div>
