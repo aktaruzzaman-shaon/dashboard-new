@@ -1,1 +1,130 @@
-<p>remarks works!</p>
+<div
+  class="max-w-4xl mx-auto bg-white rounded-3xl shadow-xl overflow-hidden font-sans text-slate-700"
+>
+  <div class="p-8 pb-0">
+    <div class="flex justify-between items-center mb-4">
+      <h2 class="text-3xl font-extrabold text-gray-800">Remarks</h2>
+      <button (click)="onClose()" class="text-gray-400 hover:text-gray-600 transition-colors">
+        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M6 18L18 6M6 6l12 12"
+          ></path>
+        </svg>
+      </button>
+    </div>
+
+    <div class="flex gap-10 text-sm mb-8">
+      <p>
+        <span class="font-bold">Reference Number:</span>
+        <span class="text-gray-500">AGT43536801250534</span>
+      </p>
+      <p>
+        <span class="font-bold">Option Name:</span>
+        <span class="text-gray-500">From Dubai Marina Sightseeing Yacht</span>
+      </p>
+    </div>
+
+    <div class="flex gap-3 mb-8">
+      <button
+        (click)="activeView.set('customer')"
+        [class]="
+          activeView() === 'customer'
+            ? 'bg-[#0095DA] text-white'
+            : 'bg-white text-gray-500 border border-gray-200'
+        "
+        class="px-6 py-2.5 rounded-xl font-bold text-sm transition-all shadow-sm"
+      >
+        Customer Remark
+      </button>
+      <button
+        (click)="activeView.set('internal')"
+        [class]="
+          activeView() === 'internal'
+            ? 'bg-[#0095DA] text-white'
+            : 'bg-white text-gray-500 border border-gray-200'
+        "
+        class="px-6 py-2.5 rounded-xl font-bold text-sm transition-all shadow-sm"
+      >
+        Internal Remark
+      </button>
+    </div>
+  </div>
+
+  <div class="px-8 pb-8">
+    <div class="border border-gray-100 rounded-3xl p-6 min-h-[400px]">
+      @if (activeView() === 'customer') {
+        <div class="space-y-4">
+          <div class="grid grid-cols-2 gap-y-3 text-sm">
+            <span class="text-gray-500 font-medium">Customer Name</span
+            ><span class="text-right font-bold">{{ customerData.name }}</span>
+            <span class="text-gray-500 font-medium">Date</span
+            ><span class="text-right font-bold">{{ customerData.date }}</span>
+            <span class="text-gray-500 font-medium">Time</span
+            ><span class="text-right font-bold">{{ customerData.time }}</span>
+            <span class="text-gray-500 font-medium">Flight Details</span
+            ><span class="text-right font-bold">{{ customerData.flight }}</span>
+            <span class="text-gray-500 font-medium">Weight</span
+            ><span class="text-right font-bold">{{ customerData.weight }}</span>
+          </div>
+
+          <div class="mt-6 bg-gray-50 rounded-2xl p-6">
+            <h4 class="font-bold mb-3">Remarks</h4>
+            <p class="text-sm leading-relaxed text-gray-600">{{ customerData.remark }}</p>
+          </div>
+        </div>
+      } @else {
+        <div class="space-y-4 h-[450px] overflow-y-auto pr-2 custom-scrollbar">
+          @for (remark of internalRemarks; track $index) {
+            <div class="border border-gray-100 rounded-2xl p-5 bg-white shadow-sm">
+              <div class="flex justify-between mb-3">
+                <h4 class="font-bold text-gray-800">{{ remark.name }}</h4>
+                <span class="text-xs text-gray-400 font-medium"
+                  >{{ remark.date }} {{ remark.time }}</span
+                >
+              </div>
+              <p class="text-sm text-gray-600 leading-relaxed mb-4">{{ remark.text }}</p>
+
+              <div class="flex justify-end items-center gap-1 text-[11px] font-bold">
+                @if (remark.readAt) {
+                  <span class="text-[#0095DA] flex items-center gap-1">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M5 13l4 4L19 7"
+                      ></path>
+                    </svg>
+                    Read at {{ remark.readAt }}
+                  </span>
+                } @else {
+                  <button class="text-[#0095DA] underline decoration-2 underline-offset-4">
+                    Mark as Read
+                  </button>
+                }
+              </div>
+            </div>
+          }
+
+          <div class="mt-8">
+            <label class="block text-sm font-bold text-gray-700 mb-2">Add New Remarks</label>
+            <textarea
+              placeholder="Enter Remarks"
+              rows="4"
+              class="w-full border border-gray-200 rounded-2xl p-4 outline-none focus:ring-2 focus:ring-blue-500 transition-all"
+            ></textarea>
+          </div>
+        </div>
+      }
+    </div>
+
+    <button
+      class="w-full bg-[#0095DA] hover:bg-blue-600 text-white font-bold py-4 rounded-xl mt-6 shadow-lg shadow-blue-100 transition-all active:scale-[0.98]"
+    >
+      Save
+    </button>
+  </div>
+</div>

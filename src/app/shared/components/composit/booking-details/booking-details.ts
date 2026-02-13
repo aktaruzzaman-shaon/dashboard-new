@@ -12,9 +12,18 @@ import { AcknowledgeAndAccept } from '../../macro/acknowledge-and-accept/acknowl
 import { ButtonWithPopup } from '../../button/button-with-popup/button-with-popup';
 import { UpdateTravelDate } from '../update-travel-date/update-travel-date';
 import { BookingCancellaiton } from '../booking-cancellaiton/booking-cancellaiton';
-import { LogsView } from "../logs-view/logs-view";
+import { LogsView } from '../logs-view/logs-view';
+import { Remarks } from "../remarks/remarks";
 
-type ModalType = 'accept' | 'decline' | 'edit' | 'edit-booking' | 'cancel' | 'log' | null;
+type ModalType =
+  | 'accept'
+  | 'decline'
+  | 'edit'
+  | 'edit-booking'
+  | 'cancel'
+  | 'log'
+  | 'remarks'
+  | null;
 
 @Component({
   selector: 'app-booking-details',
@@ -31,7 +40,8 @@ type ModalType = 'accept' | 'decline' | 'edit' | 'edit-booking' | 'cancel' | 'lo
     ButtonWithPopup,
     UpdateTravelDate,
     BookingCancellaiton,
-    LogsView
+    LogsView,
+    Remarks
 ],
   templateUrl: './booking-details.html',
   styleUrl: './booking-details.css',
