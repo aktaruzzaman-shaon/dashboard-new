@@ -1,4 +1,4 @@
-import { OverlayModule } from '@angular/cdk/overlay';
+import { ConnectedPosition, OverlayModule } from '@angular/cdk/overlay';
 import { CommonModule } from '@angular/common';
 import {
   Component,
@@ -13,7 +13,7 @@ import {
 export type PopupPosition = 'top-right' | 'top-left' | 'bottom-right' | 'bottom-left';
 @Component({
   selector: 'app-icon-button-popup',
-  imports: [CommonModule],
+  imports: [CommonModule, OverlayModule],
   templateUrl: './icon-button-popup.html',
   styleUrl: './icon-button-popup.css',
 })
@@ -24,9 +24,28 @@ export class IconButtonPopup {
   closeOnOutsideClick = input(true);
   isDisabled = input(false);
   isOpen = signal(false);
+  popupTop = 0;
+  popupLeft = 0;
 
-  togglePopup(): void {
-    this.isOpen.set(!this.isOpen());
+  // togglePopup(): void {
+  //   this.isOpen.set(!this.isOpen());
+  // }
+
+  togglePopup(event: MouseEvent) {
+    if (!this.isOpen()) {
+      // Get the button's exact position on the screen
+      const rect = (event.currentTarget as HTMLElement).getBoundingClientRect();
+
+      // Position it 8px below the button
+      this.popupTop = rect.bottom + 8;
+
+      // Align it to the left of the button
+      this.popupLeft = rect.left;
+
+      this.isOpen.set(true);
+    } else {
+      this.closePopup();
+    }
   }
 
   closePopup(): void {

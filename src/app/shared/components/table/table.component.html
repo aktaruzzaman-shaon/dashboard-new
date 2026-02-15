@@ -263,13 +263,40 @@
                           />
                         </svg> -->
                         <app-notification-icon svg-icon></app-notification-icon>
-                        <div class="space-y-2">
-                          <h3 class="font-bold text-lg">Notifications</h3>
-                          <p class="text-sm text-gray-500">
-                            You have 5 unread messages in your inbox.
-                          </p>
-                          <button class="w-full py-2 bg-blue-600 text-white rounded-md mt-2">
-                            View All
+                        <div class="flex flex-col divide-y divide-gray-100">
+                          <!-- whatsapp-reminder -->
+                          <button
+                            class="flex items-center justify-between p-4 hover:bg-gray-50 transition-colors group w-full"
+                          >
+                            <div class="flex items-center gap-3 w-[250px]">
+                              <app-whatsapp-icon class="text-gray-700"></app-whatsapp-icon>
+                              <span
+                                class="font-medium text-gray-800"
+                                (click)="activeModal.set('whatsapp-reminder')"
+                                >WhatsApp Reminder</span
+                              >
+                            </div>
+                            <span
+                              class="text-gray-400 group-hover:translate-x-1 transition-transform"
+                              >❯</span
+                            >
+                          </button>
+                          <!-- email reminder -->
+                          <button
+                            class="flex items-center justify-between p-4 hover:bg-gray-50 transition-colors group"
+                          >
+                            <div class="flex items-center gap-3 w-[250px]">
+                              <app-email-icon class="text-gray-700"></app-email-icon>
+                              <span
+                                class="font-medium text-gray-800"
+                                (click)="activeModal.set('email-reminder')"
+                                >Email Reminder</span
+                              >
+                            </div>
+                            <span
+                              class="text-gray-400 group-hover:translate-x-1 transition-transform"
+                              >❯</span
+                            >
                           </button>
                         </div>
                       </app-icon-button-popup>
@@ -342,5 +369,30 @@
         </div>
       }
     </div>
+
+    @if (activeModal()) {
+      <app-modal [open]="!!activeModal()" [hideFooter]="false" (close)="activeModal.set(null)">
+        @switch (activeModal()) {
+          @case ('log') {
+            <app-logs-view (logViewClose)="activeModal.set(null)"></app-logs-view>
+          }
+          @case ('remarks') {
+            <app-remarks (closeModal)="activeModal.set(null)"></app-remarks>
+          }
+          @case ('whatsapp-reminder') {
+            <app-whatsapp-reminder
+              (send)="activeModal.set(null)"
+              (cancel)="activeModal.set(null)"
+            ></app-whatsapp-reminder>
+          }
+          @case ('email-reminder') {
+            <app-email-reminder
+              (send)="activeModal.set(null)"
+              (cancel)="activeModal.set(null)"
+            ></app-email-reminder>
+          }
+        }
+      </app-modal>
+    }
   </div>
 </div>

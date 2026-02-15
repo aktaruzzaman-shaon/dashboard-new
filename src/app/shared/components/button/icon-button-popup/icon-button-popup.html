@@ -1,65 +1,18 @@
-<div class="relative inline-block" #container>
-  <!-- Trigger Button with projected SVG -->
-  <button
-    #triggerButton
-    (click)="togglePopup()"
-    class="relative text-blue-400 rounded-full hover:bg-gray-100 transition-colors duration-200"
-    [attr.aria-expanded]="isOpen()"
-    aria-haspopup="true"
-    [disabled]="isDisabled()"
-    [class.cursor-not-allowed]="isDisabled()"
-    [class.hover:bg-transparent]="isDisabled()"
-  >
-    <!-- SVG Icon Projection Slot -->
+<div class="relative inline-block">
+  <button #triggerButton (click)="togglePopup($event)" ...>
     <ng-content select="[svg-icon]"></ng-content>
-
-    <!-- Badge (optional) -->
-    @if (badgeDisplay(); as display) {
-      <span
-        class="absolute -top-1 -right-1 text-white text-xs font-bold rounded-full h-3 w-3 flex items-center justify-center transition-colors"
-        [ngClass]="{
-          'bg-sky-500': !isDisabled(),
-          'bg-gray-400': isDisabled(),
-        }"
-      >
-        {{ display }}
-      </span>
-    }
   </button>
 
-  <!-- Backdrop Overlay -->
   @if (isOpen()) {
-    <div class="fixed inset-0 bg-black/35 z-40" (click)="closePopup()" @fadeIn></div>
-  }
+    <div class="fixed inset-0 bg-black/10 z-40" (click)="closePopup()"></div>
 
-  <!-- Popup Modal -->
-  @if (isOpen()) {
     <div
       #popupModal
-      class="absolute z-50 bg-white rounded-xl shadow-2xl"
-      [ngClass]="getPopupPositionClasses()"
-      @slideIn
+      class="fixed z-50 bg-white rounded-xl shadow-2xl"
+      [style.top.px]="popupTop"
+      [style.left.px]="popupLeft"
       (click)="$event.stopPropagation()"
     >
-      <!-- Close button (optional) -->
-      @if (showCloseButton()) {
-        <button
-          (click)="closePopup()"
-          class="absolute -top-2 -right-100 p-1 rounded-full hover:bg-gray-100 transition-colors"
-          aria-label="Close"
-        >
-          <svg class="w-4 h-4 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M6 18L18 6M6 6l12 12"
-            ></path>
-          </svg>
-        </button>
-      }
-
-      <!-- Popup Content Projection Slot -->
       <div class="p-1">
         <ng-content></ng-content>
       </div>

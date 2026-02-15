@@ -3,11 +3,30 @@ import { Booking } from './table.types';
 import { ModalComponent } from '../modal/modal.component';
 import { IconButtonPopup } from '../button/icon-button-popup/icon-button-popup';
 import { MultiSelect, MultiSelectOption } from '../select/multi-select/multi-select.component';
-import { NotificationIconComponent } from "../../../../icons/NotificationIcon";
+import { NotificationIconComponent } from '../../../../icons/NotificationIcon';
+import { EmailIconComponent } from '../../../../icons/EmailIcon';
+import { WhatsappIconComponent } from '../../../../icons/WhatsappIcon';
+import { LogsView } from '../composit/logs-view/logs-view';
+import { Remarks } from '../composit/remarks/remarks';
+import { WhatsappReminder } from '../macro/whatsapp-reminder/whatsapp-reminder';
+import { EmailReminder } from '../macro/email-reminder/email-reminder';
+
+type ModalType = 'whatsapp-reminder' | 'email-reminder' | 'log' | 'remarks' | null;
 
 @Component({
   selector: 'app-table',
-  imports: [ModalComponent, IconButtonPopup, MultiSelect, NotificationIconComponent],
+  imports: [
+    ModalComponent,
+    IconButtonPopup,
+    MultiSelect,
+    NotificationIconComponent,
+    EmailIconComponent,
+    WhatsappIconComponent,
+    LogsView,
+    Remarks,
+    WhatsappReminder,
+    EmailReminder,
+  ],
   templateUrl: './table.component.html',
   styleUrl: './table.component.css',
 })
@@ -29,6 +48,9 @@ export class TableComponent {
   tableStatus(status: string): void {
     this.tableTravelStatus.emit(status);
   }
+
+  // showing accept modal to save
+  activeModal = signal<ModalType>(null);
 
   // 🔹 Original bookings data (immutable source)
   private readonly originalBookings: Booking[] = [
