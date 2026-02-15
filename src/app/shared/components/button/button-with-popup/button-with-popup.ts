@@ -14,6 +14,7 @@ export class ButtonWithPopup {
 
   toggle() {
     if (!this.disabled()) {
+      console.log('Toggling popup', this.isOpen());
       this.isOpen.update((v) => !v);
     }
   }

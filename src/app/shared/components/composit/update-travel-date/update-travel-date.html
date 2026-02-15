@@ -69,15 +69,18 @@
     </div>
 
     <div class="grid grid-cols-2 gap-4">
-      <app-calender></app-calender>
-      <div>
-        <label class="block text-sm font-semibold mb-2">Start Time</label>
-        <input
-          type="time"
-          formControlName="startTime"
-          class="w-full p-3 border rounded-xl outline-none"
-        />
+      <div><app-calender></app-calender></div>
+      <div class="mt-1.5">
+        <app-time-input label="Start Time" formControlName="startTime"></app-time-input>
       </div>
+    </div>
+    <div>
+      <app-button
+        label="Save Changes"
+        size="md"
+        type="submit"
+        [disabled]="travelForm.invalid"
+      ></app-button>
     </div>
   </form>
 </div>

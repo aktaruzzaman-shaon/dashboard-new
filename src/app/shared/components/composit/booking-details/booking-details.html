@@ -232,7 +232,9 @@
                   <app-acknowledge-and-accept></app-acknowledge-and-accept>
                 }
                 @case ('edit-booking') {
-                  <app-update-travel-date></app-update-travel-date>
+                  <app-update-travel-date
+                    (closeUpdateTravelDate)="activeModal.set(null)"
+                  ></app-update-travel-date>
                 }
                 @case ('cancel') {
                   <app-booking-cancellaiton

@@ -1,17 +1,16 @@
 import { CommonModule } from '@angular/common';
-import { Component, input } from '@angular/core';
+import { Component, input, output } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { ButtonComponent } from '../../button/button.component';
 import { CalenderComponent } from '../../calender/calender.component';
+import { TimeInput } from '../../input/time-input/time-input';
 
 @Component({
   selector: 'app-update-travel-date',
-  imports: [CommonModule, ReactiveFormsModule, CalenderComponent],
+  imports: [CommonModule, ReactiveFormsModule, CalenderComponent, TimeInput, ButtonComponent],
   templateUrl: './update-travel-date.html',
   styleUrl: './update-travel-date.css',
 })
-
-
 export class UpdateTravelDate {
   // Input to receive initial data
   data = input<any>({
@@ -23,6 +22,8 @@ export class UpdateTravelDate {
     yachtType: 'Private Yacht',
     cDeskNumber: '9876566316516541132',
   });
+  closeUpdateTravelDate = output<void>();
+
   // @Input() data: any = {
   //   billNumber: '0802251314',
   //   productName: 'From Dubai Marina Sightseeing Yacht',
@@ -49,6 +50,7 @@ export class UpdateTravelDate {
   }
 
   onSave() {
+    this.closeUpdateTravelDate.emit();
     console.log('Form Submitted:', this.travelForm.getRawValue());
   }
 }

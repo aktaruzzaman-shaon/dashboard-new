@@ -1,11 +1,19 @@
-import { Component, signal } from '@angular/core';
-import { ControlValueAccessor } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+import { Component, forwardRef, signal } from '@angular/core';
+import { ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Component({
   selector: 'app-time-input',
-  imports: [],
+  imports: [CommonModule, FormsModule],
   templateUrl: './time-input.html',
   styleUrl: './time-input.css',
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => TimeInput),
+      multi: true,
+    },
+  ],
 })
 export class TimeInput implements ControlValueAccessor {
   label = signal<string>('Start Time');
@@ -22,7 +30,7 @@ export class TimeInput implements ControlValueAccessor {
   // Formats the input and updates the form
   handleInput(event: Event) {
     const input = event.target as HTMLInputElement;
-    let val = input.value.replace(/\D/g, ''); // Remove non-digits
+    let val = input.value.replace(/\D/g, '');
 
     if (val.length > 4) val = val.substring(0, 4);
 
@@ -30,7 +38,6 @@ export class TimeInput implements ControlValueAccessor {
     if (val.length >= 3) {
       val = val.slice(0, 2) + ':' + val.slice(2);
     }
-
     this.timeValue.set(val);
     this.updateForm();
   }
