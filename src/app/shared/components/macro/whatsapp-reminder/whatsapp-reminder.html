@@ -1,0 +1,31 @@
+<div class=" bg-black1/2 bg-opacity-50 flex items-center justify-center p-4 z-50">
+  <div class="bg-white rounded-2xl  w-full relative">
+    <!-- Title -->
+    <h2 class="text-2xl font-semibold text-gray-900 mb-4 text-center">Send WhatsApp Reminder?</h2>
+
+    <!-- Description -->
+    <p class="text-gray-600 text-center text-sm leading-relaxed mb-8">
+      Reminders will be sent via WhatsApp only to suppliers with Pending Status and WhatsApp
+      notifications enabled.
+    </p>
+
+    <!-- Action Buttons -->
+    <div class="flex gap-4">
+      <!-- Cancel Button -->
+      <button
+        (click)="onCancel()"
+        class="flex-1 px-6 py-3 bg-white border-2 border-blue-500 text-blue-500 font-medium rounded-lg hover:bg-blue-50 transition-colors"
+      >
+        Cancel
+      </button>
+
+      <!-- Send Button -->
+      <button
+        (click)="onSend()"
+        class="flex-1 px-6 py-3 bg-blue-500 text-white font-medium rounded-lg hover:bg-blue-600 transition-colors shadow-md hover:shadow-lg"
+      >
+        Send
+      </button>
+    </div>
+  </div>
+</div>

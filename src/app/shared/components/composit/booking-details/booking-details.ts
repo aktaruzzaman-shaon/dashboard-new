@@ -16,6 +16,9 @@ import { LogsView } from '../logs-view/logs-view';
 import { Remarks } from "../remarks/remarks";
 import { CalendarIconComponent } from "../../../../../icons/DateIcon";
 import { CloseIconComponent } from "../../../../../icons/CloseIcon";
+import { EmailIconComponent } from "../../../../../icons/EmailIcon";
+import { WhatsappIconComponent } from "../../../../../icons/WhatsappIcon";
+import { WhatsappReminder } from "../../macro/whatsapp-reminder/whatsapp-reminder";
 
 type ModalType =
   | 'accept'
@@ -25,6 +28,7 @@ type ModalType =
   | 'cancel'
   | 'log'
   | 'remarks'
+  | 'whatsapp-reminder'
   | null;
 
 @Component({
@@ -45,7 +49,10 @@ type ModalType =
     LogsView,
     Remarks,
     CalendarIconComponent,
-    CloseIconComponent
+    CloseIconComponent,
+    EmailIconComponent,
+    WhatsappIconComponent,
+    WhatsappReminder
 ],
   templateUrl: './booking-details.html',
   styleUrl: './booking-details.css',

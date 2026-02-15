@@ -152,7 +152,7 @@
           <app-icon-button-popup [badgeCount]="5">
             <app-notification-icon svg-icon></app-notification-icon>
             <!-- content -->
-            <div class="flex flex-col divide-y divide-gray-100">
+            <!-- <div class="flex flex-col divide-y divide-gray-100">
               <button
                 class="flex items-center justify-between p-4 hover:bg-gray-50 transition-colors group"
               >
@@ -168,6 +168,33 @@
                 <div class="flex items-center gap-3">
                   <i class="text-xl text-gray-700">🖨️</i>
                   <span class="font-medium text-gray-800">Facebook</span>
+                </div>
+                <span class="text-gray-400 group-hover:translate-x-1 transition-transform">❯</span>
+              </button>
+            </div> -->
+
+            <div class="flex flex-col divide-y divide-gray-100">
+              <button
+                class="flex items-center justify-between p-4 hover:bg-gray-50 transition-colors group w-full"
+              >
+                <div
+                  class="flex items-center gap-3 w-[250px]"
+                >
+                  <app-whatsapp-icon class="text-gray-700"></app-whatsapp-icon>
+                  <span
+                    class="font-medium text-gray-800"
+                    (click)="activeModal.set('whatsapp-reminder')"
+                    >WhatsApp Reminder</span
+                  >
+                </div>
+                <span class="text-gray-400 group-hover:translate-x-1 transition-transform">❯</span>
+              </button>
+              <button
+                class="flex items-center justify-between p-4 hover:bg-gray-50 transition-colors group"
+              >
+                <div class="flex items-center gap-3 w-[250px]">
+                  <app-email-icon class="text-gray-700"></app-email-icon>
+                  <span class="font-medium text-gray-800">Email Reminder</span>
                 </div>
                 <span class="text-gray-400 group-hover:translate-x-1 transition-transform">❯</span>
               </button>
@@ -229,7 +256,7 @@
             >
               @switch (activeModal()) {
                 @case ('accept') {
-                  <app-acknowledge-and-accept></app-acknowledge-and-accept>
+                  <app-acknowledge-and-accept userName="rayna"></app-acknowledge-and-accept>
                 }
                 @case ('edit-booking') {
                   <app-update-travel-date
@@ -246,6 +273,12 @@
                 }
                 @case ('remarks') {
                   <app-remarks (closeModal)="activeModal.set(null)"></app-remarks>
+                }
+                @case ('whatsapp-reminder') {
+                  <app-whatsapp-reminder
+                    (send)="activeModal.set(null)"
+                    (cancel)="activeModal.set(null)"
+                  ></app-whatsapp-reminder>
                 }
               }
             </app-modal>

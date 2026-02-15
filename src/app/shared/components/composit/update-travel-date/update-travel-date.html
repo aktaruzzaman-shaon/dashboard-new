@@ -1,4 +1,4 @@
-<div class="max-w-xl mx-auto bg-white rounded-2xl p-8 font-sans text-slate-700">
+<div class="w-full font-sans text-slate-700">
   <div class="flex justify-between items-center mb-6">
     <h2 class="text-2xl font-bold text-gray-800">Update Travel Date</h2>
     <button class="text-gray-400 hover:text-gray-600 text-2xl">&times;</button>
@@ -74,13 +74,8 @@
         <app-time-input label="Start Time" formControlName="startTime"></app-time-input>
       </div>
     </div>
-    <div>
-      <app-button
-        label="Save Changes"
-        size="md"
-        type="submit"
-        [disabled]="travelForm.invalid"
-      ></app-button>
+    <div class="flex justify-center">
+      <app-button label="Save" size="lg" rounded type="submit" [disabled]="travelForm.invalid"></app-button>
     </div>
   </form>
 </div>

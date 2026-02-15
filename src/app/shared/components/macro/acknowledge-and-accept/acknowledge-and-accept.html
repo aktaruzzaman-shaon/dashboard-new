@@ -1,5 +1,62 @@
-<div>
-  <app-input-core label="Your Name"></app-input-core>
-  <app-input-core label="Confirmation Number"></app-input-core>
-  <app-outline-button label="Save"></app-outline-button>
+<div class="w-full font-sans text-slate-700 mx-auto" (click)="onClose()">
+  <div class="bg-white rounded-lg  w-full  p-6 relative">
+    <!-- Close button -->
+    <button
+      (click)="onClose()"
+      class="absolute top-4 right-4 text-gray-400 hover:text-gray-600 transition-colors"
+      aria-label="Close"
+    >
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth="2"
+          d="M6 18L18 6M6 6l12 12"
+        />
+      </svg>
+    </button>
+
+    <!-- Title -->
+    <h2 class="text-2xl font-semibold text-gray-800 mb-6">Acknowledge & Accept</h2>
+
+    <!-- Form -->
+    <div class="space-y-4">
+      <!-- Your Name - Auto-filled -->
+      <div>
+        <label for="name" class="block text-sm font-medium text-gray-700 mb-2"> Your Name </label>
+        <input
+          id="name"
+          type="text"
+          [value]="userName()"
+          disabled
+          class="w-full px-4 py-3 bg-gray-100 border border-gray-200 rounded-lg text-gray-800 cursor-not-allowed"
+        />
+      </div>
+
+      <!-- Confirmation Number -->
+      <div>
+        <label for="confirmation" class="block text-sm font-medium text-gray-700 mb-2">
+          Confirmation Number
+        </label>
+        <input
+          id="confirmation"
+          type="text"
+          [value]="confirmationNumber()"
+          (input)="updateConfirmationNumber($any($event.target).value)"
+          placeholder="Enter confirmation number"
+          class="w-full px-4 py-3 bg-white border border-gray-300 rounded-lg text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+        />
+      </div>
+    </div>
+
+    <!-- Save Button -->
+    <div class="mt-6 flex justify-center">
+      <button
+        (click)="onSave()"
+        class="px-8 py-3 bg-blue-500 hover:bg-blue-600 text-white font-medium rounded-lg transition-colors shadow-md hover:shadow-lg"
+      >
+        Save
+      </button>
+    </div>
+  </div>
 </div>
