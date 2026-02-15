@@ -1,15 +1,17 @@
 import { CommonModule } from '@angular/common';
 import { Component, input } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { ButtonComponent } from "../../button/button.component";
-import { CalenderComponent } from "../../calender/calender.component";
+import { ButtonComponent } from '../../button/button.component';
+import { CalenderComponent } from '../../calender/calender.component';
 
 @Component({
   selector: 'app-update-travel-date',
-  imports: [CommonModule, ReactiveFormsModule, ButtonComponent, CalenderComponent],
+  imports: [CommonModule, ReactiveFormsModule, CalenderComponent],
   templateUrl: './update-travel-date.html',
   styleUrl: './update-travel-date.css',
 })
+
+
 export class UpdateTravelDate {
   // Input to receive initial data
   data = input<any>({
@@ -48,6 +50,5 @@ export class UpdateTravelDate {
 
   onSave() {
     console.log('Form Submitted:', this.travelForm.getRawValue());
-    
   }
 }

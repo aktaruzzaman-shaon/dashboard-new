@@ -14,6 +14,8 @@ import { UpdateTravelDate } from '../update-travel-date/update-travel-date';
 import { BookingCancellaiton } from '../booking-cancellaiton/booking-cancellaiton';
 import { LogsView } from '../logs-view/logs-view';
 import { Remarks } from "../remarks/remarks";
+import { CalendarIconComponent } from "../../../../../icons/DateIcon";
+import { CloseIconComponent } from "../../../../../icons/CloseIcon";
 
 type ModalType =
   | 'accept'
@@ -41,7 +43,9 @@ type ModalType =
     UpdateTravelDate,
     BookingCancellaiton,
     LogsView,
-    Remarks
+    Remarks,
+    CalendarIconComponent,
+    CloseIconComponent
 ],
   templateUrl: './booking-details.html',
   styleUrl: './booking-details.css',
