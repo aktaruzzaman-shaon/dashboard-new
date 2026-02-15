@@ -308,6 +308,7 @@
                       [class.text-blue-500]="booking.status === 'Pending'"
                       [class.text-gray-400]="booking.status !== 'Pending'"
                       [disabled]="booking.status !== 'Pending'"
+                      (click)="activeModal.set('remarks')"
                     >
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -344,6 +345,7 @@
                       [class.text-blue-500]="true"
                       [class.text-gray-400]="false"
                       [disabled]="false"
+                      (click)="activeModal.set('log')"
                     >
                       <svg
                         xmlns="http://www.w3.org/2000/svg"

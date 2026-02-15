@@ -32,6 +32,7 @@ import { ModalComponent } from '../shared/components/modal/modal.component';
 import { ButtonWithPopup } from '../shared/components/button/button-with-popup/button-with-popup';
 import { DateSlider } from '../shared/components/date-slider/date-slider';
 import { BookingDetails } from '../shared/components/composit/booking-details/booking-details';
+import { BookingIconComponent } from "../../icons/BookingIcon";
 type ColumnKey = string;
 
 type StatusCountMap = Record<string, number>;
@@ -65,7 +66,8 @@ export interface CountryItem {
     DateSlider,
     ModalComponent,
     BookingDetails,
-  ],
+    BookingIconComponent
+],
   templateUrl: './b2b-dashboard.html',
   styleUrl: './b2b-dashboard.css',
 })

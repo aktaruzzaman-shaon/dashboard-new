@@ -260,7 +260,7 @@
             >
               @switch (activeModal()) {
                 @case ('accept') {
-                  <app-acknowledge-and-accept userName="rayna"></app-acknowledge-and-accept>
+                  <app-acknowledge-and-accept userName="rayna" (close)="activeModal.set(null)"></app-acknowledge-and-accept>
                 }
                 @case ('edit-booking') {
                   <app-update-travel-date

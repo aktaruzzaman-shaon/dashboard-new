@@ -1,7 +1,7 @@
 <div class="w-full font-sans text-slate-700">
   <div class="flex justify-between items-center mb-6">
     <h2 class="text-2xl font-bold text-gray-800">Update Travel Date</h2>
-    <button class="text-gray-400 hover:text-gray-600 text-2xl">&times;</button>
+    <button class="text-gray-400 hover:text-gray-600 text-2xl" (click)="onClose()">&times;</button>
   </div>
 
   <div class="space-y-3 mb-8 text-sm">
@@ -75,7 +75,13 @@
       </div>
     </div>
     <div class="flex justify-center">
-      <app-button label="Save" size="lg" rounded type="submit" [disabled]="travelForm.invalid"></app-button>
+      <!-- <app-button label="Save" size="lg" rounded [disabled]="travelForm.invalid"></app-button> -->
+      <button
+        type="submit"
+        class="w-2/5 bg-sky-600 text-white font-bold py-4 rounded-xl transition-all flex justify-center items-center gap-2 shadow-lg hover:shadow-red-200 active:scale-95 mx-auto"
+      >
+        Save
+      </button>
     </div>
   </form>
 </div>

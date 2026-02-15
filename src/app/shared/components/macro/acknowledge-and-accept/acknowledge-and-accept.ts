@@ -38,5 +38,6 @@ export class AcknowledgeAndAccept {
 
   updateConfirmationNumber(value: string): void {
     this.confirmationNumber.set(value);
+    this.onClose()
   }
 }

@@ -49,8 +49,13 @@ export class UpdateTravelDate {
     });
   }
 
-  onSave() {
+  onClose(){
     this.closeUpdateTravelDate.emit();
+  }
+
+  onSave() {
+    console.log('update travel date')
+    this.onClose()
     console.log('Form Submitted:', this.travelForm.getRawValue());
   }
 }
