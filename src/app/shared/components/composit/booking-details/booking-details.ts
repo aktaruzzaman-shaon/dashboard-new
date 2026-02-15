@@ -13,12 +13,13 @@ import { ButtonWithPopup } from '../../button/button-with-popup/button-with-popu
 import { UpdateTravelDate } from '../update-travel-date/update-travel-date';
 import { BookingCancellaiton } from '../booking-cancellaiton/booking-cancellaiton';
 import { LogsView } from '../logs-view/logs-view';
-import { Remarks } from "../remarks/remarks";
-import { CalendarIconComponent } from "../../../../../icons/DateIcon";
-import { CloseIconComponent } from "../../../../../icons/CloseIcon";
-import { EmailIconComponent } from "../../../../../icons/EmailIcon";
-import { WhatsappIconComponent } from "../../../../../icons/WhatsappIcon";
-import { WhatsappReminder } from "../../macro/whatsapp-reminder/whatsapp-reminder";
+import { Remarks } from '../remarks/remarks';
+import { CalendarIconComponent } from '../../../../../icons/DateIcon';
+import { CloseIconComponent } from '../../../../../icons/CloseIcon';
+import { EmailIconComponent } from '../../../../../icons/EmailIcon';
+import { WhatsappIconComponent } from '../../../../../icons/WhatsappIcon';
+import { WhatsappReminder } from '../../macro/whatsapp-reminder/whatsapp-reminder';
+import { EmailReminder } from '../../macro/email-reminder/email-reminder';
 
 type ModalType =
   | 'accept'
@@ -29,6 +30,7 @@ type ModalType =
   | 'log'
   | 'remarks'
   | 'whatsapp-reminder'
+  | 'email-reminder'
   | null;
 
 @Component({
@@ -52,8 +54,9 @@ type ModalType =
     CloseIconComponent,
     EmailIconComponent,
     WhatsappIconComponent,
-    WhatsappReminder
-],
+    WhatsappReminder,
+    EmailReminder,
+  ],
   templateUrl: './booking-details.html',
   styleUrl: './booking-details.css',
 })
