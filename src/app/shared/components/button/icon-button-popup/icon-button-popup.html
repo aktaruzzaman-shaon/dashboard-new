@@ -1,29 +1,31 @@
-<div class="relative inline-block">
-  <button #triggerButton (click)="togglePopup($event)" ...>
+<div class="relative inline-block" [class.disabled]="isDisabled()">
+  <button
+    #trigger
+    (click)="togglePopup()"
+    class="relative p-2 rounded-full hover:bg-gray-100 transition-colors"
+  >
     <ng-content select="[svg-icon]"></ng-content>
-    <!-- Badge (optional) -->
-    @if (badgeDisplay(); as display) {
+
+    @if (badgeDisplay()) {
       <span
-        class="absolute -top-1 -right-1 bg-sky-500 text-white text-xs font-bold rounded-full h-3 w-3 flex items-center justify-center"
+        class="absolute -top-1 -right-1 flex h-4 w-4 items-center justify-center rounded-full bg-red-500 text-[10px] font-bold text-white"
       >
-        {{ display }}
+        {{ badgeDisplay() }}
       </span>
     }
   </button>
 
   @if (isOpen()) {
-    <div class="fixed inset-0 bg-black/10 z-40" (click)="closePopup()"></div>
+    <div class="fixed inset-0 bg-black/10 z-40" (click)="togglePopup()"></div>
 
     <div
-      #popupModal
-      class="fixed z-50 bg-white rounded-xl shadow-2xl"
-      [style.top.px]="popupTop"
-      [style.left.px]="popupLeft"
+      #content
+      class="fixed z-[100] bg-white rounded-lg shadow-xl border border-gray-200 p-3 min-w-[150px]"
+      [style.top.px]="coords().top"
+      [style.left.px]="coords().left"
       (click)="$event.stopPropagation()"
     >
-      <div class="p-1">
-        <ng-content></ng-content>
-      </div>
+      <ng-content></ng-content>
     </div>
   }
 </div>

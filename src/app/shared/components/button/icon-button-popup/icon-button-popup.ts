@@ -10,7 +10,7 @@ import {
   signal,
   ViewChild,
 } from '@angular/core';
-export type PopupPosition = 'top-right' | 'top-left' | 'bottom-right' | 'bottom-left';
+export type PopupPosition = 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right' | 'left';
 @Component({
   selector: 'app-icon-button-popup',
   imports: [CommonModule, OverlayModule],
@@ -18,64 +18,83 @@ export type PopupPosition = 'top-right' | 'top-left' | 'bottom-right' | 'bottom-
   styleUrl: './icon-button-popup.css',
 })
 export class IconButtonPopup {
+  // Inputs
   position = input<PopupPosition>('bottom-right');
   badgeCount = input<number | undefined>();
-  showCloseButton = input(true);
-  closeOnOutsideClick = input(true);
+  gap = input<number>(8);
   isDisabled = input(false);
+
+  // State
   isOpen = signal(false);
-  popupTop = 0;
-  popupLeft = 0;
+  coords = signal({ top: 0, left: 0 });
 
-  // togglePopup(): void {
-  //   this.isOpen.set(!this.isOpen());
-  // }
+  @ViewChild('trigger') trigger!: ElementRef<HTMLElement>;
+  @ViewChild('content') content!: ElementRef<HTMLElement>;
 
-  togglePopup(event: MouseEvent) {
-    if (!this.isOpen()) {
-      // Get the button's exact position on the screen
-      const rect = (event.currentTarget as HTMLElement).getBoundingClientRect();
-
-      // Position it 8px below the button
-      this.popupTop = rect.bottom + 8;
-
-      // Align it to the left of the button
-      this.popupLeft = rect.left;
-
-      this.isOpen.set(true);
+  togglePopup() {
+    if (this.isOpen()) {
+      this.isOpen.set(false);
     } else {
-      this.closePopup();
+      this.isOpen.set(true);
+      // Wait for DOM to render content to measure it
+      setTimeout(() => this.calculatePosition());
     }
   }
 
-  closePopup(): void {
-    this.isOpen.set(false);
-  }
+  private calculatePosition() {
+    const btn = this.trigger.nativeElement.getBoundingClientRect();
+    const modal = this.content.nativeElement;
+    const modalWidth = modal.offsetWidth;
+    const modalHeight = modal.offsetHeight;
+    const gap = 8;
 
-  openPopup(): void {
-    this.isOpen.set(true);
+    let top = 0;
+    let left = 0;
+
+    switch (this.position()) {
+      case 'top-left':
+        // Above the button, aligned to button's left edge
+        top = btn.top - modalHeight - gap;
+        left = btn.left;
+        break;
+
+      case 'top-right':
+        // Above the button, aligned to button's right edge
+        top = btn.top - modalHeight - gap;
+        left = btn.right - modalWidth;
+        break;
+
+      case 'bottom-left':
+        // Below the button, aligned to button's left edge
+        top = btn.bottom + gap;
+        left = btn.left;
+        break;
+
+      case 'bottom-right':
+        // Below the button, aligned to button's right edge
+        top = btn.bottom + gap;
+        left = btn.right - modalWidth;
+        break;
+
+      case 'left':
+        // Vertically centered to the left of the icon
+        top = btn.top + btn.height / 2 - modalHeight / 2;
+        left = btn.left - modalWidth - gap;
+        break;
+    }
+
+    this.coords.set({ top, left });
   }
 
   badgeDisplay = computed(() => {
     const count = this.badgeCount();
-    if (count === undefined || count <= 0) return null;
-    return count > 99 ? '99+' : count.toString();
+    return count && count > 0 ? (count > 99 ? '99+' : count) : null;
   });
 
-  getPopupPositionClasses(): string {
-    const positions = {
-      'top-right': 'bottom-full right-0 mb-2',
-      'top-left': 'bottom-full left-0 mb-2',
-      'bottom-right': 'top-full right-0 mt-2',
-      'bottom-left': 'top-full left-0 mt-6',
-    };
-    return positions[this.position()] || positions['bottom-right'];
-  }
-
-  @HostListener('document:keydown.escape')
-  onEscapeKey(): void {
-    if (this.isOpen()) {
-      this.closePopup();
+  @HostListener('document:click', ['$event'])
+  outsideClick(event: MouseEvent) {
+    if (!this.trigger.nativeElement.contains(event.target as Node)) {
+      this.isOpen.set(false);
     }
   }
 }
