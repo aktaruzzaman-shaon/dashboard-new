@@ -262,7 +262,9 @@
           </div>
 
           <div class="flex gap-2">
+            <!-- show reminders button -->
             <app-button-with-popup label="Show Reminders" [disabled]="!uiState().showReminders">
+              <app-reminder-icon button-icon></app-reminder-icon>
               <div class="flex flex-col mx-5">
                 <button
                   class="flex items-center justify-between p-4 hover:bg-gray-50 transition-colors group"
@@ -288,10 +290,12 @@
                 </button>
               </div>
             </app-button-with-popup>
+            <!-- update supplier -->
             <app-button-with-popup
               label="Update Supplier"
               [disabled]="!uiState().showUpdateSupplier"
             >
+              <app-update-icon button-icon></app-update-icon>
               <div class="flex flex-col divide-y divide-gray-100">
                 <button
                   class="flex items-center justify-between p-4 hover:bg-gray-50 transition-colors group"
@@ -317,7 +321,9 @@
                 </button>
               </div>
             </app-button-with-popup>
+            <!-- accept button -->
             <app-button-with-popup label="Accept" [disabled]="!uiState().showAccept">
+              <app-accept-icon button-icon></app-accept-icon>
               <div class="flex flex-col divide-y divide-gray-100">
                 <button
                   class="flex items-center justify-between p-4 hover:bg-gray-50 transition-colors group"
@@ -343,6 +349,7 @@
                 </button>
               </div>
             </app-button-with-popup>
+            <!-- booking button -->
             <app-button-with-popup label="Bookings" [disabled]="!uiState().showBookings">
               <app-booking-icon button-icon></app-booking-icon>
               <div class="flex flex-col divide-y divide-gray-100">
