@@ -1,6 +1,14 @@
 <div class="relative inline-block">
   <button #triggerButton (click)="togglePopup($event)" ...>
     <ng-content select="[svg-icon]"></ng-content>
+    <!-- Badge (optional) -->
+    @if (badgeDisplay(); as display) {
+      <span
+        class="absolute -top-1 -right-1 bg-sky-500 text-white text-xs font-bold rounded-full h-3 w-3 flex items-center justify-center"
+      >
+        {{ display }}
+      </span>
+    }
   </button>
 
   @if (isOpen()) {

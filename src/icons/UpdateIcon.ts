@@ -20,8 +20,11 @@ import { Component, Input } from '@angular/core';
   styles: [
     `
       :host {
-        display: inline-flex;j 
-        vertical-align: middle;
+        display: inline-block;
+        line-height: 0;
+      }
+      svg {
+        display: block;
       }
     `,
   ],
