@@ -38,6 +38,7 @@ import { ReminderIconComponent } from "../../icons/ReminderIcon";
 import { UpdateIconComponent } from "../../icons/UpdateIcon";
 import { CalendarIconComponent } from "../../icons/DateIcon";
 import { CloseIconComponent } from "../../icons/CloseIcon";
+import { ButtonComponent } from "../shared/components/button/button.component";
 type ColumnKey = string;
 
 type StatusCountMap = Record<string, number>;
@@ -77,7 +78,8 @@ export interface CountryItem {
     ReminderIconComponent,
     UpdateIconComponent,
     CalendarIconComponent,
-    CloseIconComponent
+    CloseIconComponent,
+    ButtonComponent
 ],
   templateUrl: './b2b-dashboard.html',
   styleUrl: './b2b-dashboard.css',

@@ -22,7 +22,7 @@ export class ButtonComponent {
       case 'sm':
         return 'px-3 py-1.5 text-sm';
       case 'lg':
-        return 'px-6 py-3 text-lg';
+        return 'px-6 py-2.5 text-lg';
       default:
         return 'px-4 py-2 text-base';
     }
