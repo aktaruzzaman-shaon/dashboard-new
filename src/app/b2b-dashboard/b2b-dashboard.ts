@@ -36,6 +36,8 @@ import { BookingIconComponent } from "../../icons/BookingIcon";
 import { AcceptIconComponent } from "../../icons/AcceptIcon";
 import { ReminderIconComponent } from "../../icons/ReminderIcon";
 import { UpdateIconComponent } from "../../icons/UpdateIcon";
+import { CalendarIconComponent } from "../../icons/DateIcon";
+import { CloseIconComponent } from "../../icons/CloseIcon";
 type ColumnKey = string;
 
 type StatusCountMap = Record<string, number>;
@@ -66,13 +68,16 @@ export interface CountryItem {
     SettingsButton,
     MultiSelect,
     ButtonWithPopup,
+    OutlineButton,
     DateSlider,
     ModalComponent,
     BookingDetails,
     BookingIconComponent,
     AcceptIconComponent,
     ReminderIconComponent,
-    UpdateIconComponent
+    UpdateIconComponent,
+    CalendarIconComponent,
+    CloseIconComponent
 ],
   templateUrl: './b2b-dashboard.html',
   styleUrl: './b2b-dashboard.css',
