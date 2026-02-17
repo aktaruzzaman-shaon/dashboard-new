@@ -68,7 +68,7 @@
 
         <!-- ========== Booking Reference =========== -->
 
-        <app-input-core label="Booking Reference Number"></app-input-core>
+        <app-input-core label="Booking Reference Number" (valueChange)="onBookingReferenceChange($event)"></app-input-core>
 
         <!-- ========== Advance Search Button =========== -->
 
@@ -120,10 +120,10 @@
           <div>
             <app-multi-select
               id="Profit Center"
-              label="Provider"
+              label="Profit Center"
               [options]="countryOptions"
-              placeholder="Choose Provider to visit..."
-              (done)="onCountrySelection($event)"
+              placeholder="Choose Profit Center..."
+              (done)="onProfitCenterSelection($event)"
             />
           </div>
 
@@ -132,20 +132,18 @@
               id="provider"
               label="Provider"
               [options]="countryOptions"
-              placeholder="Choose Provider to visit..."
-              (done)="onCountrySelection($event)"
+              placeholder="Choose Provider..."
+              (done)="onProviderSelection($event)"
             />
           </div>
         </app-toggle-component-container>
       </div>
       <div class="flex justify-end gap-4 pr-4">
-        <app-outline-button label="Reset"></app-outline-button>
+        <app-outline-button label="Reset" (btnClick)="resetFilters()"></app-outline-button>
         <!-- <app-outline-button label="Search Now"></app-outline-button> -->
-        <app-button label="Search Now" size="lg"></app-button>
+        <app-button label="Search Now" size="lg" (buttonClick)="searchNow()"></app-button>
       </div>
     </div>
-
-  
 
     <!-- ================  Date Selections  ====================== -->
 

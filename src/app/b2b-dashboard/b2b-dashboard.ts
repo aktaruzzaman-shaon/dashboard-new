@@ -32,13 +32,13 @@ import { ModalComponent } from '../shared/components/modal/modal.component';
 import { ButtonWithPopup } from '../shared/components/button/button-with-popup/button-with-popup';
 import { DateSlider } from '../shared/components/date-slider/date-slider';
 import { BookingDetails } from '../shared/components/composit/booking-details/booking-details';
-import { BookingIconComponent } from "../../icons/BookingIcon";
-import { AcceptIconComponent } from "../../icons/AcceptIcon";
-import { ReminderIconComponent } from "../../icons/ReminderIcon";
-import { UpdateIconComponent } from "../../icons/UpdateIcon";
-import { CalendarIconComponent } from "../../icons/DateIcon";
-import { CloseIconComponent } from "../../icons/CloseIcon";
-import { ButtonComponent } from "../shared/components/button/button.component";
+import { BookingIconComponent } from '../../icons/BookingIcon';
+import { AcceptIconComponent } from '../../icons/AcceptIcon';
+import { ReminderIconComponent } from '../../icons/ReminderIcon';
+import { UpdateIconComponent } from '../../icons/UpdateIcon';
+import { CalendarIconComponent } from '../../icons/DateIcon';
+import { CloseIconComponent } from '../../icons/CloseIcon';
+import { ButtonComponent } from '../shared/components/button/button.component';
 type ColumnKey = string;
 
 type StatusCountMap = Record<string, number>;
@@ -79,8 +79,8 @@ export interface CountryItem {
     UpdateIconComponent,
     CalendarIconComponent,
     CloseIconComponent,
-    ButtonComponent
-],
+    ButtonComponent,
+  ],
   templateUrl: './b2b-dashboard.html',
   styleUrl: './b2b-dashboard.css',
 })
@@ -404,8 +404,9 @@ export class B2bDashboard {
     },
   ];
 
-  onSelect(item: any) {
-    console.log('Selected item:', item);
+  selectedCity = signal<CityItem | null>(null);
+  onSelect(item: CityItem) {
+    this.selectedCity.set(item);
   }
 
   //Supplier Status ====================================
@@ -521,23 +522,70 @@ export class B2bDashboard {
     { label: 'China', value: 'cn' },
   ];
 
-  selectedFruits: string[] = [];
-  selectedColors: string[] = [];
-  selectedCountries: string[] = [];
+  selectedFruits = signal<string[]>([]);
+  selectedColors = signal<string[]>([]);
+  selectedCountries = signal<string[]>([]);
+  selectedProfitCenter = signal<string[]>([]);
+  selectedProvider = signal<string[]>([]);
+  bookingReference = signal<string>('');
 
   onFruitSelection(event: { id: string; values: string[] }) {
-    console.log('Fruits selected:', event);
-    this.selectedFruits = event.values;
+    this.selectedFruits.set(event.values);
   }
 
   onColorSelection(event: { id: string; values: string[] }) {
-    console.log('Colors selected:', event);
-    this.selectedColors = event.values;
+    this.selectedColors.set(event.values);
   }
 
   onCountrySelection(event: { id: string; values: string[] }) {
-    console.log('Countries selected:', event);
-    this.selectedCountries = event.values;
+    this.selectedCountries.set(event.values);
+  }
+
+  onProfitCenterSelection(event: { id: string; values: string[] }) {
+    this.selectedProfitCenter.set(event.values);
+  }
+
+  onProviderSelection(event: { id: string; values: string[] }) {
+    this.selectedProvider.set(event.values);
+  }
+
+  onBookingReferenceChange(value: string | number) {
+    this.bookingReference.set(String(value));
+  }
+
+  searchNow() {
+    const filterValues = {
+      travelDateRange: this.currentSelection(),
+      travelFrom: this.travelFrom(),
+      travelTo: this.travelTo(),
+      city: this.selectedCity(),
+      supplierStatus: this.selectedData(),
+      bookingReference: this.bookingReference(),
+      category: this.selectedFruits(),
+      optionName: this.selectedColors(),
+      supplier: this.selectedCountries(),
+      profitCenter: this.selectedProfitCenter(),
+      provider: this.selectedProvider(),
+    };
+
+    console.log('Search filters:', filterValues);
+
+    this.resetFilters();
+  }
+
+  resetFilters() {
+    this.currentSelection.set([]);
+    this.allowedDateRange.set(null);
+    this.travelFrom.set(null);
+    this.travelTo.set(null);
+    this.selectedCity.set(null);
+    this.selectedData.set(null);
+    this.bookingReference.set('');
+    this.selectedFruits.set([]);
+    this.selectedColors.set([]);
+    this.selectedCountries.set([]);
+    this.selectedProfitCenter.set([]);
+    this.selectedProvider.set([]);
   }
 
   // date slider portion===========================
