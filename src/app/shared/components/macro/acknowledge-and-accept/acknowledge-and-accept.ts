@@ -30,6 +30,7 @@ export class AcknowledgeAndAccept {
       confirmationNumber: this.confirmationNumber().trim(),
     };
     this.save.emit(data);
+    this.onClose()
   }
 
   onClose(): void {
@@ -38,6 +39,6 @@ export class AcknowledgeAndAccept {
 
   updateConfirmationNumber(value: string): void {
     this.confirmationNumber.set(value);
-    this.onClose()
+    // this.onClose();
   }
 }
