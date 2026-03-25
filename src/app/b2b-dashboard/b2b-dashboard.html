@@ -94,9 +94,11 @@
             <app-multi-select
               id="fruits"
               label="Option Name"
-              [options]="fruitOptions"
+              [options]="filtersFacade.optionNames()"
+              labelKey="optionName" 
+              valueKey="tripOptionId"
               placeholder="Choose your favorite Category..."
-              (done)="onFruitSelection($event)"
+              (done)="onOptionNameSelection($event)"
             />
           </div>
 
@@ -106,7 +108,7 @@
               label="Supplier"
               [options]="colorOptions"
               placeholder="Choose your Option Name ..."
-              (done)="onColorSelection($event)"
+              (done)="onSupplierSelection($event)"
             />
           </div>
 
@@ -116,7 +118,7 @@
               label="User"
               [options]="countryOptions"
               placeholder="Choose Supplier to visit..."
-              (done)="onCountrySelection($event)"
+              (done)="onUserSelection($event)"
             />
           </div>
 

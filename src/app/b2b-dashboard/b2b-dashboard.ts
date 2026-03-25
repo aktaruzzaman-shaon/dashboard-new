@@ -90,7 +90,7 @@ export interface CountryItem {
 
 export class B2bDashboard {
 
-  private filtersFacade = inject(FiltersFacade);
+  public filtersFacade = inject(FiltersFacade);
 
   //========== Travel Date range selection input ========
   availableDateRanges: DateRangeOption[] = [
@@ -545,15 +545,18 @@ export class B2bDashboard {
   selectedProvider = signal<string[]>([]);
   bookingReference = signal<string>('');
 
-  onFruitSelection(event: { id: string; values: string[] }) {
+  onOptionNameSelection(event: { id: string; values: string[] }) {
+    console.log('Selected option names:', event.values);
     this.selectedFruits.set(event.values);
   }
 
-  onColorSelection(event: { id: string; values: string[] }) {
+  onSupplierSelection(event: { id: string; values: string[] }) {
+    console.log('Selected suppliers:', event.values);
     this.selectedColors.set(event.values);
   }
 
-  onCountrySelection(event: { id: string; values: string[] }) {
+  onUserSelection(event: { id: string; values: string[] }) {
+    console.log('Selected users:', event.values);
     this.selectedCountries.set(event.values);
   }
 

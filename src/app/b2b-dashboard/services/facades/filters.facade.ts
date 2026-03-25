@@ -29,11 +29,14 @@ export class FiltersFacade {
     effect(() => {
       console.log('Filters loaded:', this.filtersResource.value());
       console.log('Cities:', this.cities());
+      console.log('Option Names:', this.optionNames());
+      console.log('Suppliers:', this.suppliers());
+      console.log('Users:', this.users());
+      console.log('Profit Centers:', this.profitCenters());
+      console.log('Providers:', this.providers());
     });
   }
 
-  // 2. The Resource
-  // Note: Added '| null' to both Result and Request types
   private filtersResource = rxResource<FiltersResponse | null, DatePayload | null>({
     params: () => this.payload(),
     stream: ({ params: payload }) => {
@@ -55,7 +58,6 @@ export class FiltersFacade {
     }
   });
 
-  // 3. Data Extraction Helper
   // This ensures that whether the API returns [item] or { data: [item] }, you get an array.
   private extractArray(val: any): any[] {
     if (!val) return [];

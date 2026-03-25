@@ -1,6 +1,7 @@
 import {
   Component,
   computed,
+  effect,
   ElementRef,
   HostListener,
   input,
@@ -14,6 +15,15 @@ export interface MultiSelectOption {
   value: string;
 }
 
+export interface NormalizedOption {
+  label: string;
+  value: any;
+  original: any;
+}
+
+// A flexible type that covers objects, primitives, or anything
+type SelectableItem = Record<string, any> | string | number | boolean | null;
+
 @Component({
   selector: 'app-multi-select',
   imports: [FormsModule],
@@ -21,35 +31,73 @@ export interface MultiSelectOption {
   styleUrl: './multi-select.component.css',
 })
 export class MultiSelect {
+
   id = input<string>('');
   zIndex = signal(50);
   label = input<string>('');
-  options = input<MultiSelectOption[]>([]);
+  options = input<SelectableItem[]>([]);   // ✅ Accepts any structure
   placeholder = input('Select');
   isOpen = signal(false);
   search = signal('');
-  done = output<{ id: string; values: string[] }>();
+  done = output<{ id: string; values: any[] }>();
 
-  private selectedValues = signal<Set<string>>(new Set());
+  labelKey = input<string>('label');
+  valueKey = input<string>('value');
+
+  /** Normalize any incoming option shape into a flat {label, value, original} */
+  normalizedOptions = computed<NormalizedOption[]>(() => {
+    const data = this.options() ?? [];
+    const lKey = this.labelKey();
+    const vKey = this.valueKey();
+
+    return data.map((opt): NormalizedOption => {
+      const isObject = opt !== null && typeof opt === 'object';
+
+      const labelValue = isObject
+        ? (opt as Record<string, any>)[lKey]
+        : opt;
+
+      const valueValue = isObject
+        ? (opt as Record<string, any>)[vKey]
+        : opt;   // For primitives, label and value are the same thing
+
+      return {
+        label: labelValue != null ? String(labelValue) : '',
+        value: valueValue ?? '',
+        original: opt,
+      };
+    });
+  });
+
+  private selectedValues = signal<Set<any>>(new Set());
 
   /** Filtered options based on search term */
-  filteredOptions = computed(() =>
-    this.options().filter((o) => o.label.toLowerCase().includes(this.search().toLowerCase())),
-  );
+  filteredOptions = computed<NormalizedOption[]>(() => {
+    const searchTerm = this.search().toLowerCase();
+    return this.normalizedOptions().filter((o) =>
+      o.label.toLowerCase().includes(searchTerm)
+    );
+  });
 
   /** Display label showing selected options */
   selectedLabel = computed(() => {
-    if (!this.selectedValues().size) return this.placeholder();
+    const selected = this.selectedValues();
+    if (!selected.size) return this.placeholder();
 
-    return this.options()
-      .filter((o) => this.selectedValues().has(o.value))
+    // Use normalizedOptions so this works for any shape
+    return this.normalizedOptions()
+      .filter((o) => selected.has(o.value))
       .map((o) => o.label)
       .join(', ');
   });
 
-  constructor(private elementRef: ElementRef) {}
+  constructor(private elementRef: ElementRef) {
+    effect(() => {
+      console.log('Current Options Received:', this.options());
+      console.log('Normalized Data:', this.normalizedOptions());
+    });
+  }
 
-  /** Close dropdown when clicking outside this component */
   @HostListener('document:click', ['$event'])
   onDocumentClick(event: MouseEvent) {
     const clickedInside = this.elementRef.nativeElement.contains(event.target);
@@ -58,13 +106,8 @@ export class MultiSelect {
     }
   }
 
-  /** Toggle dropdown open/closed */
   toggleDropdown() {
-    if (!this.isOpen()) {
-      this.openDropdown();
-    } else {
-      this.closeDropdown();
-    }
+    this.isOpen() ? this.closeDropdown() : this.openDropdown();
   }
 
   private closeDropdown() {
@@ -78,15 +121,13 @@ export class MultiSelect {
     this.zIndex.set(9999);
   }
 
-  /** Toggle a single option on/off */
-  toggleOption(value: string) {
+  toggleOption(value: any) {
     const next = new Set(this.selectedValues());
     next.has(value) ? next.delete(value) : next.add(value);
     this.selectedValues.set(next);
   }
 
-  /** Check if an option is currently selected */
-  isChecked(value: string): boolean {
+  isChecked(value: any): boolean {
     return this.selectedValues().has(value);
   }
 
@@ -99,7 +140,6 @@ export class MultiSelect {
     this.selectedValues.set(new Set());
   }
 
-  /** Emit selected values and close dropdown */
   doneSelection() {
     this.done.emit({
       id: this.id(),
@@ -107,9 +147,4 @@ export class MultiSelect {
     });
     this.closeDropdown();
   }
-
-  /** Get count of selected items */
-  // getSelectedCount(): number {
-  //   return this.selectedValues().size;
-  // }
 }
