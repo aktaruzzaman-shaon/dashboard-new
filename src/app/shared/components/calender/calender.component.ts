@@ -369,6 +369,10 @@ export class CalenderComponent {
   // }
 
   apply(): void {
+    // console.log('Applying dates:', {
+    //   from: this.tempFromDate(),
+    //   to: this.tempToDate(),
+    // });
     this.fromDateSelected.emit(this.tempFromDate());
     this.toDateSelected.emit(this.tempToDate());
     this.isOpen = false;

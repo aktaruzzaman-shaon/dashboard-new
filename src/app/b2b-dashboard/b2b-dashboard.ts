@@ -2,6 +2,7 @@ import {
   Component,
   computed,
   effect,
+  inject,
   input,
   model,
   output,
@@ -39,6 +40,8 @@ import { UpdateIconComponent } from '../../icons/UpdateIcon';
 import { CalendarIconComponent } from '../../icons/DateIcon';
 import { CloseIconComponent } from '../../icons/CloseIcon';
 import { ButtonComponent } from '../shared/components/button/button.component';
+import { FiltersFacade } from './services/facades/filters.facade';
+
 type ColumnKey = string;
 
 type StatusCountMap = Record<string, number>;
@@ -84,9 +87,12 @@ export interface CountryItem {
   templateUrl: './b2b-dashboard.html',
   styleUrl: './b2b-dashboard.css',
 })
-export class B2bDashboard {
-  //=============== Travel Date range selection input =================
 
+export class B2bDashboard {
+
+  private filtersFacade = inject(FiltersFacade);
+
+  //========== Travel Date range selection input ========
   availableDateRanges: DateRangeOption[] = [
     { id: 'today', label: 'Today', type: 'relative', value: { start: 0, end: 1 } },
     { id: 'tomorrow', label: 'Tomorrow', type: 'relative', value: { start: 1, end: 2 } },
@@ -102,8 +108,7 @@ export class B2bDashboard {
     this.currentSelection.set(selectedItems);
   }
 
-  // ================   For calender only portion======================
-
+  // ========= For calender only portion ==================
   allowedDateRange = signal<DateRange | null>(null);
   selectedDateRange = computed(() => this.currentSelection());
   calendar = viewChild(CalenderComponent);
@@ -119,6 +124,18 @@ export class B2bDashboard {
     effect(() => {
       const ranges = this.selectedDateRange();
       this.getDateRange(ranges);
+
+    const from = this.travelFrom();
+    const to = this.travelTo();
+
+    // only call API when both dates exist (optional condition)
+    if (from && to) {
+      const payload = {
+        fromDate: from.toISOString().split('T')[0],
+        toDate: to.toISOString().split('T')[0],
+      };
+      this.filtersFacade.loadFilters(payload);
+    }
     });
   }
 
@@ -383,7 +400,6 @@ export class B2bDashboard {
   }
 
   //================ City Select =============================
-
   protected readonly title = signal('dashboard');
   options = [
     {
