@@ -538,26 +538,26 @@ export class B2bDashboard {
     { label: 'China', value: 'cn' },
   ];
 
-  selectedFruits = signal<string[]>([]);
-  selectedColors = signal<string[]>([]);
-  selectedCountries = signal<string[]>([]);
+  selectedOptionName = signal<string[]>([]);
+  selectedSuppliers = signal<string[]>([]);
+  selectedUser = signal<string[]>([]);
   selectedProfitCenter = signal<string[]>([]);
   selectedProvider = signal<string[]>([]);
   bookingReference = signal<string>('');
 
   onOptionNameSelection(event: { id: string; values: string[] }) {
     console.log('Selected option names:', event.values);
-    this.selectedFruits.set(event.values);
+    this.selectedOptionName.set(event.values);
   }
 
   onSupplierSelection(event: { id: string; values: string[] }) {
     console.log('Selected suppliers:', event.values);
-    this.selectedColors.set(event.values);
+    this.selectedSuppliers.set(event.values);
   }
 
   onUserSelection(event: { id: string; values: string[] }) {
     console.log('Selected users:', event.values);
-    this.selectedCountries.set(event.values);
+    this.selectedUser.set(event.values);
   }
 
   onProfitCenterSelection(event: { id: string; values: string[] }) {
@@ -580,9 +580,9 @@ export class B2bDashboard {
       city: this.selectedCity(),
       supplierStatus: this.selectedData(),
       bookingReference: this.bookingReference(),
-      category: this.selectedFruits(),
-      optionName: this.selectedColors(),
-      supplier: this.selectedCountries(),
+      category: this.selectedUser(),
+      optionName: this.selectedOptionName(),
+      supplier: this.selectedSuppliers(),
       profitCenter: this.selectedProfitCenter(),
       provider: this.selectedProvider(),
     };
@@ -600,9 +600,9 @@ export class B2bDashboard {
     this.selectedCity.set(null);
     this.selectedData.set(null);
     this.bookingReference.set('');
-    this.selectedFruits.set([]);
-    this.selectedColors.set([]);
-    this.selectedCountries.set([]);
+    this.selectedUser.set([]);
+    this.selectedOptionName.set([]);
+    this.selectedSuppliers.set([]);
     this.selectedProfitCenter.set([]);
     this.selectedProvider.set([]);
   }

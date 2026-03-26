@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { Country } from '../../types/b2b-dashboard.types';
 
 export interface DatePayload {
   fromDate: string;
@@ -13,13 +14,22 @@ export class FiltersApi {
 
   private baseUrl = 'http://127.0.0.1:3658/m1/1229017-1225299-default';
 
-  // ✅ Cities
-  getCities(payload: DatePayload): Observable<string[]> {
+  // ✅ Countries
+  getCountries(payload: DatePayload): Observable<Country[]> {
+    return this.http.post<Country[]>(
+      `${this.baseUrl}/get-yachtoperationcountry`,
+      payload
+    );
+  }
+  
+  //cities
+    getCities(payload: DatePayload): Observable<string[]> {
     return this.http.post<string[]>(
       `${this.baseUrl}/get-yachtoperationcity`,
       payload
     );
   }
+
 
   // ✅ Option Names
   getOptionNames(payload: DatePayload): Observable<string[]> {

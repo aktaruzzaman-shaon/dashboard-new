@@ -106,7 +106,9 @@
             <app-multi-select
               id="colors"
               label="Supplier"
-              [options]="colorOptions"
+              [options]="filtersFacade.suppliers()"
+              labelKey="supplierName" 
+              valueKey="telephoneNo"
               placeholder="Choose your Option Name ..."
               (done)="onSupplierSelection($event)"
             />
@@ -116,7 +118,9 @@
             <app-multi-select
               id="countries"
               label="User"
-              [options]="countryOptions"
+              [options]="filtersFacade.users()"
+              labelKey="name" 
+              valueKey="employeeId"
               placeholder="Choose Supplier to visit..."
               (done)="onUserSelection($event)"
             />
@@ -126,7 +130,9 @@
             <app-multi-select
               id="Profit Center"
               label="Profit Center"
-              [options]="countryOptions"
+              [options]="filtersFacade.profitCenters()"
+              labelKey="profitCenterName" 
+              valueKey="profitCenterId"
               placeholder="Choose Profit Center..."
               (done)="onProfitCenterSelection($event)"
             />
@@ -136,7 +142,9 @@
             <app-multi-select
               id="provider"
               label="Provider"
-              [options]="countryOptions"
+              [options]="filtersFacade.providers()"
+              labelKey="agentName" 
+              valueKey="agentId"
               placeholder="Choose Provider..."
               (done)="onProviderSelection($event)"
             />
