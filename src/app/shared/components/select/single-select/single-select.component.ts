@@ -19,7 +19,6 @@ export class SingleSelectComponent {
   searchTerm = signal('');
   selectedItem = signal<CityItem | null>(null);
 
-  // Track open countries
   openCountries = signal<Set<string>>(new Set());
 
   toggleCountry(country: string): void {
@@ -32,11 +31,10 @@ export class SingleSelectComponent {
 
   filteredItems = computed(() => {
     const term = this.searchTerm().toLowerCase();
-
     return this.items()
       .map((c) => ({
         ...c,
-        cities: c.cities.filter((city) => city.label.toLowerCase().includes(term)),
+        cities: c.cities.filter((city) => city?.label?.toLowerCase().includes(term)),
       }))
       .filter((c) => c.cities.length > 0);
   });

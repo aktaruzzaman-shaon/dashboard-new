@@ -42,7 +42,7 @@
 
         <app-single-select
           label="City"
-          [items]="options"
+          [items]="filtersFacade.options()"
           (selectChange)="onSelect($event)"
         ></app-single-select>
 

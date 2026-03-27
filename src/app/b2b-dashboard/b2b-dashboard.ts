@@ -87,9 +87,7 @@ export interface CountryItem {
   templateUrl: './b2b-dashboard.html',
   styleUrl: './b2b-dashboard.css',
 })
-
 export class B2bDashboard {
-
   public filtersFacade = inject(FiltersFacade);
 
   //========== Travel Date range selection input ========
@@ -125,17 +123,17 @@ export class B2bDashboard {
       const ranges = this.selectedDateRange();
       this.getDateRange(ranges);
 
-    const from = this.travelFrom();
-    const to = this.travelTo();
+      const from = this.travelFrom();
+      const to = this.travelTo();
 
-    // only call API when both dates exist (optional condition)
-    if (from && to) {
-      const payload = {
-        fromDate: from.toISOString().split('T')[0],
-        toDate: to.toISOString().split('T')[0],
-      };
-      this.filtersFacade.loadFilters(payload);
-    }
+      // only call API when both dates exist (optional condition)
+      if (from && to) {
+        const payload = {
+          fromDate: from.toISOString().split('T')[0],
+          toDate: to.toISOString().split('T')[0],
+        };
+        this.filtersFacade.loadFilters(payload);
+      }
     });
   }
 
@@ -422,6 +420,7 @@ export class B2bDashboard {
 
   selectedCity = signal<CityItem | null>(null);
   onSelect(item: CityItem) {
+    console.log("City item",item)
     this.selectedCity.set(item);
   }
 
@@ -449,6 +448,7 @@ export class B2bDashboard {
       value: { access: ['AWS', 'Kubernetes'], level: 'Staff', salary_band: 'S' },
     },
   ]);
+
   selectedData = signal<any>(null);
   handleData(data: any) {
     console.log('Component Emitted:', data);
@@ -502,41 +502,41 @@ export class B2bDashboard {
 
   //========== Advance Search Portion multiselect=========
 
-  fruitOptions: MultiSelectOption[] = [
-    { label: 'Apple', value: 'apple' },
-    { label: 'Banana', value: 'banana' },
-    { label: 'Orange', value: 'orange' },
-    { label: 'Mango', value: 'mango' },
-    { label: 'Strawberry', value: 'strawberry' },
-    { label: 'Grapes', value: 'grapes' },
-    { label: 'Watermelon', value: 'watermelon' },
-    { label: 'Pineapple', value: 'pineapple' },
-  ];
+  // fruitOptions: MultiSelectOption[] = [
+  //   { label: 'Apple', value: 'apple' },
+  //   { label: 'Banana', value: 'banana' },
+  //   { label: 'Orange', value: 'orange' },
+  //   { label: 'Mango', value: 'mango' },
+  //   { label: 'Strawberry', value: 'strawberry' },
+  //   { label: 'Grapes', value: 'grapes' },
+  //   { label: 'Watermelon', value: 'watermelon' },
+  //   { label: 'Pineapple', value: 'pineapple' },
+  // ];
 
-  colorOptions: MultiSelectOption[] = [
-    { label: 'Red', value: 'red' },
-    { label: 'Blue', value: 'blue' },
-    { label: 'Green', value: 'green' },
-    { label: 'Yellow', value: 'yellow' },
-    { label: 'Purple', value: 'purple' },
-    { label: 'Orange', value: 'orange' },
-    { label: 'Pink', value: 'pink' },
-    { label: 'Black', value: 'black' },
-    { label: 'White', value: 'white' },
-  ];
+  // colorOptions: MultiSelectOption[] = [
+  //   { label: 'Red', value: 'red' },
+  //   { label: 'Blue', value: 'blue' },
+  //   { label: 'Green', value: 'green' },
+  //   { label: 'Yellow', value: 'yellow' },
+  //   { label: 'Purple', value: 'purple' },
+  //   { label: 'Orange', value: 'orange' },
+  //   { label: 'Pink', value: 'pink' },
+  //   { label: 'Black', value: 'black' },
+  //   { label: 'White', value: 'white' },
+  // ];
 
-  countryOptions: MultiSelectOption[] = [
-    { label: 'United States', value: 'us' },
-    { label: 'United Kingdom', value: 'uk' },
-    { label: 'Canada', value: 'ca' },
-    { label: 'Australia', value: 'au' },
-    { label: 'Germany', value: 'de' },
-    { label: 'France', value: 'fr' },
-    { label: 'Japan', value: 'jp' },
-    { label: 'Brazil', value: 'br' },
-    { label: 'India', value: 'in' },
-    { label: 'China', value: 'cn' },
-  ];
+  // countryOptions: MultiSelectOption[] = [
+  //   { label: 'United States', value: 'us' },
+  //   { label: 'United Kingdom', value: 'uk' },
+  //   { label: 'Canada', value: 'ca' },
+  //   { label: 'Australia', value: 'au' },
+  //   { label: 'Germany', value: 'de' },
+  //   { label: 'France', value: 'fr' },
+  //   { label: 'Japan', value: 'jp' },
+  //   { label: 'Brazil', value: 'br' },
+  //   { label: 'India', value: 'in' },
+  //   { label: 'China', value: 'cn' },
+  // ];
 
   selectedOptionName = signal<string[]>([]);
   selectedSuppliers = signal<string[]>([]);

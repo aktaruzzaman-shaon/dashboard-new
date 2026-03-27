@@ -1,7 +1,7 @@
 import { Injectable, inject, signal, computed, effect } from '@angular/core';
 import { rxResource } from '@angular/core/rxjs-interop';
 import { forkJoin, of, Observable } from 'rxjs';
-import { catchError, map, switchMap } from 'rxjs/operators';
+import { catchError, map, switchMap, tap } from 'rxjs/operators';
 import { DatePayload, FiltersApi } from '../api/filters.api';
 import { Country } from '../../types/b2b-dashboard.types';
 
@@ -40,7 +40,6 @@ export class FiltersFacade {
       console.log('Users:', this.users());
       console.log('Profit Centers:', this.profitCenters());
       console.log('Providers:', this.providers());
-      console.log('location data:', this.locationData());
     });
   }
 
@@ -50,19 +49,29 @@ export class FiltersFacade {
       if (!payload) return of(null);
 
       return forkJoin({
-        cities: this.api
-          .getCountries(payload)
-          .pipe(catchError(() => of({ data: [], timestamp: '' }))),
+        cities: this.api.getCities(payload).pipe(catchError(() => of({ data: [], timestamp: '' }))),
         locationData: this.api.getCountries(payload).pipe(
           switchMap((countries: any) => {
             const countriesArray = countries.data;
-            
             const countryIds = countriesArray.map((c: any) => c.countryId);
-            const cityRequests = countryIds.map((id: any) => this.api.getCities({ fromDate: payload.fromDate, toDate: payload.toDate, countryId: id } as CityPayload).pipe(catchError(() => of({ data: [] }))));
+            console.log('Country IDs for city requests:', countryIds);
+            const cityRequests = countryIds.map((id: any) =>
+              this.api
+                .getCities({
+                  fromDate: payload.fromDate,
+                  toDate: payload.toDate,
+                  countryId: id,
+                } as CityPayload)
+                .pipe(
+                  tap(() => console.log('City request for:', id)),
+                  catchError(() => of({ data: [] })),
+                ),
+            );
             return forkJoin({
               countries: of(countries),
               cities: forkJoin(cityRequests).pipe(
-                map((responses:any) => responses.flatMap((res: any) => res.data || []))
+                map((responses: any) => responses.flatMap((res: any) => res.data ?? [])),
+                tap((cities) => console.log('Merged cities:', cities)),
               ),
             });
           }),
@@ -81,19 +90,37 @@ export class FiltersFacade {
     return Array.isArray(val) ? val : (val.data ?? []);
   }
 
-  // 4. State Signals
   loading = this.filtersResource.isLoading;
 
-  // Specific extraction for cities since we know its shape
-  cities = computed(() => this.filtersResource.value()?.cities?.data ?? []);
-
-  // Generic extraction for others to prevent "any pattern" issues
   optionNames = computed(() => this.extractArray(this.filtersResource.value()?.optionNames));
   suppliers = computed(() => this.extractArray(this.filtersResource.value()?.suppliers));
   users = computed(() => this.extractArray(this.filtersResource.value()?.users));
   profitCenters = computed(() => this.extractArray(this.filtersResource.value()?.profitCenters));
   providers = computed(() => this.extractArray(this.filtersResource.value()?.providers));
-  locationData = computed(() => this.extractArray(this.filtersResource.value()?.locationData));
+  cities = computed(() => this.extractArray(this.filtersResource.value()?.locationData?.cities));
+  countries = computed(() =>
+    this.extractArray(this.filtersResource.value()?.locationData?.countries),
+  );
+  options = computed(() => {
+    const cities = this.cities();
+    const countries = this.countries();
+    console.log('Computing options with countries:', countries);
+    console.log('Computing options with cities:', cities);
+
+    if (!countries || !cities) return [];
+
+    return countries.map((country: any) => ({
+      country: country.countryName,
+      code: country.countryCode,
+      cities: cities
+        .sort(() => 0.5 - Math.random())
+        .slice(0, 2)
+        .map((city: any) => ({
+          label: city.cityName,
+          value: city.cityId,
+        })),
+    }));
+  });
 
   loadFilters(payload: DatePayload) {
     this.payload.set(payload);
