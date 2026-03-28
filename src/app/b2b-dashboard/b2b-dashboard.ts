@@ -43,6 +43,7 @@ import { CloseIconComponent } from '../../icons/CloseIcon';
 import { ButtonComponent } from '../shared/components/button/button.component';
 import { FiltersFacade } from './services/facades/filters.facade';
 import { formatDateToYYYYMMDD } from './helper/b2b-dashboard.helper';
+import { SearchFacade } from './services/facades/search.facade';
 
 type ColumnKey = string;
 
@@ -91,6 +92,7 @@ export interface CountryItem {
 })
 export class B2bDashboard {
   public filtersFacade = inject(FiltersFacade);
+  public searchFacade = inject(SearchFacade);
 
   //========== Travel Date range selection input ========
   availableDateRanges: DateRangeOption[] = [
@@ -561,8 +563,7 @@ export class B2bDashboard {
       refNo: this.bookingReference() ?? '',
     };
 
-    console.log('Search filters:', filterValues);
-
+    this.searchFacade.search(filterValues);
     this.resetFilters();
   }
 

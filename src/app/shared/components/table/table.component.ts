@@ -1,5 +1,5 @@
 import { Component, input, output, signal, computed, model } from '@angular/core';
-import { Booking } from './table.types';
+import { Booking, DemoBooking, RealBooking } from './table.types';
 import { ModalComponent } from '../modal/modal.component';
 import { IconButtonPopup } from '../button/icon-button-popup/icon-button-popup';
 import { MultiSelect, MultiSelectOption } from '../select/multi-select/multi-select.component';
@@ -130,6 +130,33 @@ export class TableComponent {
       provider: 'Paramount Tourism',
     },
   ];
+
+  mapBookingData(data: RealBooking[]): DemoBooking[] {
+    return data.flatMap((item) =>
+      item.bookingDetails.map((b) => ({
+        travelDate: new Date(b.travelDate).toLocaleDateString('en-GB', {
+          day: '2-digit',
+          month: 'short',
+          year: 'numeric',
+        }),
+        reference: item.reference,
+        optionName: b.optionName,
+        type: b.type,
+        startTime: new Date(b.startTime).toLocaleTimeString('en-US', {
+          hour: '2-digit',
+          minute: '2-digit',
+        }),
+        duration: b.duration,
+        guests: `${b.guest.adult} Adult ${b.guest.child} Child ${b.guest.infant} Infant`,
+        sold: { cost: b.price.cost, sale: b.price.sell },
+        confirmation: b.confirmationNo,
+        supplier: item.supplierDetail.map((s) => s.supplierName).join(', '),
+        status: b.status,
+        user: item.user,
+        provider: item.agentDetail.map((a) => a.agentName).join(', '),
+      })),
+    );
+  }
 
   // demo data for showing the multiselect
   countryOptions: MultiSelectOption[] = [

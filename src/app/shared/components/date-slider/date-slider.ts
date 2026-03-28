@@ -1,5 +1,14 @@
 import { DatePipe } from '@angular/common';
-import { Component, computed, effect, ElementRef, output, signal, ViewChild } from '@angular/core';
+import {
+  Component,
+  computed,
+  effect,
+  ElementRef,
+  input,
+  output,
+  signal,
+  ViewChild,
+} from '@angular/core';
 
 @Component({
   selector: 'app-date-slider',
@@ -13,24 +22,53 @@ export class DateSlider {
   // State Management with Signals
   selectedDate = signal(new Date());
   activeDate = signal<string>(new Date().toDateString());
+  allotedDates = input<string[]>([]);
 
   // Emits the current date object whenever the month changes (for API calls)
   monthChanged = output<Date>();
   dateSelected = output<Date>();
 
   // Computed signal to generate days for the current selected month
+  // daysInMonth = computed(() => {
+  //   const date = this.selectedDate();
+  //   const year = date.getFullYear();
+  //   const month = date.getMonth();
+  //   const days = [];
+
+  //   // Get total days in month
+  //   const lastDay = new Date(year, month + 1, 0).getDate();
+
+  //   for (let i = 1; i <= lastDay; i++) {
+  //     days.push(new Date(year, month, i));
+  //   }
+  //   return days;
+  // });
+
   daysInMonth = computed(() => {
-    const date = this.selectedDate();
+    const date = this.selectedDate(); // current selected month
     const year = date.getFullYear();
     const month = date.getMonth();
-    const days = [];
 
     // Get total days in month
     const lastDay = new Date(year, month + 1, 0).getDate();
 
+    // Normalize allotedDates to Date objects for this month
+    const allowedDatesSet = new Set(
+      (this.allotedDates() ?? [])
+        .map((d) => new Date(d))
+        .filter((d) => d.getFullYear() === year && d.getMonth() === month)
+        .map((d) => d.getDate()), // just keep day number
+    );
+
+    const days = [];
     for (let i = 1; i <= lastDay; i++) {
-      days.push(new Date(year, month, i));
+      if (allowedDatesSet.has(i)) {
+        days.push(new Date(year, month, i));
+      }
     }
+
+    console.log(days)
+
     return days;
   });
 

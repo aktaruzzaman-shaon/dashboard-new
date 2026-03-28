@@ -161,7 +161,7 @@
     <!-- ================  Date Selections  ====================== -->
 
     <div class="app-container">
-      <app-date-slider (dateSelected)="onSliderDateSelected($event)"></app-date-slider>
+      <app-date-slider [allotedDates]="searchFacade.allotedDates()" (dateSelected)="onSliderDateSelected($event)"></app-date-slider>
     </div>
 
     <!-- =============== Table Portions  ======================== -->

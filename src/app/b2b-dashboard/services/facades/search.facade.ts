@@ -1,17 +1,24 @@
-import { Injectable, inject, signal, computed } from '@angular/core';
+import { Injectable, inject, signal, computed, effect } from '@angular/core';
 import { rxResource } from '@angular/core/rxjs-interop';
 import { catchError, of } from 'rxjs';
 import { SearchApi } from '../api/search.api';
-
+import { availableDates } from '../mappers/booking.mapper';
 
 @Injectable({ providedIn: 'root' })
 export class SearchFacade {
   private api = inject(SearchApi);
 
-  // 🔹 search payload signal
-  private payload = signal<any | null>(null);
+  constructor() {
+    effect(() => {
+      const data = this.results();
+      const dates = availableDates(data);
+      this.allotedDates.set(dates);
+    });
+  }
 
-  // 🔹 search resource
+  private payload = signal<any | null>(null);
+  allotedDates = signal<string[]>([]);
+
   private searchResource = rxResource<any, any>({
     params: () => this.payload(),
     stream: ({ params }) => {
@@ -21,23 +28,28 @@ export class SearchFacade {
         catchError((err) => {
           console.error('Search API Error:', err);
           return of([]);
-        })
+        }),
       );
     },
   });
 
-  // 🔹 exposed signals
-  results = computed(() => this.searchResource.value() ?? []);
+  private extractArray(val: any): any[] {
+    if (!val) return [];
+    return Array.isArray(val) ? val : (val.data ?? []);
+  }
+
+  results = computed(() => {
+    return this.searchResource.value()?.data ?? [];
+  });
   loading = this.searchResource.isLoading;
   error = this.searchResource.error;
 
-  // 🔹 trigger search
   search(payload: any) {
-    console.log('Search payload:', payload);
     this.payload.set(payload);
   }
 
-  // 🔹 reset search
+  // const mappedDates = availableDates(this.results);
+
   reset() {
     this.payload.set(null);
   }
