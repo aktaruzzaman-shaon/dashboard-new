@@ -70,4 +70,12 @@ export class FiltersApi {
       payload
     );
   }
+
+  // ✅ Seach Now
+  getSearchResults(payload: any): Observable<any> {
+    return this.http.post<any>(
+      `${this.baseUrl}/get-yachtoperationsearch`,
+      payload
+    );
+  }
 }

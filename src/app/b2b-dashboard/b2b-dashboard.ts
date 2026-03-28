@@ -420,7 +420,7 @@ export class B2bDashboard {
 
   selectedCity = signal<CityItem | null>(null);
   onSelect(item: CityItem) {
-    console.log("City item",item)
+    console.log('City item', item);
     this.selectedCity.set(item);
   }
 
@@ -449,10 +449,10 @@ export class B2bDashboard {
     },
   ]);
 
-  selectedData = signal<any>(null);
-  handleData(data: any) {
-    console.log('Component Emitted:', data);
-    this.selectedData.set(data);
+  supplierStatus = signal<any>(null);
+  selectedSupplierStatus(data: any) {
+    console.log('Supplier status', data);
+    this.supplierStatus.set(data);
   }
 
   //Yacht Type =========================================
@@ -574,17 +574,19 @@ export class B2bDashboard {
 
   searchNow() {
     const filterValues = {
-      travelDateRange: this.currentSelection(),
-      travelFrom: this.travelFrom(),
-      travelTo: this.travelTo(),
-      city: this.selectedCity(),
-      supplierStatus: this.selectedData(),
-      bookingReference: this.bookingReference(),
-      category: this.selectedUser(),
-      optionName: this.selectedOptionName(),
-      supplier: this.selectedSuppliers(),
-      profitCenter: this.selectedProfitCenter(),
-      provider: this.selectedProvider(),
+      bookingDateRange: {
+        fromDate: this.travelFrom(),
+        toDate: this.travelTo(),
+      },
+      cityId: this.selectedCity() ? [this.selectedCity()?.value] : [],
+      status: this.supplierStatus()?.map((s: any) => s.level) ?? [],
+      type: this.selectedUser() ?? [],
+      optionId: this.selectedOptionName() ?? [],
+      suplierId: this.selectedSuppliers() ?? [],
+      userId: this.selectedUser() ?? [],
+      profitCenterId: this.selectedProfitCenter() ?? [],
+      providerId: this.selectedProvider() ?? [],
+      refNo: this.bookingReference() ?? '',
     };
 
     console.log('Search filters:', filterValues);
