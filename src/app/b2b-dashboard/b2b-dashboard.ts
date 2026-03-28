@@ -451,7 +451,7 @@ export class B2bDashboard {
     },
   ]);
 
-  supplierStatus = signal<any>(null);
+  supplierStatus = signal<string[]>([]);
   selectedSupplierStatus(data: any) {
     console.log('Supplier status', data);
     this.supplierStatus.set(data);
@@ -539,19 +539,19 @@ export class B2bDashboard {
     this.bookingReference.set(String(value));
   }
 
-  onSelectedYachttype(event:any){
-    console.log(event)
-    this.selectedYachtType.set(event)
+  onSelectedYachttype(event: any) {
+    console.log(event);
+    this.selectedYachtType.set(event);
   }
 
   searchNow() {
     const filterValues = {
       bookingDateRange: {
         fromDate: formatDateToYYYYMMDD(this.travelFrom()),
-        toDate: this.travelTo(),
+        toDate: formatDateToYYYYMMDD(this.travelTo()),
       },
       cityId: this.selectedCity() ? [this.selectedCity()?.value] : [],
-      status: this.supplierStatus()?.map((s: any) => s.level) ?? [],
+      status: this.supplierStatus() ?? [],
       type: this.selectedYachtType() ?? [],
       optionId: this.selectedOptionName() ?? [],
       suplierId: this.selectedSuppliers() ?? [],

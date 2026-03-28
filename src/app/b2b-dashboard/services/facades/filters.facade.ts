@@ -131,9 +131,7 @@ export class FiltersFacade {
   supplierStatus = computed(() =>
     this.extractArray(this.filtersResource.value()?.supplierStatus?.data),
   );
-  yachtType = computed(() =>
-    this.extractArray(this.filtersResource.value()?.yachtType?.data),
-  );
+  yachtType = computed(() => this.extractArray(this.filtersResource.value()?.yachtType?.data));
 
   loadFilters(payload: DatePayload) {
     this.payload.set(payload);
