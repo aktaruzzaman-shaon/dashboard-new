@@ -4,6 +4,7 @@ import {
   effect,
   inject,
   input,
+  KeyValueDiffers,
   model,
   output,
   signal,
@@ -41,6 +42,7 @@ import { CalendarIconComponent } from '../../icons/DateIcon';
 import { CloseIconComponent } from '../../icons/CloseIcon';
 import { ButtonComponent } from '../shared/components/button/button.component';
 import { FiltersFacade } from './services/facades/filters.facade';
+import { formatDateToYYYYMMDD } from './helper/b2b-dashboard.helper';
 
 type ColumnKey = string;
 
@@ -106,7 +108,7 @@ export class B2bDashboard {
     this.currentSelection.set(selectedItems);
   }
 
-  // ========= For calender only portion ==================
+  // ========= For calender only portion ================
   allowedDateRange = signal<DateRange | null>(null);
   selectedDateRange = computed(() => this.currentSelection());
   calendar = viewChild(CalenderComponent);
@@ -502,48 +504,13 @@ export class B2bDashboard {
 
   //========== Advance Search Portion multiselect=========
 
-  // fruitOptions: MultiSelectOption[] = [
-  //   { label: 'Apple', value: 'apple' },
-  //   { label: 'Banana', value: 'banana' },
-  //   { label: 'Orange', value: 'orange' },
-  //   { label: 'Mango', value: 'mango' },
-  //   { label: 'Strawberry', value: 'strawberry' },
-  //   { label: 'Grapes', value: 'grapes' },
-  //   { label: 'Watermelon', value: 'watermelon' },
-  //   { label: 'Pineapple', value: 'pineapple' },
-  // ];
-
-  // colorOptions: MultiSelectOption[] = [
-  //   { label: 'Red', value: 'red' },
-  //   { label: 'Blue', value: 'blue' },
-  //   { label: 'Green', value: 'green' },
-  //   { label: 'Yellow', value: 'yellow' },
-  //   { label: 'Purple', value: 'purple' },
-  //   { label: 'Orange', value: 'orange' },
-  //   { label: 'Pink', value: 'pink' },
-  //   { label: 'Black', value: 'black' },
-  //   { label: 'White', value: 'white' },
-  // ];
-
-  // countryOptions: MultiSelectOption[] = [
-  //   { label: 'United States', value: 'us' },
-  //   { label: 'United Kingdom', value: 'uk' },
-  //   { label: 'Canada', value: 'ca' },
-  //   { label: 'Australia', value: 'au' },
-  //   { label: 'Germany', value: 'de' },
-  //   { label: 'France', value: 'fr' },
-  //   { label: 'Japan', value: 'jp' },
-  //   { label: 'Brazil', value: 'br' },
-  //   { label: 'India', value: 'in' },
-  //   { label: 'China', value: 'cn' },
-  // ];
-
   selectedOptionName = signal<string[]>([]);
   selectedSuppliers = signal<string[]>([]);
   selectedUser = signal<string[]>([]);
   selectedProfitCenter = signal<string[]>([]);
   selectedProvider = signal<string[]>([]);
   bookingReference = signal<string>('');
+  selectedYachtType = signal<string>('')
 
   onOptionNameSelection(event: { id: string; values: string[] }) {
     console.log('Selected option names:', event.values);
@@ -572,15 +539,20 @@ export class B2bDashboard {
     this.bookingReference.set(String(value));
   }
 
+  onSelectedYachttype(event:any){
+    console.log(event)
+    this.selectedYachtType.set(event)
+  }
+
   searchNow() {
     const filterValues = {
       bookingDateRange: {
-        fromDate: this.travelFrom(),
+        fromDate: formatDateToYYYYMMDD(this.travelFrom()),
         toDate: this.travelTo(),
       },
       cityId: this.selectedCity() ? [this.selectedCity()?.value] : [],
       status: this.supplierStatus()?.map((s: any) => s.level) ?? [],
-      type: this.selectedUser() ?? [],
+      type: this.selectedYachtType() ?? [],
       optionId: this.selectedOptionName() ?? [],
       suplierId: this.selectedSuppliers() ?? [],
       userId: this.selectedUser() ?? [],
@@ -600,7 +572,6 @@ export class B2bDashboard {
     this.travelFrom.set(null);
     this.travelTo.set(null);
     this.selectedCity.set(null);
-    this.selectedData.set(null);
     this.bookingReference.set('');
     this.selectedUser.set([]);
     this.selectedOptionName.set([]);
@@ -617,16 +588,7 @@ export class B2bDashboard {
     console.log('Slider selected date:', date);
   }
 
-  //======================= Table portion=======================
-
-  // for status buttons
-  // statuses = signal<StatusButtonData[]>([
-  //   { label: 'Pending', count: 30, value: 'Pending' },
-  //   { label: 'Accepted', count: 12, value: 'Accepted' },
-  //   { label: 'Rejected', count: 5, value: 'Rejected' },
-  //   { label: 'Cancelled', count: 8, value: 'Cancelled' },
-  //   { label: 'All', count: 5, value: 'All' },
-  // ]);
+  // Table portion=======================
 
   statuses = signal<StatusButtonData[]>([
     { label: 'Pending', value: 'Pending' },
@@ -640,10 +602,6 @@ export class B2bDashboard {
   statusWiseRowCount = signal<Record<string, number>>({});
   isLoading = signal(false);
   tableStatusData = signal<string | null>(null);
-  // showReminders = signal<boolean>(false);
-  // showUpdateSupplier = signal<boolean>(false);
-  // showAccept = signal<boolean>(false);
-  // showBookings = signal<boolean>(false);
 
   // for dynamic ui changes based on table status
   uiState = computed(() => {
@@ -668,7 +626,7 @@ export class B2bDashboard {
     console.log('Travel status from table:', status);
   }
 
-  // table column modification button
+  // table column modification button ================
 
   isTableModificationContainerOpen = signal(false);
   openTableRowModificationContainerToggle(isOpen: boolean) {
@@ -689,7 +647,7 @@ export class B2bDashboard {
     this.selectedReference.set(null);
   }
 
-  //Table Column Customization toggle buttons==================
+  //Table Column Customization toggle buttons===========
 
   tableColumns = [
     { key: 'travelDate', label: 'Travel Date' },

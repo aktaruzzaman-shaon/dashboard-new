@@ -16,66 +16,51 @@ export class FiltersApi {
 
   // ✅ Countries
   getCountries(payload: DatePayload): Observable<Country[]> {
-    return this.http.post<Country[]>(
-      `${this.baseUrl}/get-yachtoperationcountry`,
-      payload
-    );
-  }
-  
-  //cities
-    getCities(payload: DatePayload): Observable<string[]> {
-    return this.http.post<string[]>(
-      `${this.baseUrl}/get-yachtoperationcity`,
-      payload
-    );
+    return this.http.post<Country[]>(`${this.baseUrl}/get-yachtoperationcountry`, payload);
   }
 
+  //cities
+  getCities(payload: DatePayload): Observable<string[]> {
+    return this.http.post<string[]>(`${this.baseUrl}/get-yachtoperationcity`, payload);
+  }
 
   // ✅ Option Names
   getOptionNames(payload: DatePayload): Observable<string[]> {
-    return this.http.post<string[]>(
-      `${this.baseUrl}/get-yachtoperationoptionname`,
-      payload
-    );
+    return this.http.post<string[]>(`${this.baseUrl}/get-yachtoperationoptionname`, payload);
   }
 
   // ✅ Suppliers
   getSuppliers(payload: DatePayload): Observable<string[]> {
-    return this.http.post<string[]>(
-      `${this.baseUrl}/get-yachtoperationsupplierdetail`,
-      payload
-    );
+    return this.http.post<string[]>(`${this.baseUrl}/get-yachtoperationsupplierdetail`, payload);
   }
 
   // ✅ Users
   getUsers(payload: DatePayload): Observable<string[]> {
-    return this.http.post<string[]>(
-      `${this.baseUrl}/get-yachtoperationusername`,
-      payload
-    );
+    return this.http.post<string[]>(`${this.baseUrl}/get-yachtoperationusername`, payload);
   }
 
   // ✅ Profit Centers
   getProfitCenters(payload: DatePayload): Observable<string[]> {
-    return this.http.post<string[]>(
-      `${this.baseUrl}/get-yachtoperationprofitcentername`,
-      payload
-    );
+    return this.http.post<string[]>(`${this.baseUrl}/get-yachtoperationprofitcentername`, payload);
   }
 
   // ✅ Providers
   getProviders(payload: DatePayload): Observable<string[]> {
-    return this.http.post<string[]>(
-      `${this.baseUrl}/get-yachtoperationprovidername`,
-      payload
-    );
+    return this.http.post<string[]>(`${this.baseUrl}/get-yachtoperationprovidername`, payload);
   }
 
   // ✅ Seach Now
   getSearchResults(payload: any): Observable<any> {
-    return this.http.post<any>(
-      `${this.baseUrl}/get-yachtoperationsearch`,
-      payload
-    );
+    return this.http.post<any>(`${this.baseUrl}/get-yachtoperationsearch`, payload);
+  }
+
+  // supplier status
+  getSupplierStatus(payload: any): Observable<any> {
+    return this.http.post<any>(`${this.baseUrl}/get-yachtoperationbookingstatus`, payload);
+  }
+
+  //Yacht  Typw
+  getYachtType(payload: any): Observable<any> {
+    return this.http.post<any>(`${this.baseUrl}/get-yachtoperationtransfertype`, payload);
   }
 }

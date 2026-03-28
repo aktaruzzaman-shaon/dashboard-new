@@ -24,6 +24,8 @@ export interface FiltersResponse {
   profitCenters: any;
   providers: any;
   locationData: any;
+  supplierStaus: any;
+  yachtType: any;
 }
 
 @Injectable({ providedIn: 'root' })
@@ -40,6 +42,8 @@ export class FiltersFacade {
       console.log('Users:', this.users());
       console.log('Profit Centers:', this.profitCenters());
       console.log('Providers:', this.providers());
+      console.log('Supplier Status:', this.supplierStaus());
+      console.log('Yacht type:', this.yachtType());
     });
   }
 
@@ -81,6 +85,8 @@ export class FiltersFacade {
         users: this.api.getUsers(payload).pipe(catchError(() => of([]))),
         profitCenters: this.api.getProfitCenters(payload).pipe(catchError(() => of([]))),
         providers: this.api.getProviders(payload).pipe(catchError(() => of([]))),
+        supplierStaus: this.api.getSupplierStatus(payload).pipe(catchError(() => of([]))),
+        yachtType: this.api.getYachtType(payload).pipe(catchError(() => of([]))),
       });
     },
   });
@@ -121,6 +127,8 @@ export class FiltersFacade {
         })),
     }));
   });
+  supplierStaus = computed(() => this.extractArray(this.filtersResource.value()?.supplierStaus));
+  yachtType = computed(() => this.extractArray(this.filtersResource.value()?.yachtType));
 
   loadFilters(payload: DatePayload) {
     this.payload.set(payload);
