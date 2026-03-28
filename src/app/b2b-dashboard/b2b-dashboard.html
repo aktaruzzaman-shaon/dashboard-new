@@ -50,7 +50,7 @@
 
         <app-select-menu
           label="Supplier Status"
-          [options]="roleOptions()"
+          [options]="filtersFacade.supplierStatus()"
           placeholder="Choose an Action"
           (onSelection)="selectedSupplierStatus($event)"
         >
@@ -60,7 +60,7 @@
 
         <app-select-menu
           label="Yacht Type"
-          [options]="roleOptions()"
+          [options]="filtersFacade.yachtType()"
           placeholder="Choose an Action"
           (onSelection)="onSelectedYachttype($event)"
         >
@@ -95,7 +95,7 @@
               id="fruits"
               label="Option Name"
               [options]="filtersFacade.optionNames()"
-              labelKey="optionName" 
+              labelKey="optionName"
               valueKey="tripOptionId"
               placeholder="Choose your favorite Category..."
               (done)="onOptionNameSelection($event)"
@@ -107,7 +107,7 @@
               id="colors"
               label="Supplier"
               [options]="filtersFacade.suppliers()"
-              labelKey="supplierName" 
+              labelKey="supplierName"
               valueKey="telephoneNo"
               placeholder="Choose your Option Name ..."
               (done)="onSupplierSelection($event)"
@@ -119,7 +119,7 @@
               id="countries"
               label="User"
               [options]="filtersFacade.users()"
-              labelKey="name" 
+              labelKey="name"
               valueKey="employeeId"
               placeholder="Choose Supplier to visit..."
               (done)="onUserSelection($event)"
@@ -131,7 +131,7 @@
               id="Profit Center"
               label="Profit Center"
               [options]="filtersFacade.profitCenters()"
-              labelKey="profitCenterName" 
+              labelKey="profitCenterName"
               valueKey="profitCenterId"
               placeholder="Choose Profit Center..."
               (done)="onProfitCenterSelection($event)"
@@ -143,7 +143,7 @@
               id="provider"
               label="Provider"
               [options]="filtersFacade.providers()"
-              labelKey="agentName" 
+              labelKey="agentName"
               valueKey="agentId"
               placeholder="Choose Provider..."
               (done)="onProviderSelection($event)"

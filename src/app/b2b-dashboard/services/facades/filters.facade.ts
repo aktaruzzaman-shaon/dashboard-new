@@ -24,7 +24,7 @@ export interface FiltersResponse {
   profitCenters: any;
   providers: any;
   locationData: any;
-  supplierStaus: any;
+  supplierStatus: any;
   yachtType: any;
 }
 
@@ -42,7 +42,7 @@ export class FiltersFacade {
       console.log('Users:', this.users());
       console.log('Profit Centers:', this.profitCenters());
       console.log('Providers:', this.providers());
-      console.log('Supplier Status:', this.supplierStaus());
+      console.log('Supplier Status:', this.supplierStatus());
       console.log('Yacht type:', this.yachtType());
     });
   }
@@ -85,7 +85,7 @@ export class FiltersFacade {
         users: this.api.getUsers(payload).pipe(catchError(() => of([]))),
         profitCenters: this.api.getProfitCenters(payload).pipe(catchError(() => of([]))),
         providers: this.api.getProviders(payload).pipe(catchError(() => of([]))),
-        supplierStaus: this.api.getSupplierStatus(payload).pipe(catchError(() => of([]))),
+        supplierStatus: this.api.getSupplierStatus(payload).pipe(catchError(() => of([]))),
         yachtType: this.api.getYachtType(payload).pipe(catchError(() => of([]))),
       });
     },
@@ -93,9 +93,10 @@ export class FiltersFacade {
 
   private extractArray(val: any): any[] {
     if (!val) return [];
+    if 
     return Array.isArray(val) ? val : (val.data ?? []);
   }
-
+  
   loading = this.filtersResource.isLoading;
 
   optionNames = computed(() => this.extractArray(this.filtersResource.value()?.optionNames));
@@ -127,7 +128,7 @@ export class FiltersFacade {
         })),
     }));
   });
-  supplierStaus = computed(() => this.extractArray(this.filtersResource.value()?.supplierStaus));
+  supplierStatus = computed(() => this.extractArray(this.filtersResource.value()?.supplierStatus));
   yachtType = computed(() => this.extractArray(this.filtersResource.value()?.yachtType));
 
   loadFilters(payload: DatePayload) {
