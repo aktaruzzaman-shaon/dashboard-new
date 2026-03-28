@@ -93,10 +93,10 @@ export class FiltersFacade {
 
   private extractArray(val: any): any[] {
     if (!val) return [];
-    if 
+    if (Array.isArray(val.options)) return val.options;
     return Array.isArray(val) ? val : (val.data ?? []);
   }
-  
+
   loading = this.filtersResource.isLoading;
 
   optionNames = computed(() => this.extractArray(this.filtersResource.value()?.optionNames));
@@ -128,8 +128,12 @@ export class FiltersFacade {
         })),
     }));
   });
-  supplierStatus = computed(() => this.extractArray(this.filtersResource.value()?.supplierStatus));
-  yachtType = computed(() => this.extractArray(this.filtersResource.value()?.yachtType));
+  supplierStatus = computed(() =>
+    this.extractArray(this.filtersResource.value()?.supplierStatus?.data),
+  );
+  yachtType = computed(() =>
+    this.extractArray(this.filtersResource.value()?.yachtType?.data),
+  );
 
   loadFilters(payload: DatePayload) {
     this.payload.set(payload);

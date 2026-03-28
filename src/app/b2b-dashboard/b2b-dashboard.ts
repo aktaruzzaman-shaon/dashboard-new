@@ -502,7 +502,7 @@ export class B2bDashboard {
     this.isContainerOpen.set(false);
   }
 
-  //========== Advance Search Portion multiselect=========
+  //Advance Search Portion multiselect=========
 
   selectedOptionName = signal<string[]>([]);
   selectedSuppliers = signal<string[]>([]);
@@ -510,7 +510,7 @@ export class B2bDashboard {
   selectedProfitCenter = signal<string[]>([]);
   selectedProvider = signal<string[]>([]);
   bookingReference = signal<string>('');
-  selectedYachtType = signal<string>('')
+  selectedYachtType = signal<string>('');
 
   onOptionNameSelection(event: { id: string; values: string[] }) {
     console.log('Selected option names:', event.values);
