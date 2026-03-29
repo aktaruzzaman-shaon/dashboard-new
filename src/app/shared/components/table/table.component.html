@@ -98,7 +98,7 @@
 
     <!-- TABLE BODY -->
     <div class="space-y-4 mt-2">
-      @for (booking of bookings(); track booking.reference) {
+      @for (booking of bookings(); track booking.bookingId) {
         <div
           class="grid gap-1 items-center px-6 py-2 bg-white border border-gray-200 rounded-xl hover:shadow-md transition-all cursor-pointer"
           [class.border-sky-500]="isRowSelected(booking.reference)"
@@ -346,7 +346,7 @@
                       [class.text-blue-500]="true"
                       [class.text-gray-400]="false"
                       [disabled]="false"
-                      (click)="activeModal.set('log')"
+                      (click)="onLogClick(booking.bookingId)"
                     >
                       <svg
                         xmlns="http://www.w3.org/2000/svg"

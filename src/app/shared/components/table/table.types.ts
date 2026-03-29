@@ -53,4 +53,5 @@ export interface DemoBooking {
   status: string;
   user: string;
   provider: string;
+  bookingId: number;
 }

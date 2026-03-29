@@ -1,4 +1,4 @@
-import { Component, input, output, signal, computed, model, effect } from '@angular/core';
+import { Component, input, output, signal, computed, model, effect, inject } from '@angular/core';
 import { Booking, DemoBooking, RealBooking } from './table.types';
 import { ModalComponent } from '../modal/modal.component';
 import { IconButtonPopup } from '../button/icon-button-popup/icon-button-popup';
@@ -11,6 +11,7 @@ import { Remarks } from '../composit/remarks/remarks';
 import { WhatsappReminder } from '../macro/whatsapp-reminder/whatsapp-reminder';
 import { EmailReminder } from '../macro/email-reminder/email-reminder';
 import { mapBookingData } from '../../../b2b-dashboard/services/mappers/booking.mapper';
+import { BookingDetailsFacade } from '../../../b2b-dashboard/services/facades/bookingDetails.facade';
 
 type ModalType = 'whatsapp-reminder' | 'email-reminder' | 'log' | 'remarks' | null;
 
@@ -43,9 +44,10 @@ export class TableComponent {
   tableTravelStatus = output<string>();
   openDetail = output<string>();
   bookingData = input<RealBooking[]>([]);
-
   showOptionHeaderSelect = signal(false);
   selectedOptions = signal<string[]>([]);
+
+  bookingDetailsFacade = inject(BookingDetailsFacade);
 
   tableStatus(status: string): void {
     this.tableTravelStatus.emit(status);
@@ -61,87 +63,6 @@ export class TableComponent {
 
   //    showing accept modal to save
   activeModal = signal<ModalType>(null);
-
-  // 🔹 Original bookings data (immutable source)
-  private readonly originalBookings: Booking[] = [
-    {
-      travelDate: '18 Feb 2026',
-      reference: '264654654984641',
-      optionName: 'From Dubai Marina Sightseeing Yacht',
-      type: 'Private',
-      startTime: '10:00 AM',
-      duration: '4 Hours',
-      guests: '8Adult 4 Child 2 Infant',
-      sold: { cost: 149, sale: 200 },
-      confirmation: 'YCTG5498641',
-      supplier: 'Karan Verma',
-      status: 'Pending',
-      user: 'Rajesh Verma',
-      provider: 'Paramount Tourism',
-    },
-    {
-      travelDate: '2 Feb 2026',
-      reference: '264654654984642',
-      optionName: 'From Dubai Marina Sightseeing Yacht',
-      type: 'Private',
-      startTime: '10:00 AM',
-      duration: '5 Hours',
-      guests: '8Adult 4 Child 2 Infant',
-      sold: { cost: 149, sale: 200 },
-      confirmation: 'YCTG5498641',
-      supplier: 'Karan Verma',
-      status: 'Accepted',
-      user: 'Rajesh Verma',
-      provider: 'Paramount Tourism',
-    },
-    {
-      travelDate: '22 Feb 2026',
-      reference: '264654654984642111',
-      optionName: 'From Dubai Marina Sightseeing Yacht',
-      type: 'Private',
-      startTime: '10:00 AM',
-      duration: '4 Hours',
-      guests: '8Adult 4 Child 2 Infant',
-      sold: { cost: 149, sale: 200 },
-      confirmation: 'YCTG5498641',
-      supplier: 'Karan Verma',
-      status: 'Accepted',
-      user: 'Rajesh Verma',
-      provider: 'Paramount Tourism',
-    },
-    {
-      travelDate: '10 Feb 2026',
-      reference: '26465465498464234234',
-      optionName: 'From Dubai Marina Sightseeing Yacht',
-      type: 'Private',
-      startTime: '10:00 AM',
-      duration: '4 Hours',
-      guests: '8Adult 4 Child 2 Infant',
-      sold: { cost: 149, sale: 200 },
-      confirmation: 'YCTG5498641',
-      supplier: 'Karan Verma',
-      status: 'Accepted',
-      user: 'Rajesh Verma',
-      provider: 'Paramount Tourism',
-    },
-    {
-      travelDate: '27 Feb 2026',
-      reference: '2646546549846425678',
-      optionName: 'From Dubai Marina Sightseeing Yacht',
-      type: 'Private',
-      startTime: '10:00 AM',
-      duration: '7 Hours',
-      guests: '8Adult 4 Child 2 Infant',
-      sold: { cost: 149, sale: 200 },
-      confirmation: 'YCTG5498641',
-      supplier: 'Karan Verma',
-      status: 'Cancelled',
-      user: 'Rajesh Verma',
-      provider: 'Paramount Tourism',
-    },
-  ];
-
-  demoData = mapBookingData(this.bookingData());
 
   // demo data for showing the multiselect
   countryOptions: MultiSelectOption[] = [
@@ -216,7 +137,6 @@ export class TableComponent {
     const actualKey = this.keyMap[key] || key;
 
     const processedData = mapBookingData(this.bookingData());
-    console.log('processed data', processedData);
 
     let data = [...processedData];
 
@@ -406,6 +326,13 @@ export class TableComponent {
     }
 
     this.emitSelectionChange();
+  }
+
+  // for showing log details
+  onLogClick(bookingId: number) {
+    this.bookingDetailsFacade.loadLogs(bookingId);
+    console.log('log details', this.bookingDetailsFacade.logDetails());
+    this.activeModal.set('log');
   }
 
   selectAll(): void {
