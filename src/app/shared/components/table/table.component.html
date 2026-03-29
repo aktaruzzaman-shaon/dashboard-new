@@ -118,7 +118,7 @@
                   <div class="flex items-center gap-2 text-sm text-gray-900">
                     <span class="truncate">{{ booking.reference }}</span>
                     <button
-                      (click)="onDetailsButtonClick(booking.reference)"
+                      (click)="onDetailsButtonClick(booking.reference,booking.bookingId)"
                       class="px-2 py-0.5 text-[10px] bg-gray-50 text-gray-600 rounded border border-gray-200 hover:bg-gray-100 transition-colors"
                     >
                       Details
@@ -240,7 +240,7 @@
                       class="hover:bg-blue-50 rounded transition-colors disabled:cursor-not-allowed disabled:hover:bg-transparent"
                       [class.text-blue-500]="booking.status === 'Pending'"
                       [class.text-gray-400]="booking.status !== 'Pending'"
-                      [disabled]="booking.status !== 'Pending'"
+                      [disabled]="booking.status"
                     >
                       <app-icon-button-popup
                         [badgeCount]="5"

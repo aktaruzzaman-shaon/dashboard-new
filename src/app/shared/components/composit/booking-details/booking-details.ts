@@ -1,4 +1,4 @@
-import { Component, input, OnInit, output, signal } from '@angular/core';
+import { Component, inject, input, OnInit, output, signal } from '@angular/core';
 import { IconButtonPopup } from '../../button/icon-button-popup/icon-button-popup';
 import { DetailsIconComponent } from '../../../../../icons/DetailsIcon';
 import { LogIconComponent } from '../../../../../icons/LogIcon';
@@ -20,6 +20,7 @@ import { EmailIconComponent } from '../../../../../icons/EmailIcon';
 import { WhatsappIconComponent } from '../../../../../icons/WhatsappIcon';
 import { WhatsappReminder } from '../../macro/whatsapp-reminder/whatsapp-reminder';
 import { EmailReminder } from '../../macro/email-reminder/email-reminder';
+import { BookingDetailsFacade } from '../../../../b2b-dashboard/services/facades/bookingDetails.facade';
 
 type ModalType =
   | 'accept'
@@ -61,6 +62,7 @@ type ModalType =
   styleUrl: './booking-details.css',
 })
 export class BookingDetails {
+  bookingDetailsFacade = inject(BookingDetailsFacade);
   reference = input<string>();
   goBack = output<void>();
 
@@ -69,6 +71,10 @@ export class BookingDetails {
 
   // showing accept modal to save
   activeModal = signal<ModalType>(null);
+
+  remarksload(id: string) {
+    this.activeModal.set('remarks');
+  }
 
   // ngOnInit() {
   //   this.loadData();

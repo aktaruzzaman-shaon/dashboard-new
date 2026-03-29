@@ -12,6 +12,7 @@ import { WhatsappReminder } from '../macro/whatsapp-reminder/whatsapp-reminder';
 import { EmailReminder } from '../macro/email-reminder/email-reminder';
 import { mapBookingData } from '../../../b2b-dashboard/services/mappers/booking.mapper';
 import { BookingDetailsFacade } from '../../../b2b-dashboard/services/facades/bookingDetails.facade';
+import { identifierToKeywordKind } from 'typescript';
 
 type ModalType = 'whatsapp-reminder' | 'email-reminder' | 'log' | 'remarks' | null;
 
@@ -264,8 +265,10 @@ export class TableComponent {
   closeModal(): void {
     this.isModalOpen.set(false);
   }
+
   // for the details button
-  onDetailsButtonClick(ref: string) {
+  onDetailsButtonClick(ref: string, id: number) {
+    this.bookingDetailsFacade.loadBookingDetails(id);
     this.openDetail.emit(ref);
   }
 
@@ -276,7 +279,6 @@ export class TableComponent {
     //for loading data
     setTimeout(() => {
       console.log('Submitted Remarks:', this.remarks());
-
       this.isSubmitting.set(false);
       this.isModalOpen.set(false);
     }, 1500);
@@ -333,6 +335,13 @@ export class TableComponent {
     this.bookingDetailsFacade.loadLogs(bookingId);
     console.log('log details', this.bookingDetailsFacade.logDetails());
     this.activeModal.set('log');
+  }
+
+  // for showing remarks details
+  onRemarksClick(bookingId: number) {
+    this.bookingDetailsFacade.loadLogs(bookingId);
+    console.log('log details', this.bookingDetailsFacade.logDetails());
+    this.activeModal.set('remarks');
   }
 
   selectAll(): void {
