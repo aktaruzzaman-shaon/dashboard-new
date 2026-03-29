@@ -39,6 +39,7 @@ export class SearchFacade {
   }
 
   results = computed(() => {
+    console.log('facade booking data', this.searchResource.value()?.data);
     return this.searchResource.value()?.data ?? [];
   });
   loading = this.searchResource.isLoading;
@@ -47,8 +48,6 @@ export class SearchFacade {
   search(payload: any) {
     this.payload.set(payload);
   }
-
-  // const mappedDates = availableDates(this.results);
 
   reset() {
     this.payload.set(null);

@@ -461,29 +461,6 @@ export class B2bDashboard {
 
   //Yacht Type =========================================
 
-  // oleOptions = signal<SelectMenu[]>([
-  //   {
-  //     id: 'fe',
-  //     label: 'Accepted',
-  //     value: { access: ['Tailwind', 'Angular'], level: 'Senior', salary_band: 'A' },
-  //   },
-  //   {
-  //     id: 'be',
-  //     label: 'Rejected',
-  //     value: { access: ['NodeJS', 'PostgreSQL'], level: 'Mid', salary_band: 'B' },
-  //   },
-  //   {
-  //     id: 'qa',
-  //     label: 'Pending',
-  //     value: { access: ['Cypress', 'Playwright'], level: 'Lead', salary_band: 'A' },
-  //   },
-  //   {
-  //     id: 'de',
-  //     label: 'Cancelled',
-  //     value: { access: ['AWS', 'Kubernetes'], level: 'Staff', salary_band: 'S' },
-  //   },
-  // ]);
-
   // selectedData = signal<any>(null);
 
   // handleData(data: any) {

@@ -1,4 +1,4 @@
-import { Component, input, output, signal, computed, model } from '@angular/core';
+import { Component, input, output, signal, computed, model, effect } from '@angular/core';
 import { Booking, DemoBooking, RealBooking } from './table.types';
 import { ModalComponent } from '../modal/modal.component';
 import { IconButtonPopup } from '../button/icon-button-popup/icon-button-popup';
@@ -10,6 +10,7 @@ import { LogsView } from '../composit/logs-view/logs-view';
 import { Remarks } from '../composit/remarks/remarks';
 import { WhatsappReminder } from '../macro/whatsapp-reminder/whatsapp-reminder';
 import { EmailReminder } from '../macro/email-reminder/email-reminder';
+import { mapBookingData } from '../../../b2b-dashboard/services/mappers/booking.mapper';
 
 type ModalType = 'whatsapp-reminder' | 'email-reminder' | 'log' | 'remarks' | null;
 
@@ -41,6 +42,7 @@ export class TableComponent {
   statusWiseRowCountChange = output<Record<string, number>>();
   tableTravelStatus = output<string>();
   openDetail = output<string>();
+  bookingData = input<RealBooking[]>([]);
 
   showOptionHeaderSelect = signal(false);
   selectedOptions = signal<string[]>([]);
@@ -49,7 +51,15 @@ export class TableComponent {
     this.tableTravelStatus.emit(status);
   }
 
-  // showing accept modal to save
+  constructor() {
+    console.log('Slider selected date in table component:', this.sliderSelectedDate());
+    console.log('DemoData', this.bookingData());
+    effect(() => {
+      console.log(this.bookingData());
+    });
+  }
+
+  //    showing accept modal to save
   activeModal = signal<ModalType>(null);
 
   // 🔹 Original bookings data (immutable source)
@@ -131,32 +141,7 @@ export class TableComponent {
     },
   ];
 
-  mapBookingData(data: RealBooking[]): DemoBooking[] {
-    return data.flatMap((item) =>
-      item.bookingDetails.map((b) => ({
-        travelDate: new Date(b.travelDate).toLocaleDateString('en-GB', {
-          day: '2-digit',
-          month: 'short',
-          year: 'numeric',
-        }),
-        reference: item.reference,
-        optionName: b.optionName,
-        type: b.type,
-        startTime: new Date(b.startTime).toLocaleTimeString('en-US', {
-          hour: '2-digit',
-          minute: '2-digit',
-        }),
-        duration: b.duration,
-        guests: `${b.guest.adult} Adult ${b.guest.child} Child ${b.guest.infant} Infant`,
-        sold: { cost: b.price.cost, sale: b.price.sell },
-        confirmation: b.confirmationNo,
-        supplier: item.supplierDetail.map((s) => s.supplierName).join(', '),
-        status: b.status,
-        user: item.user,
-        provider: item.agentDetail.map((a) => a.agentName).join(', '),
-      })),
-    );
-  }
+  demoData = mapBookingData(this.bookingData());
 
   // demo data for showing the multiselect
   countryOptions: MultiSelectOption[] = [
@@ -230,7 +215,10 @@ export class TableComponent {
     const direction = sortingType === 'asc' ? 1 : -1;
     const actualKey = this.keyMap[key] || key;
 
-    let data = [...this.originalBookings];
+    const processedData = mapBookingData(this.bookingData());
+    console.log('processed data', processedData);
+
+    let data = [...processedData];
 
     this.updateStatusCounts(data);
 
@@ -308,10 +296,6 @@ export class TableComponent {
 
     return data;
   });
-
-  constructor() {
-    console.log('Slider selected date in table component:', this.sliderSelectedDate());
-  }
 
   isVisible(key: string): boolean {
     return this.columnVisibility()[key] !== false;
@@ -409,7 +393,7 @@ export class TableComponent {
     return this.selectedReferences.has(reference);
   }
 
-  toggleRowSelection(booking: Booking, event: Event): void {
+  toggleRowSelection(booking: DemoBooking, event: Event): void {
     // Prevent triggering row selection when clicking buttons
     if ((event.target as HTMLElement).closest('button')) {
       return;

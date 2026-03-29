@@ -224,6 +224,7 @@
           (selectionChange)="onSelectionChange($event)"
           [sliderSelectedDate]="sliderSelectedDate()"
           [activeStatus]="activeStatus()"
+          [bookingData]="searchFacade.results()"
           (statusWiseRowCountChange)="statusWiseRowCount.set($event)"
           (tableTravelStatus)="onTableTravelStatus($event)"
           (openDetail)="openBookingDetail($event)"
