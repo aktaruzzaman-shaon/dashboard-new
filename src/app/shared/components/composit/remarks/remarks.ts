@@ -65,7 +65,6 @@ export class Remarks {
       remark: this.remarkValue,
       userId: user,
     });
-    this.onClose();
   }
 
   onClose() {
