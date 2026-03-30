@@ -18,4 +18,8 @@ export class BookingDetails {
   bookingDetails(payload: any) {
     return this.http.post(`${this.baseUrl}/get-yachtoperationbookingdetail`, payload);
   }
+
+  submitRemark(payload: any) {
+    return this.http.post(`${this.baseUrl}/insert-yachtoperationinternalremark`, payload);
+  }
 }

@@ -1,7 +1,14 @@
 import { Injectable, inject, signal, computed, effect } from '@angular/core';
 import { rxResource } from '@angular/core/rxjs-interop';
-import { catchError, of, tap } from 'rxjs';
+import { catchError, Observable, of, tap } from 'rxjs';
 import { BookingDetails } from '../api/bookingDeatails.api';
+import { RemarkBody } from '../types/type';
+
+type Booking = {
+  bookingId: number;
+  remark: string;
+  userId: string;
+};
 
 @Injectable({ providedIn: 'root' })
 export class BookingDetailsFacade {
@@ -11,13 +18,18 @@ export class BookingDetailsFacade {
     effect(() => {
       // console.log('log details', this.logDetails());
       console.log('booking details', this.bookingDetails());
-      console.log('remarks details', this.remarks());
+      // console.log('remarks details', this.remarks());
     });
   }
 
   private bookingId = signal<number | string | any>(null);
   private remarksId = signal<number | string | any>(null);
   private bookingDetailsId = signal<number | string | any>(null);
+  private reamarkBody = signal<RemarkBody>({
+    bookingId: 0,
+    remark: '',
+    userId: '',
+  });
 
   private extractArray(val: any): any[] {
     if (!val) return [];
@@ -27,6 +39,28 @@ export class BookingDetailsFacade {
       return Array.isArray(val.data[0]) ? val.data[0] : val.data;
     }
     return [];
+  }
+
+  // generic helper resource
+  createResource<T, P>(
+    paramsSignal: () => P,
+    apiCall: (params: P) => Observable<T>,
+    defaultValue: T,
+  ) {
+    return rxResource<T, P>({
+      params: paramsSignal,
+      stream: ({ params }) => {
+        if (!params) return of(defaultValue);
+
+        return apiCall(params).pipe(
+          tap({
+            next: (res) => console.log('API SUCCESS:', res),
+            error: (err) => console.log('API ERROR BEFORE CATCH:', err),
+          }),
+          catchError(() => of(defaultValue)),
+        );
+      },
+    });
   }
 
   private logsResource = rxResource<any, number | string | null>({
@@ -80,6 +114,12 @@ export class BookingDetailsFacade {
     },
   });
 
+  private submitRemarkResource = this.createResource(
+    () => this.reamarkBody(),
+    (params) => this.api.submitRemark(params),
+    [],
+  );
+
   loading = this.logsResource.isLoading;
   error = this.logsResource.error;
 
@@ -115,5 +155,9 @@ export class BookingDetailsFacade {
   loadBookingDetails(bookingId: any) {
     const bookingDetailsIdBody = { bookingId: bookingId };
     this.bookingDetailsId.set(bookingDetailsIdBody);
+  }
+
+  submitRemark(remark: RemarkBody) {
+    this.reamarkBody.set(remark);
   }
 }
