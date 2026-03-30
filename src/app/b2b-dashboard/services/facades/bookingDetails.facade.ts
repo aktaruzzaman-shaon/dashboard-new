@@ -94,9 +94,14 @@ export class BookingDetailsFacade {
     return this.extractArray(this.remarksResource.value());
   });
 
+  // bookingDetails = computed(() => {
+  //   // console.log('booking details in computed', this.bookingDetailsResource.value());
+  //   return this.extractArray(this.bookingDetailsResource.value());
+  // });
+
   bookingDetails = computed(() => {
-    // console.log('booking details in computed', this.bookingDetailsResource.value());
-    return this.extractArray(this.bookingDetailsResource.value());
+    const data = this.extractArray(this.bookingDetailsResource.value());
+    return data.length ? data[0] : null;
   });
 
   loadLogs(bookingId: any) {

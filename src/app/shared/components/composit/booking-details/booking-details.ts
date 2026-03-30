@@ -69,7 +69,6 @@ export class BookingDetails {
   bookingDetails = signal<any>(null);
   isLoading = signal<boolean>(false);
 
-  // showing accept modal to save
   activeModal = signal<ModalType>(null);
 
   remarksload(id: string) {
