@@ -75,6 +75,16 @@ export class BookingDetails {
     this.activeModal.set('remarks');
   }
 
+  onRemarksClick(id: string) {
+    this.bookingDetailsFacade.loadRemarks(id);
+    this.activeModal.set('remarks');
+  }
+
+  onLogsClick(id: string) {
+    this.bookingDetailsFacade.loadLogs(id);
+    this.activeModal.set('log');
+  }
+
   // ngOnInit() {
   //   this.loadData();
   // }

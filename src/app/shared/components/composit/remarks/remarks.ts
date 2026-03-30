@@ -1,4 +1,5 @@
-import { Component, output, signal } from '@angular/core';
+import { Component, inject, output, signal } from '@angular/core';
+import { BookingDetailsFacade } from '../../../../b2b-dashboard/services/facades/bookingDetails.facade';
 
 @Component({
   selector: 'app-remarks',
@@ -6,7 +7,10 @@ import { Component, output, signal } from '@angular/core';
   templateUrl: './remarks.html',
   styleUrl: './remarks.css',
 })
+
 export class Remarks {
+
+  bookingDetailsFacade = inject(BookingDetailsFacade);
   // Output to notify parent to close the modal
   closeModal = output<void>();
 

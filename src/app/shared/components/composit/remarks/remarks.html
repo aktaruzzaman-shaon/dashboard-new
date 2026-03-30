@@ -17,11 +17,11 @@
     <div class="flex gap-10 text-sm mb-8">
       <p>
         <span class="font-bold">Reference Number:</span>
-        <span class="text-gray-500">AGT43536801250534</span>
+        <span class="text-gray-500">{{ bookingDetailsFacade.remarks()?.referenceNo }}</span>
       </p>
       <p>
         <span class="font-bold">Option Name:</span>
-        <span class="text-gray-500">From Dubai Marina Sightseeing Yacht</span>
+        <span class="text-gray-500">{{ bookingDetailsFacade.remarks()?.optionName }}</span>
       </p>
     </div>
 
@@ -57,20 +57,32 @@
         <div class="space-y-4">
           <div class="grid grid-cols-2 gap-y-3 text-sm">
             <span class="text-gray-500 font-medium">Customer Name</span
-            ><span class="text-right font-bold">{{ customerData.name }}</span>
+            ><span class="text-right font-bold">{{
+              bookingDetailsFacade.remarks()?.remarks?.customer[0]?.name
+            }}</span>
             <span class="text-gray-500 font-medium">Date</span
-            ><span class="text-right font-bold">{{ customerData.date }}</span>
+            ><span class="text-right font-bold">{{
+              bookingDetailsFacade.remarks()?.remarks?.customer[0]?.travelDate
+            }}</span>
             <span class="text-gray-500 font-medium">Time</span
-            ><span class="text-right font-bold">{{ customerData.time }}</span>
+            ><span class="text-right font-bold">{{
+              bookingDetailsFacade.remarks()?.remarks?.customer[0]?.startTime
+            }}</span>
             <span class="text-gray-500 font-medium">Flight Details</span
-            ><span class="text-right font-bold">{{ customerData.flight }}</span>
+            ><span class="text-right font-bold">{{
+              bookingDetailsFacade.remarks()?.remarks?.customer[0]?.flightDetails
+            }}</span>
             <span class="text-gray-500 font-medium">Weight</span
-            ><span class="text-right font-bold">{{ customerData.weight }}</span>
+            ><span class="text-right font-bold">{{
+              bookingDetailsFacade.remarks()?.remarks?.customer[0]?.weight
+            }}</span>
           </div>
 
           <div class="mt-6 bg-gray-50 rounded-2xl p-6">
             <h4 class="font-bold mb-3">Remarks</h4>
-            <p class="text-sm leading-relaxed text-gray-600">{{ customerData.remark }}</p>
+            <p class="text-sm leading-relaxed text-gray-600">
+              {{ bookingDetailsFacade.remarks()?.remarks?.customer[0]?.remarks }}
+            </p>
           </div>
         </div>
       } @else {

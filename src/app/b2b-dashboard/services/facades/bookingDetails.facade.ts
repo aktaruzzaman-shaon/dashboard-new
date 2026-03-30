@@ -1,8 +1,6 @@
 import { Injectable, inject, signal, computed, effect } from '@angular/core';
 import { rxResource } from '@angular/core/rxjs-interop';
 import { catchError, of, tap } from 'rxjs';
-import { SearchApi } from '../api/search.api';
-import { availableDates } from '../mappers/booking.mapper';
 import { BookingDetails } from '../api/bookingDeatails.api';
 
 @Injectable({ providedIn: 'root' })
@@ -13,6 +11,7 @@ export class BookingDetailsFacade {
     effect(() => {
       // console.log('log details', this.logDetails());
       console.log('booking details', this.bookingDetails());
+      console.log('remarks details', this.remarks());
     });
   }
 
@@ -48,14 +47,14 @@ export class BookingDetailsFacade {
   });
 
   private remarksResource = rxResource<any, number | string | null>({
-    params: () => this.bookingDetailsId(),
+    params: () => this.remarksId(),
     stream: ({ params }) => {
       if (!params) return of(null);
 
       return this.api.remarks(params).pipe(
         tap({
-          // next: (res) => console.log('API SUCCESS:', res),
-          // error: (err) => console.log('API ERROR BEFORE CATCH:', err),
+          next: (res) => console.log('API SUCCESS:', res),
+          error: (err) => console.log('API ERROR BEFORE CATCH:', err),
         }),
         catchError((err) => {
           return of([]);
@@ -70,10 +69,10 @@ export class BookingDetailsFacade {
       if (!params) return of(null);
 
       return this.api.bookingDetails(params).pipe(
-        tap({
-          next: (res) => console.log('API SUCCESS:', res),
-          error: (err) => console.log('API ERROR BEFORE CATCH:', err),
-        }),
+        // tap({
+        //   next: (res) => console.log('API SUCCESS:', res),
+        //   error: (err) => console.log('API ERROR BEFORE CATCH:', err),
+        // }),
         catchError((err) => {
           return of(null);
         }),
@@ -90,8 +89,7 @@ export class BookingDetailsFacade {
   });
 
   remarks = computed(() => {
-    // console.log('remarks', this.extractArray(this.remarksResource.value()));
-    return this.extractArray(this.remarksResource.value());
+    return this.remarksResource.value()?.data ?? null;
   });
 
   // bookingDetails = computed(() => {

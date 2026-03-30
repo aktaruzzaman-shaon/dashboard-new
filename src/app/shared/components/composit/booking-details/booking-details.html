@@ -227,14 +227,14 @@
           <!-- remarks icon -->
           <button
             class="text-blue-500 hover:text-blue-600 transition-colors"
-            (click)="activeModal.set('remarks')"
+            (click)="onRemarksClick(bookingDetailsFacade.bookingDetails()?.mobile)"
           >
             <app-details-icon></app-details-icon>
           </button>
           <!-- log icon -->
           <button
             class="text-blue-500 hover:text-blue-600 transition-colors"
-            (click)="activeModal.set('log')"
+            (click)="onLogsClick(bookingDetailsFacade.bookingDetails()?.mobile)"
           >
             <app-log-icon></app-log-icon>
           </button>
