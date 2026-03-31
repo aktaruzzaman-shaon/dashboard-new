@@ -12,7 +12,7 @@ export class ToggleButtonComponent {
   filterChanged = output<boolean>();
 
   toggle() {
-    this.checked.set(!this.checked());
-    this.filterChanged.emit(this.checked());
+    // this.checked.set(!this.checked());
+    this.filterChanged.emit(!this.checked());
   }
 }

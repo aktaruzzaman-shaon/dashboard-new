@@ -53,10 +53,10 @@ export class BookingDetailsFacade {
         if (!params) return of(defaultValue);
 
         return apiCall(params).pipe(
-          tap({
-            next: (res) => console.log('API SUCCESS:', res),
-            error: (err) => console.log('API ERROR BEFORE CATCH:', err),
-          }),
+          // tap({
+          //   next: (res) => console.log('API SUCCESS:', res),
+          //   error: (err) => console.log('API ERROR BEFORE CATCH:', err),
+          // }),
           catchError(() => of(defaultValue)),
         );
       },

@@ -205,13 +205,14 @@
       <div class="mt-5">
         <app-toggle-component-container
           [isOpen]="isTableModificationContainerOpen()"
+          (closed)="isTableModificationContainerOpen.set(false)"
           [closeButton]="false"
         >
           <div class="grid grid-cols-[repeat(auto-fit,minmax(240px,1fr))] gap-2 w-full">
             @for (singleColumn of tableColumns.slice(0, -1); track singleColumn.key) {
               <app-toggle-button
                 [label]="singleColumn.label"
-                [(checked)]="columnVisibility()[singleColumn.key]"
+                [checked]="columnVisibility()[singleColumn.key]"
                 (filterChanged)="onFilterUpdate(singleColumn.key, $event)"
               ></app-toggle-button>
             }

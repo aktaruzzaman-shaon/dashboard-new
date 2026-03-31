@@ -44,6 +44,7 @@ import { ButtonComponent } from '../shared/components/button/button.component';
 import { FiltersFacade } from './services/facades/filters.facade';
 import { formatDateToYYYYMMDD } from './helper/b2b-dashboard.helper';
 import { SearchFacade } from './services/facades/search.facade';
+import { BookingTableFacade } from './services/facades/bookingTable.facade';
 
 type ColumnKey = string;
 
@@ -93,6 +94,7 @@ export interface CountryItem {
 export class B2bDashboard {
   public filtersFacade = inject(FiltersFacade);
   public searchFacade = inject(SearchFacade);
+  public bookingTableFacade = inject(BookingTableFacade);
 
   //========== Travel Date range selection input ========
   availableDateRanges: DateRangeOption[] = [
@@ -609,6 +611,9 @@ export class B2bDashboard {
   isTableModificationContainerOpen = signal(false);
   openTableRowModificationContainerToggle(isOpen: boolean) {
     this.isTableModificationContainerOpen.set(isOpen);
+    if (!isOpen) {
+      this.saveColumnConfig(); 
+    }
   }
 
   // Booking Details Management
@@ -671,6 +676,28 @@ export class B2bDashboard {
 
   resetToDefault() {
     this.columnVisibility.set(Object.fromEntries(this.tableColumns.map((col) => [col.key, true])));
+  }
+
+  initialColumnVisibility = this.columnVisibility();
+
+  onContainerClose() {
+    const current = this.columnVisibility();
+
+    const isChanged = JSON.stringify(current) !== JSON.stringify(this.initialColumnVisibility);
+
+    if (isChanged) {
+      this.saveColumnConfig();
+      this.initialColumnVisibility = { ...current }; // update baseline
+    }
+  }
+
+  saveColumnConfig() {
+    const payload = {
+      columns: this.columnVisibility(),
+    };
+    console.log('Column config', this.columnVisibility());
+
+    this.bookingTableFacade.saveColumnConfig(this.columnVisibility());
   }
 
   //for table supplier modal operation
