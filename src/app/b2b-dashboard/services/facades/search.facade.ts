@@ -1,6 +1,6 @@
 import { Injectable, inject, signal, computed, effect } from '@angular/core';
 import { rxResource } from '@angular/core/rxjs-interop';
-import { catchError, of } from 'rxjs';
+import { catchError, of, tap } from 'rxjs';
 import { SearchApi } from '../api/search.api';
 import { availableDates } from '../mappers/booking.mapper';
 
@@ -23,8 +23,12 @@ export class SearchFacade {
     params: () => this.payload(),
     stream: ({ params }) => {
       if (!params) return of(null);
-
       return this.api.search(params).pipe(
+        tap(res => console.log('TAP SUCCESS:', res)),
+        // tap({
+        //   next: (res) => console.log('Search SUCCESS:', res),
+        //   error: (err) => console.log('API ERROR BEFORE CATCH:', err),
+        // }),
         catchError((err) => {
           console.error('Search API Error:', err);
           return of([]);
@@ -47,6 +51,7 @@ export class SearchFacade {
 
   search(payload: any) {
     this.payload.set(payload);
+
   }
 
   reset() {
