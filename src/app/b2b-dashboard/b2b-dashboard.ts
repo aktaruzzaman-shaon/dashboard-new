@@ -612,7 +612,7 @@ export class B2bDashboard {
   openTableRowModificationContainerToggle(isOpen: boolean) {
     this.isTableModificationContainerOpen.set(isOpen);
     if (!isOpen) {
-      this.saveColumnConfig(); 
+      this.saveColumnConfig();
     }
   }
 
