@@ -62,741 +62,741 @@ export class TableComponent {
     });
   }
 
-  realBookingData =  [
+  realBookingData = [
+    {
+      reference: 'AGT30697803250276',
+      user: 'RaynaB2B',
+      agentDetail: [
         {
-            "reference": "AGT30697803250276",
-            "user": "RaynaB2B",
-            "agentDetail": [
-                {
-                    "agentId": 40055,
-                    "agentName": "KAMINIRK"
-                }
-            ],
-            "supplierDetail": [
-                {
-                    "supplierId": 21,
-                    "supplierName": "Ossama Said"
-                }
-            ],
-            "bookingDetails": [
-                {
-                    "bookingId": 1,
-                    "detailId": 1,
-                    "optionId": 5,
-                    "optionName": "Sunset Luxury Yacht Tour with Barbeque Meal",
-                    "guestName": "Mr. vijay test",
-                    "type": "Sharing",
-                    "startTime": "12:30 PM",
-                    "travelDate": "2025-09-25T00:00:00",
-                    "duration": "2 Hours",
-                    "confirmationNo": "Test123",
-                    "guestInfo": "1 Adult,0 Child,0 Infant",
-                    "guest": {
-                        "adult": 1,
-                        "child": 0,
-                        "infant": 0
-                    },
-                    "price": {
-                        "cost": 10.00,
-                        "sell": 20.00
-                    },
-                    "status": "Accepted"
-                }
-            ]
+          agentId: 40055,
+          agentName: 'KAMINIRK',
+        },
+      ],
+      supplierDetail: [
+        {
+          supplierId: 21,
+          supplierName: 'Ossama Said',
+        },
+      ],
+      bookingDetails: [
+        {
+          bookingId: 1,
+          detailId: 1,
+          optionId: 5,
+          optionName: 'Sunset Luxury Yacht Tour with Barbeque Meal',
+          guestName: 'Mr. vijay test',
+          type: 'Sharing',
+          startTime: '12:30 PM',
+          travelDate: '2025-09-25T00:00:00',
+          duration: '2 Hours',
+          confirmationNo: 'Test123',
+          guestInfo: '1 Adult,0 Child,0 Infant',
+          guest: {
+            adult: 1,
+            child: 0,
+            infant: 0,
+          },
+          price: {
+            cost: 10.0,
+            sell: 20.0,
+          },
+          status: 'Accepted',
+        },
+      ],
+    },
+    {
+      reference: 'AGT30697803250435',
+      user: 'RaynaB2B',
+      agentDetail: [
+        {
+          agentId: 40055,
+          agentName: 'KAMINIRK',
+        },
+      ],
+      supplierDetail: [
+        {
+          supplierId: 12,
+          supplierName: 'Resort World One',
+        },
+      ],
+      bookingDetails: [
+        {
+          bookingId: 2,
+          detailId: 2,
+          optionId: 6,
+          optionName: 'Yacht Private',
+          guestName: 'Mr. vijay test',
+          type: 'Private',
+          startTime: '05:30 PM',
+          travelDate: '2025-08-07T00:00:00',
+          duration: '5 Hours',
+          confirmationNo: 'Test1456',
+          guestInfo: '5 Adult,2 Child,0 Infant',
+          guest: {
+            adult: 5,
+            child: 2,
+            infant: 0,
+          },
+          price: {
+            cost: 110.0,
+            sell: 120.0,
+          },
+          status: 'Accepted',
+        },
+      ],
+    },
+    {
+      reference: 'AGT306972303250210',
+      user: 'RaynaB2B',
+      agentDetail: [
+        {
+          agentId: 40055,
+          agentName: 'KAMINIRK',
+        },
+      ],
+      supplierDetail: [
+        {
+          supplierId: 84,
+          supplierName: 'Yacht Module Test',
+        },
+      ],
+      bookingDetails: [
+        {
+          bookingId: 3,
+          detailId: 3,
+          optionId: 13,
+          optionName: 'Yacht Sharing trip',
+          guestName: 'Mr. Vijay Test',
+          type: 'Sharing',
+          startTime: '04:30 PM',
+          travelDate: '2025-08-07T00:00:00',
+          duration: '2 Hours',
+          confirmationNo: 'hipi',
+          guestInfo: '1 Adult,0 Child,0 Infant',
+          guest: {
+            adult: 1,
+            child: 0,
+            infant: 0,
+          },
+          price: {
+            cost: 10.25,
+            sell: 10.25,
+          },
+          status: 'Cancelled',
+        },
+      ],
+    },
+    {
+      reference: 'AGT306972703250726',
+      user: 'RaynaB2B',
+      agentDetail: [
+        {
+          agentId: 40055,
+          agentName: 'KAMINIRK',
+        },
+      ],
+      supplierDetail: [
+        {
+          supplierId: 78,
+          supplierName: 'Jhonathan Herrera',
+        },
+      ],
+      bookingDetails: [
+        {
+          bookingId: 4,
+          detailId: 4,
+          optionId: 22,
+          optionName: 'Test Sharing Yacht',
+          guestName: 'Ms. Khushbu Patel',
+          type: 'Sharing',
+          startTime: '12:00 AM',
+          travelDate: '2025-07-10T22:30:00',
+          duration: '2 Hours',
+          confirmationNo: 'AR-122323',
+          guestInfo: '1 Adult,0 Child,0 Infant',
+          guest: {
+            adult: 1,
+            child: 0,
+            infant: 0,
+          },
+          price: {
+            cost: 0.42,
+            sell: 0.43,
+          },
+          status: 'Accepted',
+        },
+      ],
+    },
+    {
+      reference: 'AGT306972803250815',
+      user: 'RaynaB2B',
+      agentDetail: [
+        {
+          agentId: 40055,
+          agentName: 'KAMINIRK',
+        },
+      ],
+      supplierDetail: [
+        {
+          supplierId: 84,
+          supplierName: 'Yacht Module Test',
+        },
+      ],
+      bookingDetails: [
+        {
+          bookingId: 5,
+          detailId: 5,
+          optionId: 14,
+          optionName: 'Yacht Trip Private Test',
+          guestName: 'Ms. Kamini Test',
+          type: 'Private',
+          startTime: '10:00 AM',
+          travelDate: '2025-10-15T00:00:00',
+          duration: '1 Hours',
+          confirmationNo: '12112sdd12211',
+          guestInfo: '1 Adult,0 Child,0 Infant',
+          guest: {
+            adult: 1,
+            child: 0,
+            infant: 0,
+          },
+          price: {
+            cost: 50.0,
+            sell: 67.5,
+          },
+          status: 'Accepted',
+        },
+      ],
+    },
+    {
+      reference: 'AGT306972903250193',
+      user: 'RaynaB2B',
+      agentDetail: [
+        {
+          agentId: 40055,
+          agentName: 'KAMINIRK',
+        },
+      ],
+      supplierDetail: [
+        {
+          supplierId: 84,
+          supplierName: 'Yacht Module Test',
+        },
+      ],
+      bookingDetails: [
+        {
+          bookingId: 6,
+          detailId: 6,
+          optionId: 25,
+          optionName: 'Private only Yacht test',
+          guestName: 'Ms. Kamini Test',
+          type: 'Private',
+          startTime: '04:30 PM',
+          travelDate: '2025-08-05T00:00:00',
+          duration: '5 Hours',
+          confirmationNo: 'testph',
+          guestInfo: '1 Adult,1 Child,1 Infant',
+          guest: {
+            adult: 1,
+            child: 1,
+            infant: 1,
+          },
+          price: {
+            cost: 25.0,
+            sell: 25.0,
+          },
+          status: 'Accepted',
+        },
+      ],
+    },
+    {
+      reference: 'AGT30697104250292',
+      user: 'RaynaB2B',
+      agentDetail: [
+        {
+          agentId: 40055,
+          agentName: 'KAMINIRK',
+        },
+      ],
+      supplierDetail: [
+        {
+          supplierId: 85,
+          supplierName: 'Vijay',
+        },
+      ],
+      bookingDetails: [
+        {
+          bookingId: 7,
+          detailId: 7,
+          optionId: 13,
+          optionName: 'Yacht Sharing trip 1',
+          guestName: 'Ms. Kamini Test',
+          type: 'Sharing',
+          startTime: '01:00 AM',
+          travelDate: '2025-06-25T00:00:00',
+          duration: '6 Hours',
+          confirmationNo: '',
+          guestInfo: '1 Adult,0 Child,0 Infant',
+          guest: {
+            adult: 1,
+            child: 0,
+            infant: 0,
+          },
+          price: {
+            cost: 7.7,
+            sell: 10.25,
+          },
+          status: 'Pending',
+        },
+      ],
+    },
+    {
+      reference: 'AGT30697104250455',
+      user: 'RaynaB2B',
+      agentDetail: [
+        {
+          agentId: 40055,
+          agentName: 'KAMINIRK',
+        },
+      ],
+      supplierDetail: [
+        {
+          supplierId: 84,
+          supplierName: 'Yacht Module Test',
+        },
+      ],
+      bookingDetails: [
+        {
+          bookingId: 8,
+          detailId: 8,
+          optionId: 19,
+          optionName: 'Yacht Sharing trip 2',
+          guestName: 'Ms. Kamini Test',
+          type: 'Sharing',
+          startTime: '02:00 AM',
+          travelDate: '2025-08-05T00:00:00',
+          duration: '1 Hours',
+          confirmationNo: '',
+          guestInfo: '1 Adult,1 Child,1 Infant',
+          guest: {
+            adult: 1,
+            child: 1,
+            infant: 1,
+          },
+          price: {
+            cost: 31.55,
+            sell: 31.55,
+          },
+          status: 'Pending',
         },
         {
-            "reference": "AGT30697803250435",
-            "user": "RaynaB2B",
-            "agentDetail": [
-                {
-                    "agentId": 40055,
-                    "agentName": "KAMINIRK"
-                }
-            ],
-            "supplierDetail": [
-                {
-                    "supplierId": 12,
-                    "supplierName": "Resort World One"
-                }
-            ],
-            "bookingDetails": [
-                {
-                    "bookingId": 2,
-                    "detailId": 2,
-                    "optionId": 6,
-                    "optionName": "Yacht Private",
-                    "guestName": "Mr. vijay test",
-                    "type": "Private",
-                    "startTime": "05:30 PM",
-                    "travelDate": "2025-08-07T00:00:00",
-                    "duration": "5 Hours",
-                    "confirmationNo": "Test1456",
-                    "guestInfo": "5 Adult,2 Child,0 Infant",
-                    "guest": {
-                        "adult": 5,
-                        "child": 2,
-                        "infant": 0
-                    },
-                    "price": {
-                        "cost": 110.00,
-                        "sell": 120.00
-                    },
-                    "status": "Accepted"
-                }
-            ]
+          bookingId: 9,
+          detailId: 9,
+          optionId: 14,
+          optionName: 'Yacht Trip Private Test',
+          guestName: 'Ms. Kamini Test',
+          type: 'Private',
+          startTime: '12:00 AM',
+          travelDate: '2025-08-12T00:00:00',
+          duration: '1 Hours',
+          confirmationNo: '',
+          guestInfo: '6 Adult,0 Child,0 Infant',
+          guest: {
+            adult: 6,
+            child: 0,
+            infant: 0,
+          },
+          price: {
+            cost: 50.0,
+            sell: 50.0,
+          },
+          status: 'Pending',
+        },
+      ],
+    },
+    {
+      reference: 'AGT30697104250888',
+      user: 'RaynaB2B',
+      agentDetail: [
+        {
+          agentId: 40055,
+          agentName: 'KAMINIRK',
+        },
+      ],
+      supplierDetail: [
+        {
+          supplierId: 78,
+          supplierName: 'Jhonathan Herrera',
         },
         {
-            "reference": "AGT306972303250210",
-            "user": "RaynaB2B",
-            "agentDetail": [
-                {
-                    "agentId": 40055,
-                    "agentName": "KAMINIRK"
-                }
-            ],
-            "supplierDetail": [
-                {
-                    "supplierId": 84,
-                    "supplierName": "Yacht Module Test"
-                }
-            ],
-            "bookingDetails": [
-                {
-                    "bookingId": 3,
-                    "detailId": 3,
-                    "optionId": 13,
-                    "optionName": "Yacht Sharing trip",
-                    "guestName": "Mr. Vijay Test",
-                    "type": "Sharing",
-                    "startTime": "04:30 PM",
-                    "travelDate": "2025-08-07T00:00:00",
-                    "duration": "2 Hours",
-                    "confirmationNo": "hipi",
-                    "guestInfo": "1 Adult,0 Child,0 Infant",
-                    "guest": {
-                        "adult": 1,
-                        "child": 0,
-                        "infant": 0
-                    },
-                    "price": {
-                        "cost": 10.25,
-                        "sell": 10.25
-                    },
-                    "status": "Cancelled"
-                }
-            ]
+          supplierId: 85,
+          supplierName: 'Vijay',
         },
         {
-            "reference": "AGT306972703250726",
-            "user": "RaynaB2B",
-            "agentDetail": [
-                {
-                    "agentId": 40055,
-                    "agentName": "KAMINIRK"
-                }
-            ],
-            "supplierDetail": [
-                {
-                    "supplierId": 78,
-                    "supplierName": "Jhonathan Herrera"
-                }
-            ],
-            "bookingDetails": [
-                {
-                    "bookingId": 4,
-                    "detailId": 4,
-                    "optionId": 22,
-                    "optionName": "Test Sharing Yacht",
-                    "guestName": "Ms. Khushbu Patel",
-                    "type": "Sharing",
-                    "startTime": "12:00 AM",
-                    "travelDate": "2025-07-10T22:30:00",
-                    "duration": "2 Hours",
-                    "confirmationNo": "AR-122323",
-                    "guestInfo": "1 Adult,0 Child,0 Infant",
-                    "guest": {
-                        "adult": 1,
-                        "child": 0,
-                        "infant": 0
-                    },
-                    "price": {
-                        "cost": 0.42,
-                        "sell": 0.43
-                    },
-                    "status": "Accepted"
-                }
-            ]
+          supplierId: 83,
+          supplierName: 'Yacht For Testing',
+        },
+      ],
+      bookingDetails: [
+        {
+          bookingId: 10,
+          detailId: 10,
+          optionId: 20,
+          optionName: 'Yacht Sharing trip 3',
+          guestName: 'Ms. Kamini Test',
+          type: 'Sharing',
+          startTime: '03:00 AM',
+          travelDate: '2025-12-05T00:00:00',
+          duration: '0 Hours',
+          confirmationNo: '',
+          guestInfo: '2 Adult,0 Child,0 Infant',
+          guest: {
+            adult: 2,
+            child: 0,
+            infant: 0,
+          },
+          price: {
+            cost: 23.9,
+            sell: 24.5,
+          },
+          status: 'Cancelled',
         },
         {
-            "reference": "AGT306972803250815",
-            "user": "RaynaB2B",
-            "agentDetail": [
-                {
-                    "agentId": 40055,
-                    "agentName": "KAMINIRK"
-                }
-            ],
-            "supplierDetail": [
-                {
-                    "supplierId": 84,
-                    "supplierName": "Yacht Module Test"
-                }
-            ],
-            "bookingDetails": [
-                {
-                    "bookingId": 5,
-                    "detailId": 5,
-                    "optionId": 14,
-                    "optionName": "Yacht Trip Private Test",
-                    "guestName": "Ms. Kamini Test",
-                    "type": "Private",
-                    "startTime": "10:00 AM",
-                    "travelDate": "2025-10-15T00:00:00",
-                    "duration": "1 Hours",
-                    "confirmationNo": "12112sdd12211",
-                    "guestInfo": "1 Adult,0 Child,0 Infant",
-                    "guest": {
-                        "adult": 1,
-                        "child": 0,
-                        "infant": 0
-                    },
-                    "price": {
-                        "cost": 50.00,
-                        "sell": 67.50
-                    },
-                    "status": "Accepted"
-                }
-            ]
+          bookingId: 11,
+          detailId: 11,
+          optionId: 14,
+          optionName: 'Yacht Trip Private Test',
+          guestName: 'Ms. Kamini Test',
+          type: 'Private',
+          startTime: '12:00 AM',
+          travelDate: '2025-08-07T00:00:00',
+          duration: '1 Hours',
+          confirmationNo: '',
+          guestInfo: '1 Adult,0 Child,0 Infant',
+          guest: {
+            adult: 1,
+            child: 0,
+            infant: 0,
+          },
+          price: {
+            cost: 49.9,
+            sell: 50.0,
+          },
+          status: 'Pending',
         },
         {
-            "reference": "AGT306972903250193",
-            "user": "RaynaB2B",
-            "agentDetail": [
-                {
-                    "agentId": 40055,
-                    "agentName": "KAMINIRK"
-                }
-            ],
-            "supplierDetail": [
-                {
-                    "supplierId": 84,
-                    "supplierName": "Yacht Module Test"
-                }
-            ],
-            "bookingDetails": [
-                {
-                    "bookingId": 6,
-                    "detailId": 6,
-                    "optionId": 25,
-                    "optionName": "Private only Yacht test",
-                    "guestName": "Ms. Kamini Test",
-                    "type": "Private",
-                    "startTime": "04:30 PM",
-                    "travelDate": "2025-08-05T00:00:00",
-                    "duration": "5 Hours",
-                    "confirmationNo": "testph",
-                    "guestInfo": "1 Adult,1 Child,1 Infant",
-                    "guest": {
-                        "adult": 1,
-                        "child": 1,
-                        "infant": 1
-                    },
-                    "price": {
-                        "cost": 25.00,
-                        "sell": 25.00
-                    },
-                    "status": "Accepted"
-                }
-            ]
+          bookingId: 12,
+          detailId: 12,
+          optionId: 25,
+          optionName: 'Private only Yacht test',
+          guestName: 'Ms. Kamini Test',
+          type: 'Private',
+          startTime: '06:00 PM',
+          travelDate: '2025-08-07T00:00:00',
+          duration: '2 Hours',
+          confirmationNo: '',
+          guestInfo: '1 Adult,0 Child,0 Infant',
+          guest: {
+            adult: 1,
+            child: 0,
+            infant: 0,
+          },
+          price: {
+            cost: 9.0,
+            sell: 10.0,
+          },
+          status: 'Pending',
         },
+      ],
+    },
+    {
+      reference: 'AGT30697204250192',
+      user: 'RaynaB2B',
+      agentDetail: [
         {
-            "reference": "AGT30697104250292",
-            "user": "RaynaB2B",
-            "agentDetail": [
-                {
-                    "agentId": 40055,
-                    "agentName": "KAMINIRK"
-                }
-            ],
-            "supplierDetail": [
-                {
-                    "supplierId": 85,
-                    "supplierName": "Vijay"
-                }
-            ],
-            "bookingDetails": [
-                {
-                    "bookingId": 7,
-                    "detailId": 7,
-                    "optionId": 13,
-                    "optionName": "Yacht Sharing trip 1",
-                    "guestName": "Ms. Kamini Test",
-                    "type": "Sharing",
-                    "startTime": "01:00 AM",
-                    "travelDate": "2025-06-25T00:00:00",
-                    "duration": "6 Hours",
-                    "confirmationNo": "",
-                    "guestInfo": "1 Adult,0 Child,0 Infant",
-                    "guest": {
-                        "adult": 1,
-                        "child": 0,
-                        "infant": 0
-                    },
-                    "price": {
-                        "cost": 7.70,
-                        "sell": 10.25
-                    },
-                    "status": "Pending"
-                }
-            ]
+          agentId: 40055,
+          agentName: 'KAMINIRK',
         },
+      ],
+      supplierDetail: [
         {
-            "reference": "AGT30697104250455",
-            "user": "RaynaB2B",
-            "agentDetail": [
-                {
-                    "agentId": 40055,
-                    "agentName": "KAMINIRK"
-                }
-            ],
-            "supplierDetail": [
-                {
-                    "supplierId": 84,
-                    "supplierName": "Yacht Module Test"
-                }
-            ],
-            "bookingDetails": [
-                {
-                    "bookingId": 8,
-                    "detailId": 8,
-                    "optionId": 19,
-                    "optionName": "Yacht Sharing trip 2",
-                    "guestName": "Ms. Kamini Test",
-                    "type": "Sharing",
-                    "startTime": "02:00 AM",
-                    "travelDate": "2025-08-05T00:00:00",
-                    "duration": "1 Hours",
-                    "confirmationNo": "",
-                    "guestInfo": "1 Adult,1 Child,1 Infant",
-                    "guest": {
-                        "adult": 1,
-                        "child": 1,
-                        "infant": 1
-                    },
-                    "price": {
-                        "cost": 31.55,
-                        "sell": 31.55
-                    },
-                    "status": "Pending"
-                },
-                {
-                    "bookingId": 9,
-                    "detailId": 9,
-                    "optionId": 14,
-                    "optionName": "Yacht Trip Private Test",
-                    "guestName": "Ms. Kamini Test",
-                    "type": "Private",
-                    "startTime": "12:00 AM",
-                    "travelDate": "2025-08-12T00:00:00",
-                    "duration": "1 Hours",
-                    "confirmationNo": "",
-                    "guestInfo": "6 Adult,0 Child,0 Infant",
-                    "guest": {
-                        "adult": 6,
-                        "child": 0,
-                        "infant": 0
-                    },
-                    "price": {
-                        "cost": 50.00,
-                        "sell": 50.00
-                    },
-                    "status": "Pending"
-                }
-            ]
+          supplierId: 84,
+          supplierName: 'Yacht Module Test',
         },
+      ],
+      bookingDetails: [
         {
-            "reference": "AGT30697104250888",
-            "user": "RaynaB2B",
-            "agentDetail": [
-                {
-                    "agentId": 40055,
-                    "agentName": "KAMINIRK"
-                }
-            ],
-            "supplierDetail": [
-                {
-                    "supplierId": 78,
-                    "supplierName": "Jhonathan Herrera"
-                },
-                {
-                    "supplierId": 85,
-                    "supplierName": "Vijay"
-                },
-                {
-                    "supplierId": 83,
-                    "supplierName": "Yacht For Testing"
-                }
-            ],
-            "bookingDetails": [
-                {
-                    "bookingId": 10,
-                    "detailId": 10,
-                    "optionId": 20,
-                    "optionName": "Yacht Sharing trip 3",
-                    "guestName": "Ms. Kamini Test",
-                    "type": "Sharing",
-                    "startTime": "03:00 AM",
-                    "travelDate": "2025-12-05T00:00:00",
-                    "duration": "0 Hours",
-                    "confirmationNo": "",
-                    "guestInfo": "2 Adult,0 Child,0 Infant",
-                    "guest": {
-                        "adult": 2,
-                        "child": 0,
-                        "infant": 0
-                    },
-                    "price": {
-                        "cost": 23.90,
-                        "sell": 24.50
-                    },
-                    "status": "Cancelled"
-                },
-                {
-                    "bookingId": 11,
-                    "detailId": 11,
-                    "optionId": 14,
-                    "optionName": "Yacht Trip Private Test",
-                    "guestName": "Ms. Kamini Test",
-                    "type": "Private",
-                    "startTime": "12:00 AM",
-                    "travelDate": "2025-08-07T00:00:00",
-                    "duration": "1 Hours",
-                    "confirmationNo": "",
-                    "guestInfo": "1 Adult,0 Child,0 Infant",
-                    "guest": {
-                        "adult": 1,
-                        "child": 0,
-                        "infant": 0
-                    },
-                    "price": {
-                        "cost": 49.90,
-                        "sell": 50.00
-                    },
-                    "status": "Pending"
-                },
-                {
-                    "bookingId": 12,
-                    "detailId": 12,
-                    "optionId": 25,
-                    "optionName": "Private only Yacht test",
-                    "guestName": "Ms. Kamini Test",
-                    "type": "Private",
-                    "startTime": "06:00 PM",
-                    "travelDate": "2025-08-07T00:00:00",
-                    "duration": "2 Hours",
-                    "confirmationNo": "",
-                    "guestInfo": "1 Adult,0 Child,0 Infant",
-                    "guest": {
-                        "adult": 1,
-                        "child": 0,
-                        "infant": 0
-                    },
-                    "price": {
-                        "cost": 9.00,
-                        "sell": 10.00
-                    },
-                    "status": "Pending"
-                }
-            ]
+          bookingId: 13,
+          detailId: 13,
+          optionId: 23,
+          optionName: 'Test Private Yacht',
+          guestName: 'Ms. Khushbu Patel',
+          type: 'Private',
+          startTime: '12:00 AM',
+          travelDate: '2025-07-15T00:00:00',
+          duration: '2 Hours',
+          confirmationNo: '',
+          guestInfo: '1 Adult,0 Child,0 Infant',
+          guest: {
+            adult: 1,
+            child: 0,
+            infant: 0,
+          },
+          price: {
+            cost: 4.29,
+            sell: 4.5,
+          },
+          status: 'Pending',
         },
+      ],
+    },
+    {
+      reference: 'AGT30697204250274',
+      user: 'RaynaB2B',
+      agentDetail: [
         {
-            "reference": "AGT30697204250192",
-            "user": "RaynaB2B",
-            "agentDetail": [
-                {
-                    "agentId": 40055,
-                    "agentName": "KAMINIRK"
-                }
-            ],
-            "supplierDetail": [
-                {
-                    "supplierId": 84,
-                    "supplierName": "Yacht Module Test"
-                }
-            ],
-            "bookingDetails": [
-                {
-                    "bookingId": 13,
-                    "detailId": 13,
-                    "optionId": 23,
-                    "optionName": "Test Private Yacht",
-                    "guestName": "Ms. Khushbu Patel",
-                    "type": "Private",
-                    "startTime": "12:00 AM",
-                    "travelDate": "2025-07-15T00:00:00",
-                    "duration": "2 Hours",
-                    "confirmationNo": "",
-                    "guestInfo": "1 Adult,0 Child,0 Infant",
-                    "guest": {
-                        "adult": 1,
-                        "child": 0,
-                        "infant": 0
-                    },
-                    "price": {
-                        "cost": 4.29,
-                        "sell": 4.50
-                    },
-                    "status": "Pending"
-                }
-            ]
+          agentId: 40055,
+          agentName: 'KAMINIRK',
         },
+      ],
+      supplierDetail: [
         {
-            "reference": "AGT30697204250274",
-            "user": "RaynaB2B",
-            "agentDetail": [
-                {
-                    "agentId": 40055,
-                    "agentName": "KAMINIRK"
-                }
-            ],
-            "supplierDetail": [
-                {
-                    "supplierId": 84,
-                    "supplierName": "Yacht Module Test"
-                }
-            ],
-            "bookingDetails": [
-                {
-                    "bookingId": 14,
-                    "detailId": 14,
-                    "optionId": 23,
-                    "optionName": "Test Private Yacht",
-                    "guestName": "Ms. Khushbu Patel",
-                    "type": "Private",
-                    "startTime": "03:10 AM",
-                    "travelDate": "2026-02-27T00:00:00",
-                    "duration": "2 Hours",
-                    "confirmationNo": "",
-                    "guestInfo": "1 Adult,0 Child,0 Infant",
-                    "guest": {
-                        "adult": 1,
-                        "child": 0,
-                        "infant": 0
-                    },
-                    "price": {
-                        "cost": 4.29,
-                        "sell": 4.63
-                    },
-                    "status": "Cancelled"
-                }
-            ]
+          supplierId: 84,
+          supplierName: 'Yacht Module Test',
         },
+      ],
+      bookingDetails: [
         {
-            "reference": "AGT30697204250295",
-            "user": "RaynaB2B",
-            "agentDetail": [
-                {
-                    "agentId": 40055,
-                    "agentName": "KAMINIRK"
-                }
-            ],
-            "supplierDetail": [
-                {
-                    "supplierId": 84,
-                    "supplierName": "Yacht Module Test"
-                }
-            ],
-            "bookingDetails": [
-                {
-                    "bookingId": 15,
-                    "detailId": 15,
-                    "optionId": 23,
-                    "optionName": "Test Private Yacht",
-                    "guestName": "Ms. Khushbu Patel",
-                    "type": "Private",
-                    "startTime": "04:00 PM",
-                    "travelDate": "2025-08-08T00:00:00",
-                    "duration": "3 Hours",
-                    "confirmationNo": "",
-                    "guestInfo": "1 Adult,0 Child,0 Infant",
-                    "guest": {
-                        "adult": 1,
-                        "child": 0,
-                        "infant": 0
-                    },
-                    "price": {
-                        "cost": 6.44,
-                        "sell": 6.95
-                    },
-                    "status": "Cancelled"
-                }
-            ]
+          bookingId: 14,
+          detailId: 14,
+          optionId: 23,
+          optionName: 'Test Private Yacht',
+          guestName: 'Ms. Khushbu Patel',
+          type: 'Private',
+          startTime: '03:10 AM',
+          travelDate: '2026-02-27T00:00:00',
+          duration: '2 Hours',
+          confirmationNo: '',
+          guestInfo: '1 Adult,0 Child,0 Infant',
+          guest: {
+            adult: 1,
+            child: 0,
+            infant: 0,
+          },
+          price: {
+            cost: 4.29,
+            sell: 4.63,
+          },
+          status: 'Cancelled',
         },
+      ],
+    },
+    {
+      reference: 'AGT30697204250295',
+      user: 'RaynaB2B',
+      agentDetail: [
         {
-            "reference": "AGT30697204250373",
-            "user": "RaynaB2B",
-            "agentDetail": [
-                {
-                    "agentId": 40055,
-                    "agentName": "KAMINIRK"
-                }
-            ],
-            "supplierDetail": [
-                {
-                    "supplierId": 78,
-                    "supplierName": "Jhonathan Herrera"
-                }
-            ],
-            "bookingDetails": [
-                {
-                    "bookingId": 16,
-                    "detailId": 16,
-                    "optionId": 23,
-                    "optionName": "Test Private Yacht",
-                    "guestName": "Ms. Khushbu Patel",
-                    "type": "Private",
-                    "startTime": "12:00 AM",
-                    "travelDate": "2025-07-19T00:00:00",
-                    "duration": "3 Hours",
-                    "confirmationNo": "878",
-                    "guestInfo": "1 Adult,0 Child,0 Infant",
-                    "guest": {
-                        "adult": 1,
-                        "child": 0,
-                        "infant": 0
-                    },
-                    "price": {
-                        "cost": 6.42,
-                        "sell": 6.89
-                    },
-                    "status": "Accepted"
-                }
-            ]
+          agentId: 40055,
+          agentName: 'KAMINIRK',
         },
+      ],
+      supplierDetail: [
         {
-            "reference": "AGT33868204250816",
-            "user": "RaynaB2B",
-            "agentDetail": [
-                {
-                    "agentId": 43233,
-                    "agentName": "vijay"
-                }
-            ],
-            "supplierDetail": [
-                {
-                    "supplierId": 84,
-                    "supplierName": "Yacht Module Test"
-                }
-            ],
-            "bookingDetails": [
-                {
-                    "bookingId": 17,
-                    "detailId": 17,
-                    "optionId": 23,
-                    "optionName": "Test Private Yacht",
-                    "guestName": "Ms. Khushbu Patel",
-                    "type": "Private",
-                    "startTime": "12:00 AM",
-                    "travelDate": "2025-07-16T00:00:00",
-                    "duration": "3 Hours",
-                    "confirmationNo": "Ar-TEST001212",
-                    "guestInfo": "1 Adult,0 Child,0 Infant",
-                    "guest": {
-                        "adult": 1,
-                        "child": 0,
-                        "infant": 0
-                    },
-                    "price": {
-                        "cost": 6.44,
-                        "sell": 7.08
-                    },
-                    "status": "Accepted"
-                }
-            ]
+          supplierId: 84,
+          supplierName: 'Yacht Module Test',
         },
+      ],
+      bookingDetails: [
         {
-            "reference": "AGT069241404250655",
-            "user": "RaynaB2B",
-            "agentDetail": [
-                {
-                    "agentId": 15679,
-                    "agentName": "Ahmed Yaqoob"
-                }
-            ],
-            "supplierDetail": [
-                {
-                    "supplierId": 78,
-                    "supplierName": "Jhonathan Herrera"
-                }
-            ],
-            "bookingDetails": [
-                {
-                    "bookingId": 18,
-                    "detailId": 18,
-                    "optionId": 5,
-                    "optionName": "Sunset Luxury Yacht Tour with Barbeque Meal",
-                    "guestName": "Mr. adnantest test",
-                    "type": "Sharing",
-                    "startTime": "05:30 PM",
-                    "travelDate": "2025-08-07T00:00:00",
-                    "duration": "2 Hours",
-                    "confirmationNo": "AR-08979789689768",
-                    "guestInfo": "1 Adult,0 Child,0 Infant",
-                    "guest": {
-                        "adult": 1,
-                        "child": 0,
-                        "infant": 0
-                    },
-                    "price": {
-                        "cost": 128.90,
-                        "sell": 130.00
-                    },
-                    "status": "Accepted"
-                }
-            ]
+          bookingId: 15,
+          detailId: 15,
+          optionId: 23,
+          optionName: 'Test Private Yacht',
+          guestName: 'Ms. Khushbu Patel',
+          type: 'Private',
+          startTime: '04:00 PM',
+          travelDate: '2025-08-08T00:00:00',
+          duration: '3 Hours',
+          confirmationNo: '',
+          guestInfo: '1 Adult,0 Child,0 Infant',
+          guest: {
+            adult: 1,
+            child: 0,
+            infant: 0,
+          },
+          price: {
+            cost: 6.44,
+            sell: 6.95,
+          },
+          status: 'Cancelled',
         },
+      ],
+    },
+    {
+      reference: 'AGT30697204250373',
+      user: 'RaynaB2B',
+      agentDetail: [
         {
-            "reference": "AGT069241404250666",
-            "user": "RaynaB2B",
-            "agentDetail": [
-                {
-                    "agentId": 15679,
-                    "agentName": "Ahmed Yaqoob"
-                }
-            ],
-            "supplierDetail": [
-                {
-                    "supplierId": 78,
-                    "supplierName": "Jhonathan Herrera"
-                }
-            ],
-            "bookingDetails": [
-                {
-                    "bookingId": 19,
-                    "detailId": 19,
-                    "optionId": 6,
-                    "optionName": "Yacht Private",
-                    "guestName": "Mr. adnantest test",
-                    "type": "Private",
-                    "startTime": "12:00 PM",
-                    "travelDate": "2025-04-24T00:00:00",
-                    "duration": "3 Hours",
-                    "confirmationNo": "",
-                    "guestInfo": "1 Adult,0 Child,0 Infant",
-                    "guest": {
-                        "adult": 1,
-                        "child": 0,
-                        "infant": 0
-                    },
-                    "price": {
-                        "cost": 450.00,
-                        "sell": 495.00
-                    },
-                    "status": "Cancelled"
-                }
-            ]
-        }
-    ]
+          agentId: 40055,
+          agentName: 'KAMINIRK',
+        },
+      ],
+      supplierDetail: [
+        {
+          supplierId: 78,
+          supplierName: 'Jhonathan Herrera',
+        },
+      ],
+      bookingDetails: [
+        {
+          bookingId: 16,
+          detailId: 16,
+          optionId: 23,
+          optionName: 'Test Private Yacht',
+          guestName: 'Ms. Khushbu Patel',
+          type: 'Private',
+          startTime: '12:00 AM',
+          travelDate: '2025-07-19T00:00:00',
+          duration: '3 Hours',
+          confirmationNo: '878',
+          guestInfo: '1 Adult,0 Child,0 Infant',
+          guest: {
+            adult: 1,
+            child: 0,
+            infant: 0,
+          },
+          price: {
+            cost: 6.42,
+            sell: 6.89,
+          },
+          status: 'Accepted',
+        },
+      ],
+    },
+    {
+      reference: 'AGT33868204250816',
+      user: 'RaynaB2B',
+      agentDetail: [
+        {
+          agentId: 43233,
+          agentName: 'vijay',
+        },
+      ],
+      supplierDetail: [
+        {
+          supplierId: 84,
+          supplierName: 'Yacht Module Test',
+        },
+      ],
+      bookingDetails: [
+        {
+          bookingId: 17,
+          detailId: 17,
+          optionId: 23,
+          optionName: 'Test Private Yacht',
+          guestName: 'Ms. Khushbu Patel',
+          type: 'Private',
+          startTime: '12:00 AM',
+          travelDate: '2025-07-16T00:00:00',
+          duration: '3 Hours',
+          confirmationNo: 'Ar-TEST001212',
+          guestInfo: '1 Adult,0 Child,0 Infant',
+          guest: {
+            adult: 1,
+            child: 0,
+            infant: 0,
+          },
+          price: {
+            cost: 6.44,
+            sell: 7.08,
+          },
+          status: 'Accepted',
+        },
+      ],
+    },
+    {
+      reference: 'AGT069241404250655',
+      user: 'RaynaB2B',
+      agentDetail: [
+        {
+          agentId: 15679,
+          agentName: 'Ahmed Yaqoob',
+        },
+      ],
+      supplierDetail: [
+        {
+          supplierId: 78,
+          supplierName: 'Jhonathan Herrera',
+        },
+      ],
+      bookingDetails: [
+        {
+          bookingId: 18,
+          detailId: 18,
+          optionId: 5,
+          optionName: 'Sunset Luxury Yacht Tour with Barbeque Meal',
+          guestName: 'Mr. adnantest test',
+          type: 'Sharing',
+          startTime: '05:30 PM',
+          travelDate: '2025-08-07T00:00:00',
+          duration: '2 Hours',
+          confirmationNo: 'AR-08979789689768',
+          guestInfo: '1 Adult,0 Child,0 Infant',
+          guest: {
+            adult: 1,
+            child: 0,
+            infant: 0,
+          },
+          price: {
+            cost: 128.9,
+            sell: 130.0,
+          },
+          status: 'Accepted',
+        },
+      ],
+    },
+    {
+      reference: 'AGT069241404250666',
+      user: 'RaynaB2B',
+      agentDetail: [
+        {
+          agentId: 15679,
+          agentName: 'Ahmed Yaqoob',
+        },
+      ],
+      supplierDetail: [
+        {
+          supplierId: 78,
+          supplierName: 'Jhonathan Herrera',
+        },
+      ],
+      bookingDetails: [
+        {
+          bookingId: 19,
+          detailId: 19,
+          optionId: 6,
+          optionName: 'Yacht Private',
+          guestName: 'Mr. adnantest test',
+          type: 'Private',
+          startTime: '12:00 PM',
+          travelDate: '2025-04-24T00:00:00',
+          duration: '3 Hours',
+          confirmationNo: '',
+          guestInfo: '1 Adult,0 Child,0 Infant',
+          guest: {
+            adult: 1,
+            child: 0,
+            infant: 0,
+          },
+          price: {
+            cost: 450.0,
+            sell: 495.0,
+          },
+          status: 'Cancelled',
+        },
+      ],
+    },
+  ];
 
   //    showing accept modal to save
   activeModal = signal<ModalType>(null);
@@ -872,9 +872,12 @@ export class TableComponent {
 
     const direction = sortingType === 'asc' ? 1 : -1;
     const actualKey = this.keyMap[key] || key;
+    console.log("booking data", this.bookingData())
 
-    const processedData = mapBookingData(this.bookingData());
+    const processedData = mapBookingData(this.realBookingData);
     // const processedData = this.realBookingData
+
+    console.log('processedData', processedData);
 
     let data = [...processedData];
 

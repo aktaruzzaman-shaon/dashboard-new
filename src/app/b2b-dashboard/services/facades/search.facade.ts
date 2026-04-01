@@ -24,7 +24,7 @@ export class SearchFacade {
     stream: ({ params }) => {
       if (!params) return of(null);
       return this.api.search(params).pipe(
-        tap(res => console.log('TAP SUCCESS:', res)),
+        tap((res) => console.log('TAP SUCCESS:', res)),
         // tap({
         //   next: (res) => console.log('Search SUCCESS:', res),
         //   error: (err) => console.log('API ERROR BEFORE CATCH:', err),
@@ -51,7 +51,6 @@ export class SearchFacade {
 
   search(payload: any) {
     this.payload.set(payload);
-
   }
 
   reset() {
