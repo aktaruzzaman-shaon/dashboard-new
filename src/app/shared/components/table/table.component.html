@@ -157,7 +157,7 @@
                 }
 
                 @case ('supplier') {
-                  <div class="flex items-start" (click)="openSupplierDetailsModal()">
+                  <div class="flex items-start" (click)="activeModal.set('supplierDetails')">
                     <span
                       class="flex items-center justify-center w-4 mr-1 h-4 rounded-full bg-green-100 text-green-600 text-xs shrink-0"
                     >
@@ -181,7 +181,7 @@
                     </svg>
                     <app-modal
                       [open]="isSupplierModalOpen()"
-                      title="Remarks"
+                      title="Supplier"
                       size="lg"
                       submitText="Save"
                       cancelText="Cancel"
@@ -392,6 +392,9 @@
               (send)="activeModal.set(null)"
               (cancel)="activeModal.set(null)"
             ></app-email-reminder>
+          }
+          @case ('supplierDetails') {
+            <app-supplier-details (closeModal)="activeModal.set(null)"></app-supplier-details>
           }
         }
       </app-modal>

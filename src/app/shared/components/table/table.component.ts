@@ -13,8 +13,9 @@ import { EmailReminder } from '../macro/email-reminder/email-reminder';
 import { mapBookingData } from '../../../b2b-dashboard/services/mappers/booking.mapper';
 import { BookingDetailsFacade } from '../../../b2b-dashboard/services/facades/bookingDetails.facade';
 import { identifierToKeywordKind } from 'typescript';
+import { SupplierDetails } from "../composit/supplier-details/supplier-details";
 
-type ModalType = 'whatsapp-reminder' | 'email-reminder' | 'log' | 'remarks' | null;
+type ModalType = 'whatsapp-reminder' | 'email-reminder' | 'log' | 'remarks' | 'supplierDetails' | null;
 
 @Component({
   selector: 'app-table',
@@ -29,7 +30,8 @@ type ModalType = 'whatsapp-reminder' | 'email-reminder' | 'log' | 'remarks' | nu
     Remarks,
     WhatsappReminder,
     EmailReminder,
-  ],
+    SupplierDetails
+],
   templateUrl: './table.component.html',
   styleUrl: './table.component.css',
 })
@@ -872,7 +874,7 @@ export class TableComponent {
 
     const direction = sortingType === 'asc' ? 1 : -1;
     const actualKey = this.keyMap[key] || key;
-    console.log("booking data", this.bookingData())
+    console.log('booking data', this.bookingData());
 
     const processedData = mapBookingData(this.realBookingData);
     // const processedData = this.realBookingData
