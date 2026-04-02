@@ -45,7 +45,7 @@ import { FiltersFacade } from './services/facades/filters.facade';
 import { formatDateToYYYYMMDD } from './helper/b2b-dashboard.helper';
 import { SearchFacade } from './services/facades/search.facade';
 import { BookingTableFacade } from './services/facades/bookingTable.facade';
-import { UpdateSupplier } from "../shared/components/composit/update-supplier/update-supplier";
+import { UpdateSupplier } from '../shared/components/composit/update-supplier/update-supplier';
 
 type ColumnKey = string;
 
@@ -88,8 +88,8 @@ export interface CountryItem {
     CalendarIconComponent,
     CloseIconComponent,
     ButtonComponent,
-    UpdateSupplier
-],
+    UpdateSupplier,
+  ],
   templateUrl: './b2b-dashboard.html',
   styleUrl: './b2b-dashboard.css',
 })
@@ -118,6 +118,7 @@ export class B2bDashboard {
   allowedDateRange = signal<DateRange | null>(null);
   selectedDateRange = computed(() => this.currentSelection());
   calendar = viewChild(CalenderComponent);
+  activeModal = signal<Boolean>(false);
 
   // checkign custom add or not
   isCustomMode = computed(() => {
@@ -486,7 +487,6 @@ export class B2bDashboard {
   }
 
   //Advance Search Portion multiselect=========
-
   selectedOptionName = signal<string[]>([]);
   selectedSuppliers = signal<string[]>([]);
   selectedUser = signal<string[]>([]);
@@ -736,5 +736,9 @@ export class B2bDashboard {
 
   onSelectionChange(selectedReferences: string[]): void {
     console.log('Selected references:', selectedReferences);
+  }
+
+  updateSupplier() {
+    this.activeModal.set(!this.activeModal);
   }
 }

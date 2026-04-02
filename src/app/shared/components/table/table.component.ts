@@ -14,6 +14,7 @@ import { mapBookingData } from '../../../b2b-dashboard/services/mappers/booking.
 import { BookingDetailsFacade } from '../../../b2b-dashboard/services/facades/bookingDetails.facade';
 import { identifierToKeywordKind } from 'typescript';
 import { SupplierDetails } from "../composit/supplier-details/supplier-details";
+import { UpdateSupplier } from "../composit/update-supplier/update-supplier";
 
 type ModalType = 'whatsapp-reminder' | 'email-reminder' | 'log' | 'remarks' | 'supplierDetails' | null;
 
@@ -30,7 +31,8 @@ type ModalType = 'whatsapp-reminder' | 'email-reminder' | 'log' | 'remarks' | 's
     Remarks,
     WhatsappReminder,
     EmailReminder,
-    SupplierDetails
+    SupplierDetails,
+    UpdateSupplier
 ],
   templateUrl: './table.component.html',
   styleUrl: './table.component.css',

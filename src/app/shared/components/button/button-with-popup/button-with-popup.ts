@@ -11,6 +11,8 @@ export class ButtonWithPopup {
   label = input<string>('Open Menu');
   isOpen = signal(false);
   disabled = input<boolean>(false);
+  // 'popup' follows the button, 'modal' centers on screen
+  mode = input<'popup' | 'modal'>('popup');
 
   toggle() {
     if (!this.disabled()) {

@@ -42,6 +42,8 @@ export class UpdateSupplier {
       cost: this.newCost(),
       location: this.newLocation(),
     });
+    console.log('Saved data:')
+    this.onClose.emit();
   }
 
   clearCost() {

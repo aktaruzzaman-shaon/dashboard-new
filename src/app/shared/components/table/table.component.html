@@ -396,6 +396,9 @@
           @case ('supplierDetails') {
             <app-supplier-details (closeModal)="activeModal.set(null)"></app-supplier-details>
           }
+          @case ('supplierDetails') {
+            <app-update-supplier (onClose)="activeModal.set(null)"></app-update-supplier>
+          }
         }
       </app-modal>
     }
