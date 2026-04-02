@@ -45,6 +45,7 @@ import { FiltersFacade } from './services/facades/filters.facade';
 import { formatDateToYYYYMMDD } from './helper/b2b-dashboard.helper';
 import { SearchFacade } from './services/facades/search.facade';
 import { BookingTableFacade } from './services/facades/bookingTable.facade';
+import { UpdateSupplier } from "../shared/components/composit/update-supplier/update-supplier";
 
 type ColumnKey = string;
 
@@ -87,7 +88,8 @@ export interface CountryItem {
     CalendarIconComponent,
     CloseIconComponent,
     ButtonComponent,
-  ],
+    UpdateSupplier
+],
   templateUrl: './b2b-dashboard.html',
   styleUrl: './b2b-dashboard.css',
 })

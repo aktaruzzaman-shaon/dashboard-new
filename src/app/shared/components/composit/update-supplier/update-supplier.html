@@ -1,0 +1,127 @@
+<div class="fixed inset-0 bg-black/50 flex items-center justify-center p-4 z-50">
+  <div class="bg-white rounded-2xl shadow-xl w-full max-w-2xl overflow-hidden">
+    <div class="flex justify-between items-center px-6 py-4">
+      <h2 class="text-2xl font-bold text-gray-800">Update Supplier</h2>
+      <button (click)="onClose.emit()" class="text-gray-400 hover:text-gray-600">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M6 18L18 6M6 6l12 12"
+          ></path>
+        </svg>
+      </button>
+    </div>
+
+    <div class="px-6 py-2 space-y-6">
+      <div class="flex flex-wrap gap-x-8 gap-y-2 text-sm text-gray-600">
+        <p>
+          <span class="font-semibold text-gray-800">Reference Number:</span> {{ referenceNumber() }}
+        </p>
+        <p><span class="font-semibold text-gray-800">Option Name:</span> {{ optionName() }}</p>
+      </div>
+
+      <div class="grid grid-cols-3 gap-4">
+        <div>
+          <label class="text-sm font-semibold text-gray-800">Current supplier</label>
+          <p class="text-gray-600">{{ currentSupplier() }}</p>
+        </div>
+        <div>
+          <label class="text-sm font-semibold text-gray-800">Current Cost</label>
+          <p class="text-gray-600">{{ currentCost() }}</p>
+        </div>
+        <div>
+          <label class="text-sm font-semibold text-gray-800">Sale</label>
+          <p class="text-gray-600">{{ currentSale() }}</p>
+        </div>
+      </div>
+
+      <div>
+        <label class="text-sm font-semibold text-gray-800">Current Location</label>
+        <p class="text-gray-600 text-sm leading-relaxed">{{ currentLocation() }}</p>
+      </div>
+
+      <hr class="border-gray-100" />
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div class="md:col-span-1">
+          <label class="block text-sm font-semibold text-gray-800 mb-1">New Supplier</label>
+          <select
+            [ngModel]="newSupplier()"
+            (ngModelChange)="newSupplier.set($event)"
+            class="w-full border border-gray-300 rounded-lg p-2.5 outline-none focus:ring-2 focus:ring-blue-500 appearance-none bg-no-repeat bg-[right_1rem_center] bg-[length:1em_1em]"
+          >
+            <option value="" disabled selected>Supplier 1</option>
+            <option value="S1">Supplier 1</option>
+            <option value="S2">Supplier 2</option>
+          </select>
+        </div>
+
+        <div class="md:col-span-1 relative">
+          <label class="block text-sm font-semibold text-gray-800 mb-1">New Cost</label>
+          <div class="relative">
+            <input
+              type="number"
+              [ngModel]="newCost()"
+              (ngModelChange)="newCost.set($event)"
+              [class.border-red-500]="costError()"
+              class="w-full border border-gray-300 rounded-lg p-2.5 outline-none focus:ring-2 focus:ring-blue-500"
+              placeholder="500"
+            />
+            @if (newCost()) {
+              <button
+                (click)="clearCost()"
+                class="absolute right-3 top-1/2 -translate-y-1/2 text-red-500"
+              >
+                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                  <path
+                    d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z"
+                  />
+                </svg>
+              </button>
+            }
+          </div>
+          @if (costError()) {
+            <p class="text-red-500 text-xs mt-1 absolute">
+              New cost can't be more than previous cost
+            </p>
+          }
+        </div>
+
+        <div class="md:col-span-1">
+          <label class="block text-sm font-semibold text-gray-800 mb-1">Sale</label>
+          <input
+            type="number"
+            [value]="currentSale()"
+            disabled
+            class="w-full border border-gray-100 bg-gray-50 rounded-lg p-2.5 text-gray-500 cursor-not-allowed"
+          />
+        </div>
+      </div>
+
+      <div>
+        <label class="block text-sm font-semibold text-gray-800 mb-1">Update Location</label>
+        <select
+          [ngModel]="newLocation()"
+          (ngModelChange)="newLocation.set($event)"
+          class="w-full border border-gray-300 rounded-lg p-2.5 outline-none focus:ring-2 focus:ring-blue-500"
+        >
+          <option value="" disabled selected>Select</option>
+          <option value="L1">Location A</option>
+          <option value="L2">Location B</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="p-6 flex justify-center">
+      <button
+        (click)="handleSave()"
+        [disabled]="costError()"
+        class="bg-[#0096EB] hover:bg-blue-600 disabled:opacity-50 text-white font-semibold py-3 px-16 rounded-xl transition-colors"
+      >
+        Save
+      </button>
+    </div>
+  </div>
+</div>
