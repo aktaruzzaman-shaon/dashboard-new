@@ -486,7 +486,7 @@ export class B2bDashboard {
     this.isContainerOpen.set(false);
   }
 
-  //Advance Search Portion multiselect=========
+  //Advance Search Portion multiselect===================
   selectedOptionName = signal<string[]>([]);
   selectedSuppliers = signal<string[]>([]);
   selectedUser = signal<string[]>([]);
