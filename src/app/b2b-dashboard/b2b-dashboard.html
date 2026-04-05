@@ -15,12 +15,16 @@
         <!-- Travel From Date -->
         <app-calender
           [label]="'Travel Date From'"
-          [isCustomMode]="isCustomMode()"
           [placeholder]="'Select travel dates'"
+          [isCustomMode]="isCustomMode()"
+          [showDateType]="'fromDate'"
           [dateRange]="allowedDateRange()"
           [travelFromDate]="travelFrom()"
-          [showDateType]="'fromDate'"
           [travelToDate]="travelTo()"
+          [tempFromDate]="tempFrom()"
+          [tempToDate]="tempTo()"
+          (tempFromChange)="tempFrom.set($event)"
+          (tempToChange)="tempTo.set($event)"
           (fromDateSelected)="onFromDateSelected($event)"
           (toDateSelected)="onToDateSelected($event)"
         />
@@ -34,6 +38,10 @@
           [dateRange]="allowedDateRange()"
           [travelFromDate]="travelFrom()"
           [travelToDate]="travelTo()"
+          [tempFromDate]="tempFrom()"
+          [tempToDate]="tempTo()"
+          (tempFromChange)="tempFrom.set($event)"
+          (tempToChange)="tempTo.set($event)"
           (fromDateSelected)="onFromDateSelected($event)"
           (toDateSelected)="onToDateSelected($event)"
         />

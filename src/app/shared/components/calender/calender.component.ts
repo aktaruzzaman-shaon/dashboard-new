@@ -38,17 +38,15 @@ export class CalenderComponent {
   travelToDate = input<Date | null>(null);
   showDateType = input<'fromDate' | 'toDate'>('fromDate');
   isCustomMode = input<boolean>(false);
+  tempFromDate = input<Date | null>(null);
+  tempToDate = input<Date | null>(null);
+  tempFromChange = output<Date | null>();
+  tempToChange = output<Date | null>();
 
   // Outputs
   fromDateSelected = output<Date | null>();
   toDateSelected = output<Date | null>();
 
-  // Internal state
-  // tempSelectedDate = signal<Date | null>(null);
-  // isOpen = false;
-  // Internal state
-  tempFromDate = signal<Date | null>(null);
-  tempToDate = signal<Date | null>(null);
   isOpen = false;
 
   currentMonth = new Date();
@@ -56,13 +54,12 @@ export class CalenderComponent {
 
   weekDays = ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'];
 
-  constructor() {
-    // Sync temp dates with selected dates from parent
-    effect(() => {
-      this.tempFromDate.set(this.travelFromDate());
-      this.tempToDate.set(this.travelToDate());
-    });
-  }
+  // constructor() {
+  //   effect(() => {
+  //     this.tempFromChange.emit(this.travelFromDate());
+  //     this.tempToChange.emit(this.travelToDate());
+  //   });
+  // }
 
   toggleCalendar(): void {
     this.isOpen = !this.isOpen;
@@ -132,89 +129,91 @@ export class CalenderComponent {
   //   this.tempSelectedDate.set(selectedDate);
   // }
 
-  selectDate(day: number | null, isNextMonth: boolean): void {
-    if (!day) return;
+  // selectDate(day: number | null, isNextMonth: boolean): void {
+  //   if (!day) return;
 
-    const selectedDate = new Date(
-      isNextMonth ? this.nextMonth.getFullYear() : this.currentMonth.getFullYear(),
-      isNextMonth ? this.nextMonth.getMonth() : this.currentMonth.getMonth(),
-      day,
-    );
+  //   const selectedDate = new Date(
+  //     isNextMonth ? this.nextMonth.getFullYear() : this.currentMonth.getFullYear(),
+  //     isNextMonth ? this.nextMonth.getMonth() : this.currentMonth.getMonth(),
+  //     day,
+  //   );
 
-    // Check if date is within allowed range
-    if (!this.isDateAllowed(selectedDate)) {
-      return;
-    }
+  //   // Check if date is within allowed range
+  //   if (!this.isDateAllowed(selectedDate)) {
+  //     return;
+  //   }
 
-    // Check if clicking on an already selected date to change it
-    const clickedOnFromDate =
-      this.tempFromDate() && this.isSameDay(selectedDate, this.tempFromDate()!);
-    const clickedOnToDate = this.tempToDate() && this.isSameDay(selectedDate, this.tempToDate()!);
+  //   // Check if clicking on an already selected date to change it
+  //   const clickedOnFromDate =
+  //     this.tempFromDate() && this.isSameDay(selectedDate, this.tempFromDate()!);
+  //   const clickedOnToDate = this.tempToDate() && this.isSameDay(selectedDate, this.tempToDate()!);
 
-    if (clickedOnFromDate) {
-      // Clicking on from date again - allow deselection
-      this.tempFromDate.set(null);
-      return;
-    }
+  //   if (clickedOnFromDate) {
 
-    if (clickedOnToDate) {
-      // Clicking on to date again - allow deselection
-      this.tempToDate.set(null);
-      return;
-    }
+  //     this.tempFromChange.emit(null);
+  //     return;
+  //   }
 
-    // Smart selection logic for new date selection
-    if (!this.tempFromDate() && !this.tempToDate()) {
-      // No dates selected - set as from date
-      this.tempFromDate.set(selectedDate);
-    } else if (this.tempFromDate() && !this.tempToDate()) {
-      // Only from date exists - set as to date
-      if (selectedDate < this.tempFromDate()!) {
-        // If selected date is before from date, swap them
-        this.tempToDate.set(this.tempFromDate());
-        this.tempFromDate.set(selectedDate);
-      } else {
-        this.tempToDate.set(selectedDate);
-      }
-    } else if (!this.tempFromDate() && this.tempToDate()) {
-      // Only to date exists - set as from date
-      if (selectedDate > this.tempToDate()!) {
-        // If selected date is after to date, swap them
-        this.tempFromDate.set(this.tempToDate());
-        this.tempToDate.set(selectedDate);
-      } else {
-        this.tempFromDate.set(selectedDate);
-      }
-    } else {
-      // Both dates exist - determine which one to replace based on proximity
-      const fromDate = this.tempFromDate()!;
-      const toDate = this.tempToDate()!;
+  //   if (clickedOnToDate) {
+  //     // Clicking on to date again - allow deselection
+  //     console.log('To date clicked again');
+  //     // this.tempToDate.set(null);
+  //     this.tempToChange.emit(null);
+  //     return;
+  //   }
 
-      const diffFromSelectedToFrom = Math.abs(selectedDate.getTime() - fromDate.getTime());
-      const diffFromSelectedToTo = Math.abs(selectedDate.getTime() - toDate.getTime());
+  //   // Smart selection logic for new date selection
+  //   if (!this.tempFromDate() && !this.tempToDate()) {
+  //     // No dates selected - set as from date
+  //     this.tempFromChange.emit(selectedDate);
+  //   } else if (this.tempFromDate() && !this.tempToDate()) {
+  //     // Only from date exists - set as to date
+  //     if (selectedDate < this.tempFromDate()!) {
+  //       // If selected date is before from date, swap them
+  //       this.tempToDate.set(this.tempFromChange());
+  //       this.tempFromChange.emit(selectedDate);
+  //     } else {
+  //       this.tempToDate.set(selectedDate);
+  //     }
+  //   } else if (!this.tempFromDate() && this.tempToDate()) {
+  //     // Only to date exists - set as from date
+  //     if (selectedDate > this.tempToDate()!) {
+  //       // If selected date is after to date, swap them
+  //       this.tempFromChange.emit(this.tempToDate());
+  //       this.tempToDate.set(selectedDate);
+  //     } else {
+  //       this.tempFromChange.emit(selectedDate);
+  //     }
+  //   } else {
+  //     // Both dates exist - determine which one to replace based on proximity
+  //     const fromDate = this.tempFromDate()!;
+  //     const toDate = this.tempToDate()!;
 
-      // Replace the date that's closer to the clicked date
-      if (diffFromSelectedToFrom < diffFromSelectedToTo) {
-        // Closer to from date - replace from date
-        if (selectedDate > toDate) {
-          // If new from date is after to date, swap them
-          this.tempFromDate.set(toDate);
-          this.tempToDate.set(selectedDate);
-        } else {
-          this.tempFromDate.set(selectedDate);
-        }
-      } else {
-        // Closer to to date - replace to date
-        if (selectedDate < fromDate) {
-          // If new to date is before from date, swap them
-          this.tempToDate.set(fromDate);
-          this.tempFromDate.set(selectedDate);
-        } else {
-          this.tempToDate.set(selectedDate);
-        }
-      }
-    }
-  }
+  //     const diffFromSelectedToFrom = Math.abs(selectedDate.getTime() - fromDate.getTime());
+  //     const diffFromSelectedToTo = Math.abs(selectedDate.getTime() - toDate.getTime());
+
+  //     // Replace the date that's closer to the clicked date
+  //     if (diffFromSelectedToFrom < diffFromSelectedToTo) {
+  //       // Closer to from date - replace from date
+  //       if (selectedDate > toDate) {
+  //         // If new from date is after to date, swap them
+  //         this.tempFromDate.(toDate);
+  //         this.tempToDate.set(selectedDate);
+  //       } else {
+  //         this.tempFromDate.set(selectedDate);
+  //       }
+  //     } else {
+  //       // Closer to to date - replace to date
+  //       if (selectedDate < fromDate) {
+  //         // If new to date is before from date, swap them
+  //         this.tempToDate.set(fromDate);
+  //         this.tempFromDate.set(selectedDate);
+  //       } else {
+  //         this.tempToDate.set(selectedDate);
+  //       }
+  //     }
+  //   }
+  // }
 
   // Check if date is within the allowed range
   isDateAllowed(date: Date): boolean {
@@ -233,6 +232,84 @@ export class CalenderComponent {
     return dateOnly >= rangeFrom && dateOnly <= rangeTo;
   }
 
+  selectDate(day: number | null, isNextMonth: boolean): void {
+    if (!day) return;
+
+    const selectedDate = new Date(
+      isNextMonth ? this.nextMonth.getFullYear() : this.currentMonth.getFullYear(),
+      isNextMonth ? this.nextMonth.getMonth() : this.currentMonth.getMonth(),
+      day,
+    );
+
+    if (!this.isDateAllowed(selectedDate)) return;
+
+    const from = this.tempFromDate();
+    const to = this.tempToDate();
+
+    const clickedOnFromDate = from && this.isSameDay(selectedDate, from);
+    const clickedOnToDate = to && this.isSameDay(selectedDate, to);
+
+    // deselect
+    if (clickedOnFromDate) {
+      this.tempFromChange.emit(null);
+      return;
+    }
+
+    if (clickedOnToDate) {
+      this.tempToChange.emit(null);
+      return;
+    }
+
+    // no dates
+    if (!from && !to) {
+      this.tempFromChange.emit(selectedDate);
+      return;
+    }
+
+    // only from exists
+    if (from && !to) {
+      if (selectedDate < from) {
+        this.tempFromChange.emit(selectedDate);
+        this.tempToChange.emit(from);
+      } else {
+        this.tempToChange.emit(selectedDate);
+      }
+      return;
+    }
+
+    // only to exists
+    if (!from && to) {
+      if (selectedDate > to) {
+        this.tempFromChange.emit(to);
+        this.tempToChange.emit(selectedDate);
+      } else {
+        this.tempFromChange.emit(selectedDate);
+      }
+      return;
+    }
+
+    // both exist
+    const diffFrom = Math.abs(selectedDate.getTime() - from!.getTime());
+    const diffTo = Math.abs(selectedDate.getTime() - to!.getTime());
+
+    if (diffFrom < diffTo) {
+      // replace from
+      if (selectedDate > to!) {
+        this.tempFromChange.emit(to!);
+        this.tempToChange.emit(selectedDate);
+      } else {
+        this.tempFromChange.emit(selectedDate);
+      }
+    } else {
+      // replace to
+      if (selectedDate < from!) {
+        this.tempFromChange.emit(from!);
+        this.tempToChange.emit(selectedDate);
+      } else {
+        this.tempToChange.emit(selectedDate);
+      }
+    }
+  }
   // Check if date is selected
   // isSelected(day: number | null, isNextMonth: boolean): boolean {
   //   if (!day || !this.tempSelectedDate()) return false;
@@ -359,8 +436,8 @@ export class CalenderComponent {
   // }
 
   reset(): void {
-    this.tempFromDate.set(null);
-    this.tempToDate.set(null);
+    this.tempFromChange.emit(null);
+    this.tempToChange.emit(null);
   }
 
   // apply(): void {
@@ -368,13 +445,21 @@ export class CalenderComponent {
   //   this.isOpen = false;
   // }
 
+  // apply(): void {
+  //   this.fromDateSelected.emit(this.tempFromDate());
+  //   this.toDateSelected.emit(this.tempToDate());
+  //   this.isOpen = false;
+  // }
+
   apply(): void {
-    // console.log('Applying dates:', {
-    //   from: this.tempFromDate(),
-    //   to: this.tempToDate(),
-    // });
-    this.fromDateSelected.emit(this.tempFromDate());
-    this.toDateSelected.emit(this.tempToDate());
+    const from = this.tempFromDate();
+    const to = this.tempToDate();
+
+    if (!from || !to) return; // optional guard (avoid invalid API calls)
+
+    this.fromDateSelected.emit(from);
+    this.toDateSelected.emit(to);
+
     this.isOpen = false;
   }
 
@@ -390,25 +475,40 @@ export class CalenderComponent {
   //   return this.formatDate(this.tempSelectedDate());
   // }
 
+  // getDisplayValue(): string {
+  //   if (this.tempFromDate() && this.showDateType() === 'fromDate') {
+  //     return this.formatDate(this.tempFromDate());
+  //   } else if (
+  //     this.dateRange() &&
+  //     this.dateRange()?.from.toString() != 'Invalid Date' &&
+  //     this.showDateType() === 'fromDate'
+  //   ) {
+  //     return this.formatDate(this.dateRange()?.from || null);
+  //   }
+
+  //   if (this.tempToDate() && this.showDateType() === 'toDate') {
+  //     return this.formatDate(this.tempToDate());
+  //   } else if (
+  //     this.dateRange() &&
+  //     this.dateRange()?.to.toString() != 'Invalid Date' &&
+  //     this.showDateType() === 'toDate'
+  //   ) {
+  //     return this.formatDate(this.dateRange()?.to || null);
+  //   }
+
+  //   return '';
+  // }
+
   getDisplayValue(): string {
-    if (this.tempFromDate() && this.showDateType() === 'fromDate') {
-      return this.formatDate(this.tempFromDate());
-    } else if (
-      this.dateRange() &&
-      this.dateRange()?.from.toString() != 'Invalid Date' &&
-      this.showDateType() === 'fromDate'
-    ) {
-      return this.formatDate(this.dateRange()?.from || null);
+    const from = this.tempFromDate();
+    const to = this.tempToDate();
+
+    if (this.showDateType() === 'fromDate') {
+      return from ? this.formatDate(from) : '';
     }
 
-    if (this.tempToDate() && this.showDateType() === 'toDate') {
-      return this.formatDate(this.tempToDate());
-    } else if (
-      this.dateRange() &&
-      this.dateRange()?.to.toString() != 'Invalid Date' &&
-      this.showDateType() === 'toDate'
-    ) {
-      return this.formatDate(this.dateRange()?.to || null);
+    if (this.showDateType() === 'toDate') {
+      return to ? this.formatDate(to) : '';
     }
 
     return '';

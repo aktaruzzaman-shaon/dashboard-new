@@ -132,6 +132,8 @@ export class B2bDashboard {
       const ranges = this.selectedDateRange();
       this.getDateRange(ranges);
 
+      console.log('travel from', this.travelFrom());
+      console.log('travel to', this.travelTo()); 
       const from = this.travelFrom();
       const to = this.travelTo();
 
@@ -280,6 +282,9 @@ export class B2bDashboard {
   rangeFromInput: string = '';
   rangeToInput: string = '';
 
+  tempFrom = signal<Date | null>(null);
+  tempTo = signal<Date | null>(null);
+
   // setDateRange(): void {
   //   if (this.selectedDateRange().length > 0 && this.selectedDateRange()[0].type === 'custom') {
   //     const calendarInstance = this.calendar();
@@ -312,6 +317,7 @@ export class B2bDashboard {
   //     }
   //   }
   // }
+
   setDateRange(): void {
     if (this.selectedDateRange().length > 0 && this.selectedDateRange()[0].type === 'custom') {
       // Remove this block since getDateRange already handles it
@@ -362,6 +368,7 @@ export class B2bDashboard {
   }
 
   onToDateSelected(date: Date | null): void {
+    console.log('To date selected:', date);
     this.travelTo.set(date);
   }
 
