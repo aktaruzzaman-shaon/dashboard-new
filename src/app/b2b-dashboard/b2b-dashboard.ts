@@ -133,7 +133,7 @@ export class B2bDashboard {
       this.getDateRange(ranges);
 
       console.log('travel from', this.travelFrom());
-      console.log('travel to', this.travelTo()); 
+      console.log('travel to', this.travelTo());
       const from = this.travelFrom();
       const to = this.travelTo();
 
@@ -748,4 +748,9 @@ export class B2bDashboard {
   updateSupplier() {
     this.activeModal.set(!this.activeModal);
   }
+
+  // update supplier modal operation
+  updateSupplierButtonOpen = signal(false);
+  showReminderButtonOpen = signal(false);
+  showBookingsButton = signal(false);
 }

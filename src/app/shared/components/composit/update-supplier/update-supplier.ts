@@ -36,13 +36,11 @@ export class UpdateSupplier {
 
   handleSave() {
     if (this.costError()) return;
-
     this.onSave.emit({
       supplier: this.newSupplier(),
       cost: this.newCost(),
       location: this.newLocation(),
     });
-    console.log('Saved data:')
     this.onClose.emit();
   }
 

@@ -294,7 +294,13 @@
 
           <div class="flex gap-2">
             <!-- show reminders button -->
-            <app-button-with-popup label="Show Reminders" [disabled]="!uiState().showReminders">
+            <app-button-with-popup
+              label="Show Reminders"
+              [disabled]="!uiState().showReminders"
+              [isOpen]="showReminderButtonOpen()"
+              (isOpenChange)="showReminderButtonOpen.set($event)"
+              mode="popup"
+            >
               <app-reminder-icon button-icon></app-reminder-icon>
               <div class="flex flex-col mx-5">
                 <button
@@ -323,14 +329,19 @@
             </app-button-with-popup>
 
             <!-- update supplier -->
-
             <app-button-with-popup
               label="Update Supplier"
               [disabled]="!uiState().showUpdateSupplier"
+              [isOpen]="updateSupplierButtonOpen()"
+              (isOpenChange)="updateSupplierButtonOpen.set($event)"
               mode="modal"
             >
               <app-update-icon button-icon></app-update-icon>
-              <app-modal
+              <app-update-supplier
+                (onClose)="updateSupplierButtonOpen.set(false)"
+                (onSave)="updateSupplierButtonOpen.set(false)"
+              ></app-update-supplier>
+              <!-- <app-modal
                 [open]="!!activeModal()"
                 [hideFooter]="false"
                 (close)="activeModal.set(false)"
@@ -339,8 +350,7 @@
                   (onClose)="activeModal.set(false)"
                   (onSave)="activeModal.set(false)"
                 ></app-update-supplier>
-              </app-modal>
-              <app-update-supplier></app-update-supplier>
+              </app-modal> -->
             </app-button-with-popup>
 
             <!-- accept button -->
@@ -349,7 +359,13 @@
             </app-outline-button>
 
             <!-- booking button -->
-            <app-button-with-popup label="Bookings" [disabled]="!uiState().showBookings">
+            <app-button-with-popup
+              label="Bookings"
+              [disabled]="!uiState().showBookings"
+              [isOpen]="showBookingsButton()"
+              (isOpenChange)="showBookingsButton.set($event)"
+              mode="popup"
+            >
               <app-booking-icon button-icon></app-booking-icon>
               <div class="flex flex-col divide-y divide-gray-100">
                 <button

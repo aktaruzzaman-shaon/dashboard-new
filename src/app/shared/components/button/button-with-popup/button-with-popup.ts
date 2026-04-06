@@ -1,4 +1,4 @@
-import { Component, input, signal } from '@angular/core';
+import { Component, input, output, signal } from '@angular/core';
 import { ɵEmptyOutletComponent } from '@angular/router';
 
 @Component({
@@ -9,19 +9,18 @@ import { ɵEmptyOutletComponent } from '@angular/router';
 })
 export class ButtonWithPopup {
   label = input<string>('Open Menu');
-  isOpen = signal(false);
+  isOpen = input<boolean>(false);
+  isOpenChange = output<boolean>();
   disabled = input<boolean>(false);
-  // 'popup' follows the button, 'modal' centers on screen
   mode = input<'popup' | 'modal'>('popup');
 
   toggle() {
     if (!this.disabled()) {
-      console.log('Toggling popup', this.isOpen());
-      this.isOpen.update((v) => !v);
+      this.isOpenChange.emit(!this.isOpen());
     }
   }
 
   close() {
-    this.isOpen.set(false);
+    this.isOpenChange.emit(false);
   }
 }

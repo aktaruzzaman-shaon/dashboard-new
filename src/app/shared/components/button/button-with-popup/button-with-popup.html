@@ -12,12 +12,14 @@
   </button>
 
   @if (isOpen()) {
+    @if (isOpen() && mode() === 'modal') {
+      <div
+        class="fixed inset-0 bg-10/20 z-[45] transition-opacity animate-in fade-in"
+        (click)="close()"
+      ></div>
+    }
     <div
-      class="fixed inset-0 bg-gray-900/30 z-[45] transition-opacity animate-in fade-in"
-      (click)="close()"
-    ></div>
-
-    <div
+      (click)="$event.stopPropagation()"
       [class]="
         mode() === 'modal'
           ? 'fixed inset-0 flex items-center justify-center z-[50] p-4 pointer-events-none'

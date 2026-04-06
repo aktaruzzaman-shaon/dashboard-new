@@ -11,7 +11,7 @@ export class ToggleComponentContainer {
   closed = output<void>();
   closeButton = input<boolean>(true);
   name = input<string>('')
-  zIndex = input<number>(50);
+  // zIndex = input<number>(50);
 
   close() {
     this.closed.emit();
